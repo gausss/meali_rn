@@ -7,13 +7,13 @@ const resources = {
             plan: {
                 "tabTitle": "Plan",
                 "headerTitle": "Essensplan",
-                "introHeading": "Erstelle einen Plan",
+                "introHeading": "Essensplan erstellen",
                 "introDescription": "Erstelle einen Essensplan für die nächsten tage. Pinne deine Favoriten und erstelle den Rest neu bis du zufrieden bist.",
                 "generate": "Erstellen"
             },
             meals: {
                 "tabTitle": "Gerichte",
-                "introHeading": "Füge Gerichte hinzu",
+                "introHeading": "Gerichte hinzufügen",
                 "introDescription": "Füge deine Lieblingsgerichte und Zutaten hinzu, um sie in zukünftigen Essensplänen zu sehen.",
                 "add": "Gericht hinzufügen",
                 "save": "Speichern",
