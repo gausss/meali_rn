@@ -1,8 +1,8 @@
 import { useTheme } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NativeStackScreenProps, createNativeStackNavigator } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, ScrollView, Text, TextInput, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Section } from "./Section";
 
@@ -11,11 +11,20 @@ export interface Meal {
     ingredients: string
 }
 
+type MealStackParams = {
+    List: { newMeal: Meal };
+    Add: undefined;
+};
+
+
+type ListProps = NativeStackScreenProps<MealStackParams, 'List'>;
+type AddProps = NativeStackScreenProps<MealStackParams, 'Add'>;
+
 export default function MealTab(): React.JSX.Element {
     const { colors } = useTheme();
     const { t } = useTranslation();
 
-    const Stack = createNativeStackNavigator();
+    const Stack = createNativeStackNavigator<MealStackParams>();
 
     return <Stack.Navigator>
         <Stack.Screen
@@ -30,15 +39,14 @@ export default function MealTab(): React.JSX.Element {
     </Stack.Navigator>
 };
 
-function MealList({ route, navigation }): React.JSX.Element {
+function MealList({ route, navigation }: ListProps): React.JSX.Element {
     const { colors } = useTheme();
     const { t } = useTranslation();
 
     React.useEffect(() => {
         if (route.params?.newMeal) {
             setMeals([...meals, route.params.newMeal]);
-            route.params.newMeal = undefined;
-            console.log(meals);
+            navigation.setParams({ newMeal: undefined })
         }
     }, [route.params?.newMeal]);
 
@@ -84,7 +92,7 @@ function MealList({ route, navigation }): React.JSX.Element {
         </ScrollView>
     </View>;
 }
-function MealAdd({ navigation }): React.JSX.Element {
+function MealAdd({ navigation }: AddProps): React.JSX.Element {
     const { colors } = useTheme();
     const { t } = useTranslation();
 
@@ -123,10 +131,3 @@ function MealAdd({ navigation }): React.JSX.Element {
         </View>
     </ScrollView >
 }
-
-
-const styles = StyleSheet.create({
-    highlight: {
-        fontWeight: '700',
-    },
-});

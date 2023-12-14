@@ -1,7 +1,7 @@
 import { useTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useTranslation } from "react-i18next";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Section } from "./Section";
 
@@ -61,9 +61,3 @@ export function PlanList(): React.JSX.Element {
         </ScrollView>
     </View>;
 };
-
-const styles = StyleSheet.create({
-    highlight: {
-        fontWeight: '700',
-    },
-});
