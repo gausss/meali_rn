@@ -1,6 +1,7 @@
 import { useTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Section } from "./Section";
@@ -10,8 +11,9 @@ export interface Meal {
     ingredients: string
 }
 
-export default function Meals(): React.JSX.Element {
+export default function MealTab(): React.JSX.Element {
     const { colors } = useTheme();
+    const { t } = useTranslation();
 
     const Stack = createNativeStackNavigator();
 
@@ -19,15 +21,18 @@ export default function Meals(): React.JSX.Element {
         <Stack.Screen
             name="List"
             component={MealList}
+            options={{ title: t('meals.tabTitle'), }}
         />
         <Stack.Screen name="Add"
             component={MealAdd}
+            options={{ title: t('meals.add'), }}
         />
     </Stack.Navigator>
 };
 
 function MealList({ route, navigation }): React.JSX.Element {
     const { colors } = useTheme();
+    const { t } = useTranslation();
 
     React.useEffect(() => {
         if (route.params?.newMeal) {
@@ -46,8 +51,8 @@ function MealList({ route, navigation }): React.JSX.Element {
                 style={{
                     backgroundColor: colors.background,
                 }}>
-                <Section title="Step One">
-                    Add your <Text style={styles.highlight}>favorite</Text> meals to the list.
+                <Section title={t('meals.introHeading')}>
+                    <Text>{t('meals.introDescription')}</Text>
                 </Section>
                 <View>
                     {meals.map((value, key) => { return <Text key={key} style={{ color: colors.text }}>{value.name}</Text> })}
@@ -72,7 +77,7 @@ function MealList({ route, navigation }): React.JSX.Element {
                         backgroundColor={colors.primary}
                         onPress={() => navigation.navigate('Add')}
                     >
-                        Add meal
+                        {t('meals.add')}
                     </Icon.Button>
                 </View>
             </View>
@@ -81,6 +86,8 @@ function MealList({ route, navigation }): React.JSX.Element {
 }
 function MealAdd({ navigation }): React.JSX.Element {
     const { colors } = useTheme();
+    const { t } = useTranslation();
+
     const [name, setName] = useState('');
     const [ingredients, setIngredients] = useState('');
 
@@ -88,13 +95,13 @@ function MealAdd({ navigation }): React.JSX.Element {
         <View style={{ height: '100%', padding: 15, gap: 20 }}>
             <TextInput
                 style={{ height: 50, color: colors.text, backgroundColor: colors.card, borderRadius: 12, padding: 15, fontSize: 14 }}
-                placeholder="Name"
+                placeholder={t('meals.name')}
                 onChangeText={name => setName(name)}
                 defaultValue={name}
             />
             <TextInput
                 style={{ height: 50, color: colors.text, backgroundColor: colors.card, borderRadius: 12, padding: 15, fontSize: 14 }}
-                placeholder="Ingredients"
+                placeholder={t('meals.ingredients')}
                 onChangeText={ingredients => setIngredients(ingredients)}
                 defaultValue={ingredients}
             />
@@ -110,7 +117,7 @@ function MealAdd({ navigation }): React.JSX.Element {
                         merge: true,
                     })}
                 >
-                    Save
+                    {t('meals.save')}
                 </Icon.Button>
             </View>
         </View>

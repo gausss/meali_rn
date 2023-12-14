@@ -1,11 +1,28 @@
 import { useTheme } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useTranslation } from "react-i18next";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Section } from "./Section";
 
-
-export default function Plan(): React.JSX.Element {
+export default function PlanTab(): React.JSX.Element {
     const { colors } = useTheme();
+    const { t } = useTranslation();
+
+    const Stack = createNativeStackNavigator();
+
+    return <Stack.Navigator>
+        <Stack.Screen
+            name="List"
+            component={PlanList}
+            options={{ title: t('plan.headerTitle'), }}
+        />
+    </Stack.Navigator>
+};
+
+export function PlanList(): React.JSX.Element {
+    const { colors } = useTheme();
+    const { t } = useTranslation();
 
     return <View style={{ height: '100%' }}>
         <ScrollView
@@ -14,9 +31,8 @@ export default function Plan(): React.JSX.Element {
                 style={{
                     backgroundColor: colors.background,
                 }}>
-                <Section title="First step">
-                    <Text>Generate a randomized plan of your <Text style={styles.highlight}>favorite</Text> meals. </Text>
-                    <Text>You can <Text style={styles.highlight}>pin</Text> meals you like and randomize the rest until you are happy.</Text>
+                <Section title={t('plan.introHeading')}>
+                    <Text>{t('plan.introDescription')} </Text>
                 </Section>
                 <View style={{
                     alignItems: 'center',
@@ -38,7 +54,7 @@ export default function Plan(): React.JSX.Element {
                         backgroundColor={colors.primary}
                         onPress={() => console.log("Pressed")}
                     >
-                        Generate
+                        {t('plan.generate')}
                     </Icon.Button>
                 </View>
             </View>
