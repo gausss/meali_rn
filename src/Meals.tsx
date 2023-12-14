@@ -21,7 +21,6 @@ type ListProps = NativeStackScreenProps<MealStackParams, 'List'>;
 type AddProps = NativeStackScreenProps<MealStackParams, 'Add'>;
 
 export default function MealTab(): React.JSX.Element {
-    const { colors } = useTheme();
     const { t } = useTranslation();
 
     const Stack = createNativeStackNavigator<MealStackParams>();
@@ -32,9 +31,12 @@ export default function MealTab(): React.JSX.Element {
             component={MealList}
             options={{ title: t('meals.tabTitle'), }}
         />
-        <Stack.Screen name="Add"
+        <Stack.Screen
+            name="Add"
             component={MealAdd}
-            options={{ title: t('meals.add'), }}
+            options={{
+                title: t('meals.create'),
+            }}
         />
     </Stack.Navigator>
 };
