@@ -39,7 +39,7 @@ export function PlanList(): React.JSX.Element {
                     gap: 20
                 }}>
                     <Image
-                        source={{ uri: 'Farfalle' }}
+                        source={require('./img/Farfalle.png')}
                         style={{
                             width: 400,
                             height: 400,

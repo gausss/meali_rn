@@ -72,7 +72,7 @@ function MealList({ route, navigation }: ListProps): React.JSX.Element {
                     gap: 20
                 }}>
                     <Image
-                        source={{ uri: 'Ravioli' }}
+                        source={require('./img/Ravioli.png' )}
                         style={{
                             width: 400,
                             height: 400,

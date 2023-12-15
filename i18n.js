@@ -8,7 +8,7 @@ const resources = {
                 "tabTitle": "Plan",
                 "headerTitle": "Essensplan",
                 "introHeading": "Plan erstellen",
-                "introDescription": "Erstelle einen Essensplan für die nächsten tage. Pinne deine Favoriten und erstelle den Rest neu bis du zufrieden bist.",
+                "introDescription": "Erstelle einen Essensplan für die nächsten tage. Pinne deine Favoriten bis du zufrieden bist.",
                 "generate": "Plan erstellen"
             },
             meals: {
