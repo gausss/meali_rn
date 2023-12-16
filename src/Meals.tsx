@@ -136,7 +136,7 @@ function MealAdd({ navigation }: AddProps): React.JSX.Element {
                 rowTextStyle={{ color: colors.text, textAlign: 'left', fontSize: 14 }}
                 selectedRowTextStyle={{ color: colors.primary }}
                 dropdownStyle={{ backgroundColor: colors.card, borderRadius: 12, padding: 15, height:'auto' }}
-                renderDropdownIcon={() => <Icon name="chevron-down-outline"></Icon>}
+                renderDropdownIcon={() => <Icon name="chevron-down-outline" color={colors.text}></Icon>}
                 dropdownIconPosition='right'
                 data={['EASY', 'HARD']}
                 rowTextForSelection={(item) => {

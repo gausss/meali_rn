@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, useTheme } from '@react-navigation/native';
+import { DarkTheme, DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { useColorScheme } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 import MealTab from './Meals';
 import Plan from './Plan';
@@ -10,11 +11,11 @@ import Plan from './Plan';
 
 export default function App(): React.JSX.Element {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const isDarkMode = useColorScheme() === 'dark';
   const Tab = createBottomTabNavigator();
 
   return (
-    <NavigationContainer theme={theme}>
+    <NavigationContainer theme={isDarkMode ? DarkTheme : DefaultTheme}>
       <Tab.Navigator initialRouteName="Plan">
         <Tab.Screen name="Plan" component={Plan} options={{
           headerShown: false,
