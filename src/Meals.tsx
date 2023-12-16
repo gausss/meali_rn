@@ -10,7 +10,7 @@ import { Section } from "./Section";
 export interface Meal {
     name: string,
     ingredients: Ingredient[],
-    complex: Complexity
+    complex?: Complexity
 }
 
 type Complexity = 'EASY' | 'HARD';
@@ -110,7 +110,7 @@ function MealAdd({ navigation }: AddProps): React.JSX.Element {
 
     const [name, setName] = useState('');
     const [ingredients, setIngredients] = useState([]);
-    const [complex, setComplex] = useState<Complexity>('EASY');
+    const [complex, setComplex] = useState<Complexity>();
 
     return <ScrollView>
         <View style={{ height: '100%', padding: 15, gap: 20 }}>
@@ -130,10 +130,11 @@ function MealAdd({ navigation }: AddProps): React.JSX.Element {
             />
             <SelectDropdown
                 defaultButtonText={t('meals.complexity.name')}
-                buttonTextStyle={{ textAlign: 'left', color: 'grey', fontSize: 14 }}
+                buttonTextStyle={{ textAlign: 'left', color: complex ? colors.text : 'grey', fontSize: 14 }}
                 buttonStyle={{ height: 50, backgroundColor: colors.card, borderRadius: 12, padding: 15, width: '100%' }}
                 dropdownOverlayColor='transparent'
-                rowTextStyle={{ color: 'grey', textAlign: 'left', fontSize: 14 }}
+                rowTextStyle={{ color: colors.text, textAlign: 'left', fontSize: 14 }}
+                selectedRowTextStyle={{ color: colors.primary }}
                 dropdownStyle={{ backgroundColor: colors.card, borderRadius: 12, padding: 15, height:'auto' }}
                 renderDropdownIcon={() => <Icon name="chevron-down-outline"></Icon>}
                 dropdownIconPosition='right'
