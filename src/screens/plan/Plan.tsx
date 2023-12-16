@@ -2,7 +2,7 @@ import {useTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useTranslation} from 'react-i18next';
 import {Image, Text, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Button} from '../../shared/Button';
 import {Section} from '../../shared/Section';
 
 export default function PlanTab(): React.JSX.Element {
@@ -36,7 +36,6 @@ export function PlanList(): React.JSX.Element {
       <View
         style={{
           alignItems: 'center',
-          gap: 20,
         }}>
         <Image
           source={require('../../img/Farfalle.png')}
@@ -46,14 +45,9 @@ export function PlanList(): React.JSX.Element {
             tintColor: colors.text,
           }}
         />
-        <Icon.Button
-          style={{paddingVertical: 15, paddingHorizontal: 25}}
-          name="reload-outline"
-          borderRadius={25}
-          backgroundColor={colors.primary}
-          onPress={() => console.log('Pressed')}>
+        <Button name="reload-outline" onPress={() => console.log('Pressed')}>
           {t('plan.generate')}
-        </Icon.Button>
+        </Button>
       </View>
     </View>
   );

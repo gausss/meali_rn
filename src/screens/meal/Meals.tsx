@@ -14,9 +14,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {IdGenerator} from '../../shared/IdGenerator';
 import {Section} from '../../shared/Section';
 import {Complexity, Meal} from '../../domain/Meal';
+import {Card} from '../../shared/Card';
+import {Button} from '../../shared/Button';
 
 type MealStackParams = {
-  List: {newMeal: Meal};
+  List: {newMeal?: Meal};
   Add: undefined;
 };
 
@@ -43,10 +45,36 @@ export default function MealTab(): React.JSX.Element {
   );
 }
 
+function MealsNotFound(): React.JSX.Element {
+  const {colors} = useTheme();
+  const {t} = useTranslation();
+
+  return (
+    <View>
+      <Section title={t('meals.introHeading')}>
+        <Text>{t('meals.introDescription')}</Text>
+      </Section>
+      <View
+        style={{
+          alignItems: 'center',
+        }}>
+        <Image
+          source={require('../../img/Ravioli.png')}
+          style={{
+            height: 380,
+            resizeMode: 'contain',
+            tintColor: colors.text,
+          }}
+        />
+      </View>
+    </View>
+  );
+}
+
 function MealList(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<MealStackParams>>();
   const route = useRoute<RouteProp<MealStackParams, 'List'>>();
 
   const [meals, setMeals] = useState<Meal[]>([]);
@@ -63,45 +91,28 @@ function MealList(): React.JSX.Element {
       style={{
         backgroundColor: colors.background,
       }}>
-      <StatusBar barStyle="light-content" backgroundColor="#ecf0f1" />
-      <Section title={t('meals.introHeading')}>
-        <Text>{t('meals.introDescription')}</Text>
-      </Section>
-      <FlatList
-        data={meals}
-        renderItem={({item}) => (
-          <View
-            style={{
-              height: 50,
-              backgroundColor: colors.card,
-              borderRadius: 12,
-              padding: 15,
-            }}>
-            <Text style={{color: colors.text, fontSize: 14}}>{item.name}</Text>
-          </View>
-        )}
-      />
+      {meals.length ? (
+        <Card>
+          <FlatList
+            data={meals}
+            renderItem={({item}) => (
+              <Text style={{color: colors.text, fontSize: 14}}>
+                {item.name}
+              </Text>
+            )}
+          />
+        </Card>
+      ) : (
+        <MealsNotFound />
+      )}
+
       <View
         style={{
           alignItems: 'center',
-          gap: 20,
         }}>
-        <Image
-          source={require('../../img/Ravioli.png')}
-          style={{
-            height: 380,
-            resizeMode: 'contain',
-            tintColor: colors.text,
-          }}
-        />
-        <Icon.Button
-          style={{paddingVertical: 15, paddingHorizontal: 25}}
-          name="add-outline"
-          borderRadius={25}
-          backgroundColor={colors.primary}
-          onPress={() => navigation.navigate('Add')}>
+        <Button name="add-outline" onPress={() => navigation.navigate('Add')}>
           {t('meals.add')}
-        </Icon.Button>
+        </Button>
       </View>
     </View>
   );
