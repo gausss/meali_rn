@@ -3,13 +3,24 @@ import { NativeStackScreenProps, createNativeStackNavigator } from "@react-navig
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, ScrollView, Text, TextInput, View } from "react-native";
+import SelectDropdown from "react-native-select-dropdown";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Section } from "./Section";
 
 export interface Meal {
     name: string,
-    ingredients: string
+    ingredients: Ingredient[],
+    complex: Complexity
 }
+
+type Complexity = 'EASY' | 'HARD';
+
+export interface Ingredient {
+    name: string,
+    count: number,
+    type: Unit
+}
+type Unit = 'GRM' | 'ML' | 'UNIT';
 
 type MealStackParams = {
     List: { newMeal: Meal };
@@ -72,10 +83,9 @@ function MealList({ route, navigation }: ListProps): React.JSX.Element {
                     gap: 20
                 }}>
                     <Image
-                        source={require('./img/Ravioli.png' )}
+                        source={require('./img/Ravioli.png')}
                         style={{
-                            width: 400,
-                            height: 400,
+                            height: 380,
                             resizeMode: 'contain',
                             tintColor: colors.text,
                         }}
@@ -99,22 +109,46 @@ function MealAdd({ navigation }: AddProps): React.JSX.Element {
     const { t } = useTranslation();
 
     const [name, setName] = useState('');
-    const [ingredients, setIngredients] = useState('');
+    const [ingredients, setIngredients] = useState([]);
+    const [complex, setComplex] = useState<Complexity>('EASY');
 
     return <ScrollView>
         <View style={{ height: '100%', padding: 15, gap: 20 }}>
-            <TextInput
+            <TextInput inputMode='text' clearButtonMode='always'
+                placeholderTextColor='grey'
                 style={{ height: 50, color: colors.text, backgroundColor: colors.card, borderRadius: 12, padding: 15, fontSize: 14 }}
                 placeholder={t('meals.name')}
                 onChangeText={name => setName(name)}
                 defaultValue={name}
             />
-            <TextInput
+            <TextInput inputMode='text' clearButtonMode='always'
+                placeholderTextColor='grey'
                 style={{ height: 50, color: colors.text, backgroundColor: colors.card, borderRadius: 12, padding: 15, fontSize: 14 }}
                 placeholder={t('meals.ingredients')}
-                onChangeText={ingredients => setIngredients(ingredients)}
-                defaultValue={ingredients}
+            // onChangeText={ingredients => setIngredients(ingredients)}
+            // defaultValue={ingredients}
             />
+            <SelectDropdown
+                defaultButtonText={t('meals.complexity.name')}
+                buttonTextStyle={{ textAlign: 'left', color: 'grey', fontSize: 14 }}
+                buttonStyle={{ height: 50, backgroundColor: colors.card, borderRadius: 12, padding: 15, width: '100%' }}
+                dropdownOverlayColor='transparent'
+                rowTextStyle={{ color: 'grey', textAlign: 'left', fontSize: 14 }}
+                dropdownStyle={{ backgroundColor: colors.card, borderRadius: 12, padding: 15, height:'auto' }}
+                renderDropdownIcon={() => <Icon name="chevron-down-outline"></Icon>}
+                dropdownIconPosition='right'
+                data={['EASY', 'HARD']}
+                rowTextForSelection={(item) => {
+                    return t(`meals.complexity.${item}`)
+                }}
+                buttonTextAfterSelection={(item) => {
+                    return t(`meals.complexity.${item}`)
+                }}
+                onSelect={(selectedItem) => {
+                    setComplex(selectedItem);
+                }}
+            />
+
             <View style={{ alignItems: 'center' }}>
                 <Icon.Button
                     style={{ paddingVertical: 15, paddingHorizontal: 25 }}
@@ -123,7 +157,7 @@ function MealAdd({ navigation }: AddProps): React.JSX.Element {
                     backgroundColor={colors.primary}
                     onPress={() => navigation.navigate({
                         name: 'List',
-                        params: { newMeal: { name, ingredients } },
+                        params: { newMeal: { name: name, ingredients: [], complex: complex } },
                         merge: true,
                     })}
                 >

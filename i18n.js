@@ -20,7 +20,12 @@ const resources = {
                 "edit": "Gericht bearbeiten",
                 "save": "Speichern",
                 "name": "Name",
-                "ingredients": "Zutaten"
+                "ingredients": "Zutaten",
+                complexity: {
+                    "name": "Schwierigkeit",
+                    "EASY": "Einfach",
+                    "HARD": "Aufwändig",
+                }
             }
         }
     }

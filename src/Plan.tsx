@@ -41,8 +41,7 @@ export function PlanList(): React.JSX.Element {
                     <Image
                         source={require('./img/Farfalle.png')}
                         style={{
-                            width: 400,
-                            height: 400,
+                            height: 380,
                             resizeMode: 'contain',
                             tintColor: colors.text,
                         }}
