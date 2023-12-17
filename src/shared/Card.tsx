@@ -9,7 +9,11 @@ export function Card({children}: CardProps): React.JSX.Element {
   const {colors} = useTheme();
 
   return (
-    <View style={{...styles.cardContainer, backgroundColor: colors.card}}>
+    <View
+      style={{
+        ...styles.cardContainer,
+        backgroundColor: colors.card,
+      }}>
       {children}
     </View>
   );

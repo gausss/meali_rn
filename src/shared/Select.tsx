@@ -15,7 +15,7 @@ export function Select(props: SelectDropdownProps): React.JSX.Element {
       {...props}
       buttonTextStyle={{
         ...styles.buttonTextStyle,
-        color: selected ? colors.text : 'grey',
+        color: props.defaultValue || selected ? colors.text : 'grey',
       }}
       buttonStyle={{...styles.buttonStyle, backgroundColor: colors.card}}
       dropdownOverlayColor="transparent"
@@ -26,7 +26,10 @@ export function Select(props: SelectDropdownProps): React.JSX.Element {
         <Icon name="chevron-down-outline" color={colors.text} />
       )}
       dropdownIconPosition="right"
-      onSelect={() => setSelected(true)}
+      onSelect={(selectedItem, index) => {
+        props.onSelect(selectedItem, index);
+        setSelected(true);
+      }}
     />
   );
 }

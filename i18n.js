@@ -21,6 +21,7 @@ const resources = {
         create: 'Neues Gericht',
         edit: 'Gericht bearbeiten',
         save: 'Speichern',
+        delete: 'Löschen',
         name: 'Name',
         ingredients: 'Zutaten',
         complexity: {

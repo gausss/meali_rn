@@ -1,27 +1,29 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {View} from 'react-native';
-import {Complexity, Meal} from '../../domain/Meal';
+import {Button, View} from 'react-native';
 import {GlobalStyles} from '../../shared/GlobalStyles';
 import {Input} from '../../shared/Input';
 import {MainButton} from '../../shared/MainButton';
 import {Select} from '../../shared/Select';
 import {MealScreenParams} from './MealScreenParams';
 
-export function MealAdd(): React.JSX.Element {
+export function MealEdit(): React.JSX.Element {
   const {t} = useTranslation();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
-
-  const [name, setName] = useState('');
-  const [complexity, setComplexity] = useState<Complexity>();
+  const route = useRoute<RouteProp<MealScreenParams, 'Edit'>>();
+  const {editMeal, editIndex} = route.params;
 
   return (
     <View style={GlobalStyles.viewContainer}>
       <Input
         placeholder={t('meals.name')}
-        onChangeText={value => setName(value)}
-        defaultValue={name}
+        onChangeText={value => (editMeal.name = value)}
+        defaultValue={editMeal.name}
       />
       <Input placeholder={t('meals.ingredients')} />
       <Select
@@ -34,25 +36,50 @@ export function MealAdd(): React.JSX.Element {
           return t(`meals.complexity.${item}`);
         }}
         onSelect={selectedItem => {
-          setComplexity(selectedItem);
+          editMeal.complexity = selectedItem;
         }}
+        defaultValue={editMeal.complexity}
       />
 
       <View style={GlobalStyles.viewCentered}>
         <MainButton
           name="add-outline"
-          onPress={() =>
+          onPress={() => {
             navigation.navigate({
               name: 'List',
               params: {
-                newMeal: new Meal(name, [], complexity),
+                editMeal: editMeal,
+                editIndex: editIndex,
               },
               merge: true,
-            })
-          }>
+            });
+          }}>
           {t('meals.save')}
         </MainButton>
       </View>
     </View>
+  );
+}
+
+export function MealDeleteButton(): React.JSX.Element {
+  const {t} = useTranslation();
+  const route = useRoute<RouteProp<MealScreenParams, 'Edit'>>();
+  const navigation = useNavigation<NavigationProp<MealScreenParams>>();
+
+  return (
+    <Button
+      onPress={() =>
+        navigation.navigate({
+          name: 'List',
+          params: {
+            editMeal: undefined,
+            editIndex: route.params.editIndex,
+          },
+          merge: true,
+        })
+      }
+      title={t('meals.delete')}
+      color="red"
+    />
   );
 }

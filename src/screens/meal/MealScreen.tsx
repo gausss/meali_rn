@@ -1,9 +1,10 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {MealScreenParams} from './MealScreenParams';
-import {MealList} from './MealList';
 import {MealAdd} from './MealAdd';
+import {MealDeleteButton, MealEdit} from './MealEdit';
+import {MealList} from './MealList';
+import {MealScreenParams} from './MealScreenParams';
 
 export default function MealScreen(): React.JSX.Element {
   const {t} = useTranslation();
@@ -22,6 +23,15 @@ export default function MealScreen(): React.JSX.Element {
         options={{
           presentation: 'modal',
           title: t('meals.create'),
+        }}
+      />
+      <Stack.Screen
+        name="Edit"
+        component={MealEdit}
+        options={{
+          presentation: 'modal',
+          title: t('meals.edit'),
+          headerRight: () => <MealDeleteButton />,
         }}
       />
     </Stack.Navigator>

@@ -5,17 +5,26 @@ import {
   useRoute,
   useTheme,
 } from '@react-navigation/native';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  Platform,
+  PlatformColor,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 import {Meal} from '../../domain/Meal';
 import {Card} from '../../shared/Card';
+import {GlobalStyles} from '../../shared/GlobalStyles';
 import {MainButton} from '../../shared/MainButton';
 import {Section} from '../../shared/Section';
 import {MealScreenParams} from './MealScreenParams';
 
 export function MealList(): React.JSX.Element {
-  const {colors} = useTheme();
+  const {colors, dark} = useTheme();
   const {t} = useTranslation();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
   const route = useRoute<RouteProp<MealScreenParams, 'List'>>();
@@ -24,24 +33,92 @@ export function MealList(): React.JSX.Element {
 
   useEffect(() => {
     if (route.params?.newMeal) {
-      setMeals([...meals, route.params.newMeal]);
+      const newMeal = route.params.newMeal;
+      setMeals(current => {
+        current.push(newMeal);
+        return current;
+      });
       navigation.setParams({newMeal: undefined});
     }
-  }, [meals, navigation, route?.params?.newMeal]);
+  }, [navigation, route?.params?.newMeal]);
+
+  useEffect(() => {
+    if (route?.params?.editIndex !== undefined) {
+      const editIndex = route.params.editIndex;
+      if (!route.params?.editMeal) {
+        setMeals(current => {
+          current.splice(editIndex, 1);
+          return current;
+        });
+        navigation.setParams({editMeal: undefined, editIndex: undefined});
+      } else {
+        const editMeal = route.params.editMeal;
+        setMeals(current => {
+          current[editIndex] = editMeal;
+          return current;
+        });
+        navigation.setParams({editMeal: undefined, editIndex: undefined});
+      }
+    }
+  }, [navigation, route?.params?.editMeal, route?.params?.editIndex]);
 
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.viewContainer}>
       {meals.length ? (
         <Card>
           <FlatList
             data={meals}
+            scrollEnabled={true}
             ItemSeparatorComponent={() => (
-              <View style={{backgroundColor: 'green', height: 2}} />
+              <View
+                style={{
+                  backgroundColor: Platform.select({
+                    ios: PlatformColor('systemGray6'),
+                    android: dark
+                      ? PlatformColor(
+                          '@android:color/system_control_highlight_dark',
+                        )
+                      : PlatformColor(
+                          '@android:color/system_control_highlight_light',
+                        ),
+                  }),
+                  height: 1,
+                }}
+              />
             )}
-            renderItem={({item, separators}) => (
-              <Text style={{...styles.textStyle, color: colors.text}}>
-                {item.name}
-              </Text>
+            renderItem={({item, index}) => (
+              <TouchableHighlight
+                key={item.id}
+                underlayColor={Platform.select({
+                  ios: PlatformColor('systemGray6'),
+                  android: dark
+                    ? PlatformColor(
+                        '@android:color/system_control_highlight_dark',
+                      )
+                    : PlatformColor(
+                        '@android:color/system_control_highlight_light',
+                      ),
+                })}
+                onPress={() => {
+                  navigation.navigate({
+                    name: 'Edit',
+                    params: {
+                      editMeal: item,
+                      editIndex: index,
+                    },
+                    merge: true,
+                  });
+                }}>
+                <View
+                  style={{
+                    padding: 15,
+                  }}>
+                  <Text
+                    style={{...GlobalStyles.defaultText, color: colors.text}}>
+                    {item.name}
+                  </Text>
+                </View>
+              </TouchableHighlight>
             )}
           />
         </Card>
@@ -49,7 +126,7 @@ export function MealList(): React.JSX.Element {
         <MealsNotFound />
       )}
 
-      <View style={styles.viewStyleCenter}>
+      <View style={GlobalStyles.viewCentered}>
         <MainButton
           name="add-outline"
           onPress={() => navigation.navigate('Add')}>
@@ -69,30 +146,12 @@ function MealsNotFound(): React.JSX.Element {
       <Section title={t('meals.introHeading')}>
         <Text>{t('meals.introDescription')}</Text>
       </Section>
-      <View style={styles.viewStyleCenter}>
+      <View style={GlobalStyles.viewCentered}>
         <Image
           source={require('../../img/Ravioli.png')}
-          style={{...styles.mainImage, tintColor: colors.text}}
+          style={{...GlobalStyles.placeholderImage, tintColor: colors.text}}
         />
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    marginTop: 20,
-    gap: 20,
-  },
-  textStyle: {
-    fontSize: 14,
-  },
-  viewStyleCenter: {
-    alignItems: 'center',
-  },
-  mainImage: {
-    height: 380,
-    resizeMode: 'contain',
-  },
-});
