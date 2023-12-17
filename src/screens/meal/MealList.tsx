@@ -103,7 +103,7 @@ export function MealList(): React.JSX.Element {
                   navigation.navigate({
                     name: 'Edit',
                     params: {
-                      editMeal: item,
+                      editMeal: {...item},
                       editIndex: index,
                     },
                     merge: true,
