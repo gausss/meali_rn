@@ -14,10 +14,6 @@ export class Meal {
     this.ingredients = ingredients;
     this.complexity = complexity;
   }
-
-  isValid(): boolean {
-    return Boolean(this.name && this.complexity);
-  }
 }
 
 export type Complexity = 'EASY' | 'HARD';

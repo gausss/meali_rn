@@ -1,3 +1,4 @@
+import {DarkTheme, DefaultTheme} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
 
 export const GlobalStyles = StyleSheet.create({
@@ -17,3 +18,19 @@ export const GlobalStyles = StyleSheet.create({
     fontSize: 14,
   },
 });
+
+export const Light = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    notification: '#E0DEE7',
+  },
+};
+
+export const Dark = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    notification: '#212123',
+  },
+};

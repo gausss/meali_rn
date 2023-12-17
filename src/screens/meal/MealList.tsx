@@ -7,18 +7,10 @@ import {
 } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {
-  FlatList,
-  Image,
-  Platform,
-  PlatformColor,
-  Text,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
 import {Meal} from '../../domain/Meal';
 import {Card} from '../../shared/Card';
-import {GlobalStyles} from '../../shared/GlobalStyles';
+import {GlobalColors, GlobalStyles} from '../../shared/GlobalStyles';
 import {MainButton} from '../../shared/MainButton';
 import {Section} from '../../shared/Section';
 import {MealScreenParams} from './MealScreenParams';
@@ -72,16 +64,7 @@ export function MealList(): React.JSX.Element {
             ItemSeparatorComponent={() => (
               <View
                 style={{
-                  backgroundColor: Platform.select({
-                    ios: PlatformColor('systemGray6'),
-                    android: dark
-                      ? PlatformColor(
-                          '@android:color/system_control_highlight_dark',
-                        )
-                      : PlatformColor(
-                          '@android:color/system_control_highlight_light',
-                        ),
-                  }),
+                  backgroundColor: colors.notification,
                   height: 1,
                 }}
               />
@@ -89,16 +72,7 @@ export function MealList(): React.JSX.Element {
             renderItem={({item, index}) => (
               <TouchableHighlight
                 key={item.id}
-                underlayColor={Platform.select({
-                  ios: PlatformColor('systemGray6'),
-                  android: dark
-                    ? PlatformColor(
-                        '@android:color/system_control_highlight_dark',
-                      )
-                    : PlatformColor(
-                        '@android:color/system_control_highlight_light',
-                      ),
-                })}
+                underlayColor={colors.notification}
                 onPress={() => {
                   navigation.navigate({
                     name: 'Edit',
