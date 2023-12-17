@@ -25,7 +25,6 @@ export function MealEdit(): React.JSX.Element {
         onChangeText={value => (editMeal.name = value)}
         defaultValue={editMeal.name}
       />
-      <Input placeholder={t('meals.ingredients')} />
       <Select
         defaultButtonText={t('meals.complexity.name')}
         data={['EASY', 'HARD']}

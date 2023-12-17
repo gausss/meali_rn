@@ -12,7 +12,6 @@ import {Input} from '../../shared/Input';
 import {MainButton} from '../../shared/MainButton';
 import {Select} from '../../shared/Select';
 import {MealScreenParams} from './MealScreenParams';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 export function MealAdd(): React.JSX.Element {
   const {colors} = useTheme();
