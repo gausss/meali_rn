@@ -30,12 +30,15 @@ export function MealList(): React.JSX.Element {
   }, [meals, navigation, route?.params?.newMeal]);
 
   return (
-    <View>
+    <View style={styles.container}>
       {meals.length ? (
         <Card>
           <FlatList
             data={meals}
-            renderItem={({item}) => (
+            ItemSeparatorComponent={() => (
+              <View style={{backgroundColor: 'green', height: 2}} />
+            )}
+            renderItem={({item, separators}) => (
               <Text style={{...styles.textStyle, color: colors.text}}>
                 {item.name}
               </Text>
@@ -77,6 +80,11 @@ function MealsNotFound(): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+    marginTop: 20,
+    gap: 20,
+  },
   textStyle: {
     fontSize: 14,
   },

@@ -10,7 +10,7 @@ export function Section({children, title}: SectionProps): React.JSX.Element {
   const {colors} = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View>
       <Text
         style={[
           styles.sectionTitle,
@@ -34,10 +34,6 @@ export function Section({children, title}: SectionProps): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 32,
-    paddingHorizontal: 25,
-  },
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',

@@ -9,10 +9,7 @@ export function PlanList(): React.JSX.Element {
   const {t} = useTranslation();
 
   return (
-    <View
-      style={{
-        backgroundColor: colors.background,
-      }}>
+    <View style={styles.container}>
       <Section title={t('plan.introHeading')}>
         <Text>{t('plan.introDescription')} </Text>
       </Section>
@@ -32,6 +29,11 @@ export function PlanList(): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+    marginTop: 20,
+    gap: 20,
+  },
   viewStyleCenter: {
     alignItems: 'center',
   },
