@@ -8,7 +8,7 @@ import {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, Image, StatusBar, Text, TextInput, View} from 'react-native';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {IdGenerator} from '../../shared/IdGenerator';
@@ -16,6 +16,8 @@ import {Section} from '../../shared/Section';
 import {Complexity, Meal} from '../../domain/Meal';
 import {Card} from '../../shared/Card';
 import {Button} from '../../shared/Button';
+import {Input} from '../../shared/Input';
+import {Select} from '../../shared/Select';
 
 type MealStackParams = {
   List: {newMeal?: Meal};
@@ -54,17 +56,10 @@ function MealsNotFound(): React.JSX.Element {
       <Section title={t('meals.introHeading')}>
         <Text>{t('meals.introDescription')}</Text>
       </Section>
-      <View
-        style={{
-          alignItems: 'center',
-        }}>
+      <View style={styles.viewStyleCenter}>
         <Image
           source={require('../../img/Ravioli.png')}
-          style={{
-            height: 380,
-            resizeMode: 'contain',
-            tintColor: colors.text,
-          }}
+          style={{...styles.mainImage, tintColor: colors.text}}
         />
       </View>
     </View>
@@ -87,16 +82,13 @@ function MealList(): React.JSX.Element {
   }, [meals, navigation, route?.params?.newMeal]);
 
   return (
-    <View
-      style={{
-        backgroundColor: colors.background,
-      }}>
+    <View>
       {meals.length ? (
         <Card>
           <FlatList
             data={meals}
             renderItem={({item}) => (
-              <Text style={{color: colors.text, fontSize: 14}}>
+              <Text style={{...styles.textStyle, color: colors.text}}>
                 {item.name}
               </Text>
             )}
@@ -106,10 +98,7 @@ function MealList(): React.JSX.Element {
         <MealsNotFound />
       )}
 
-      <View
-        style={{
-          alignItems: 'center',
-        }}>
+      <View style={styles.viewStyleCenter}>
         <Button name="add-outline" onPress={() => navigation.navigate('Add')}>
           {t('meals.add')}
         </Button>
@@ -119,7 +108,6 @@ function MealList(): React.JSX.Element {
 }
 
 function MealAdd(): React.JSX.Element {
-  const {colors} = useTheme();
   const {t} = useTranslation();
   const navigation = useNavigation<NavigationProp<MealStackParams>>();
 
@@ -127,66 +115,15 @@ function MealAdd(): React.JSX.Element {
   const [complex, setComplex] = useState<Complexity>();
 
   return (
-    <View style={{height: '100%', padding: 15, gap: 20}}>
-      <TextInput
-        inputMode="text"
-        clearButtonMode="always"
-        placeholderTextColor="grey"
-        style={{
-          height: 50,
-          color: colors.text,
-          backgroundColor: colors.card,
-          borderRadius: 12,
-          padding: 15,
-          fontSize: 14,
-        }}
+    <View style={styles.container}>
+      <Input
         placeholder={t('meals.name')}
         onChangeText={value => setName(value)}
         defaultValue={name}
       />
-      <TextInput
-        inputMode="text"
-        clearButtonMode="always"
-        placeholderTextColor="grey"
-        style={{
-          height: 50,
-          color: colors.text,
-          backgroundColor: colors.card,
-          borderRadius: 12,
-          padding: 15,
-          fontSize: 14,
-        }}
-        placeholder={t('meals.ingredients')}
-        // onChangeText={ingredients => setIngredients(ingredients)}
-        // defaultValue={ingredients}
-      />
-      <SelectDropdown
+      <Input placeholder={t('meals.ingredients')} />
+      <Select
         defaultButtonText={t('meals.complexity.name')}
-        buttonTextStyle={{
-          textAlign: 'left',
-          color: complex ? colors.text : 'grey',
-          fontSize: 14,
-        }}
-        buttonStyle={{
-          height: 50,
-          backgroundColor: colors.card,
-          borderRadius: 12,
-          padding: 15,
-          width: '100%',
-        }}
-        dropdownOverlayColor="transparent"
-        rowTextStyle={{color: colors.text, textAlign: 'left', fontSize: 14}}
-        selectedRowTextStyle={{color: colors.primary}}
-        dropdownStyle={{
-          backgroundColor: colors.card,
-          borderRadius: 12,
-          padding: 15,
-          height: 'auto',
-        }}
-        renderDropdownIcon={() => (
-          <Icon name="chevron-down-outline" color={colors.text} />
-        )}
-        dropdownIconPosition="right"
         data={['EASY', 'HARD']}
         rowTextForSelection={item => {
           return t(`meals.complexity.${item}`);
@@ -199,12 +136,9 @@ function MealAdd(): React.JSX.Element {
         }}
       />
 
-      <View style={{alignItems: 'center'}}>
-        <Icon.Button
-          style={{paddingVertical: 15, paddingHorizontal: 25}}
+      <View style={styles.viewStyleCenter}>
+        <Button
           name="add-outline"
-          borderRadius={25}
-          backgroundColor={colors.primary}
           onPress={() =>
             navigation.navigate({
               name: 'List',
@@ -220,8 +154,26 @@ function MealAdd(): React.JSX.Element {
             })
           }>
           {t('meals.save')}
-        </Icon.Button>
+        </Button>
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  textStyle: {
+    fontSize: 14,
+  },
+  viewStyleCenter: {
+    alignItems: 'center',
+  },
+  mainImage: {
+    height: 380,
+    resizeMode: 'contain',
+  },
+  container: {
+    paddingHorizontal: 25,
+    padding: 25,
+    gap: 20,
+  },
+});
