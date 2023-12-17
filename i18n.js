@@ -23,7 +23,16 @@ const resources = {
         save: 'Speichern',
         delete: 'Löschen',
         name: 'Name',
-        ingredients: 'Zutaten',
+        ingredient: {
+          name: 'Zutat',
+          count: 'Anzahl',
+          unit: 'Einheit',
+          unitType: {
+            GRM: 'Gramm',
+            ML: 'Milliliter',
+            UNIT: 'Stück',
+          },
+        },
         complexity: {
           name: 'Schwierigkeit',
           EASY: 'Einfach',

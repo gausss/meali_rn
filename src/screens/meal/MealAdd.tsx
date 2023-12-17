@@ -1,29 +1,37 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {
+  NavigationProp,
+  useNavigation,
+  useTheme,
+} from '@react-navigation/native';
 import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
-import {Complexity, Meal} from '../../domain/Meal';
+import {Meal} from '../../domain/Meal';
 import {GlobalStyles} from '../../shared/GlobalStyles';
 import {Input} from '../../shared/Input';
 import {MainButton} from '../../shared/MainButton';
 import {Select} from '../../shared/Select';
 import {MealScreenParams} from './MealScreenParams';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export function MealAdd(): React.JSX.Element {
+  const {colors} = useTheme();
   const {t} = useTranslation();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
 
-  const [name, setName] = useState('');
-  const [complexity, setComplexity] = useState<Complexity>();
+  const [addMeal, setAddMeal] = useState({} as Meal);
 
   return (
     <View style={GlobalStyles.viewContainer}>
       <Input
         placeholder={t('meals.name')}
-        onChangeText={value => setName(value)}
-        defaultValue={name}
+        onChangeText={value =>
+          setAddMeal(meal => {
+            meal.name = value;
+            return meal;
+          })
+        }
       />
-      <Input placeholder={t('meals.ingredients')} />
       <Select
         defaultButtonText={t('meals.complexity.name')}
         data={['EASY', 'HARD']}
@@ -34,7 +42,10 @@ export function MealAdd(): React.JSX.Element {
           return t(`meals.complexity.${item}`);
         }}
         onSelect={selectedItem => {
-          setComplexity(selectedItem);
+          setAddMeal(meal => {
+            meal.complexity = selectedItem;
+            return meal;
+          });
         }}
       />
 
@@ -45,7 +56,7 @@ export function MealAdd(): React.JSX.Element {
             navigation.navigate({
               name: 'List',
               params: {
-                newMeal: new Meal(name, [], complexity),
+                newMeal: addMeal,
               },
               merge: true,
             })

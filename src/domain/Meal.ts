@@ -14,6 +14,10 @@ export class Meal {
     this.ingredients = ingredients;
     this.complexity = complexity;
   }
+
+  isValid(): boolean {
+    return Boolean(this.name && this.complexity);
+  }
 }
 
 export type Complexity = 'EASY' | 'HARD';
@@ -21,7 +25,7 @@ export type Complexity = 'EASY' | 'HARD';
 export interface Ingredient {
   name: string;
   count: number;
-  type: Unit;
+  unit: Unit;
 }
 
 export type Unit = 'GRM' | 'ML' | 'UNIT';

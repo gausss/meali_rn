@@ -1,12 +1,16 @@
 import {useTheme} from '@react-navigation/native';
 import {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {DimensionValue, StyleSheet} from 'react-native';
 import SelectDropdown, {
   SelectDropdownProps,
 } from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export function Select(props: SelectDropdownProps): React.JSX.Element {
+export type SelectProps = SelectDropdownProps & {
+  width?: DimensionValue;
+};
+
+export function Select(props: SelectProps): React.JSX.Element {
   const {colors} = useTheme();
   const [selected, setSelected] = useState(false);
 
@@ -17,7 +21,11 @@ export function Select(props: SelectDropdownProps): React.JSX.Element {
         ...styles.buttonTextStyle,
         color: props.defaultValue || selected ? colors.text : 'grey',
       }}
-      buttonStyle={{...styles.buttonStyle, backgroundColor: colors.card}}
+      buttonStyle={{
+        ...styles.buttonStyle,
+        backgroundColor: colors.card,
+        width: props.width || '100%',
+      }}
       dropdownOverlayColor="transparent"
       rowTextStyle={{...styles.rowTextStyle, color: colors.text}}
       selectedRowTextStyle={{color: colors.primary}}

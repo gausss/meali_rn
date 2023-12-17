@@ -1,7 +1,16 @@
 import {useTheme} from '@react-navigation/native';
-import {StyleSheet, TextInput, TextInputProps} from 'react-native';
+import {
+  DimensionValue,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+} from 'react-native';
 
-export function Input(props: TextInputProps): React.JSX.Element {
+type InputProps = TextInputProps & {
+  width?: DimensionValue;
+};
+
+export function Input(props: InputProps): React.JSX.Element {
   const {colors} = useTheme();
 
   return (
@@ -14,6 +23,7 @@ export function Input(props: TextInputProps): React.JSX.Element {
         ...styles.textInputStyle,
         color: colors.text,
         backgroundColor: colors.card,
+        width: props.width,
       }}
     />
   );
