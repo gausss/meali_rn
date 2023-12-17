@@ -9,8 +9,8 @@ import {
 import {useTranslation} from 'react-i18next';
 import {useColorScheme} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import MealTab from './screens/meal/Meals';
-import Plan from './screens/plan/Plan';
+import MealScreen from './screens/meal/MealScreen';
+import Plan from './screens/plan/PlanScreen';
 
 export default function App(): React.JSX.Element {
   const {t} = useTranslation();
@@ -33,7 +33,7 @@ export default function App(): React.JSX.Element {
         />
         <Tab.Screen
           name="Meals"
-          component={MealTab}
+          component={MealScreen}
           options={{
             headerShown: false,
             title: t('meals.tabTitle'),
