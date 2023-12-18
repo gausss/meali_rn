@@ -3,9 +3,9 @@ import {StyleSheet} from 'react-native';
 import {IconButtonProps} from 'react-native-vector-icons/Icon';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export function MainButton(props: IconButtonProps): React.JSX.Element {
+export function ActionButton(props: IconButtonProps): React.JSX.Element {
   const {colors} = useTheme();
-  console.log(props);
+
   return (
     <Icon.Button
       {...props}

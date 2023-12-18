@@ -9,12 +9,11 @@ import {View} from 'react-native';
 import {Meal} from '../../domain/Meal';
 import {GlobalStyles} from '../../shared/GlobalStyles';
 import {Input} from '../../shared/Input';
-import {MainButton} from '../../shared/MainButton';
 import {Select} from '../../shared/Select';
 import {MealScreenParams} from './MealScreenParams';
+import {ActionButton} from '../../shared/ActionButton';
 
 export function MealAdd(): React.JSX.Element {
-  const {colors} = useTheme();
   const {t} = useTranslation();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
 
@@ -25,9 +24,7 @@ export function MealAdd(): React.JSX.Element {
       <Input
         placeholder={t('meals.name')}
         onChangeText={value => {
-          setAddMeal(meal => {
-            return {...meal, name: value};
-          });
+          setAddMeal(meal => ({...meal, name: value}));
         }}
       />
       <Select
@@ -40,16 +37,13 @@ export function MealAdd(): React.JSX.Element {
           return t(`meals.complexity.${item}`);
         }}
         onSelect={selectedItem => {
-          setAddMeal(meal => {
-            meal.complexity = selectedItem;
-            return meal;
-          });
+          setAddMeal(meal => ({...meal, complexity: selectedItem}));
         }}
       />
       <View style={GlobalStyles.viewCentered}>
-        <MainButton
+        <ActionButton
           name="add-outline"
-          disabled={!addMeal.name}
+          disabled={!addMeal.name || !addMeal.complexity}
           onPress={() =>
             navigation.navigate({
               name: 'List',
@@ -60,7 +54,7 @@ export function MealAdd(): React.JSX.Element {
             })
           }>
           {t('meals.save')}
-        </MainButton>
+        </ActionButton>
       </View>
     </View>
   );

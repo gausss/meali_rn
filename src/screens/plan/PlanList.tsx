@@ -2,8 +2,8 @@ import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {Image, Text, View} from 'react-native';
 import {GlobalStyles} from '../../shared/GlobalStyles';
-import {MainButton} from '../../shared/MainButton';
 import {Section} from '../../shared/Section';
+import {ActionButton} from '../../shared/ActionButton';
 
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
@@ -19,11 +19,11 @@ export function PlanList(): React.JSX.Element {
           source={require('../../img/Farfalle.png')}
           style={{...GlobalStyles.placeholderImage, tintColor: colors.text}}
         />
-        <MainButton
+        <ActionButton
           name="reload-outline"
           onPress={() => console.log('Pressed')}>
           {t('plan.generate')}
-        </MainButton>
+        </ActionButton>
       </View>
     </View>
   );

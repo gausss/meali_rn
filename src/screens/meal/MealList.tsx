@@ -10,10 +10,10 @@ import {useTranslation} from 'react-i18next';
 import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
 import {Meal} from '../../domain/Meal';
 import {Card} from '../../shared/Card';
-import {GlobalColors, GlobalStyles} from '../../shared/GlobalStyles';
-import {MainButton} from '../../shared/MainButton';
 import {Section} from '../../shared/Section';
 import {MealScreenParams} from './MealScreenParams';
+import {GlobalStyles} from '../../shared/GlobalStyles';
+import {ActionButton} from '../../shared/ActionButton';
 
 export function MealList(): React.JSX.Element {
   const {colors, dark} = useTheme();
@@ -101,11 +101,11 @@ export function MealList(): React.JSX.Element {
       )}
 
       <View style={GlobalStyles.viewCentered}>
-        <MainButton
+        <ActionButton
           name="add-outline"
           onPress={() => navigation.navigate('Add')}>
           {t('meals.add')}
-        </MainButton>
+        </ActionButton>
       </View>
     </View>
   );

@@ -8,9 +8,10 @@ import {useTranslation} from 'react-i18next';
 import {Button, View} from 'react-native';
 import {GlobalStyles} from '../../shared/GlobalStyles';
 import {Input} from '../../shared/Input';
-import {MainButton} from '../../shared/MainButton';
 import {Select} from '../../shared/Select';
 import {MealScreenParams} from './MealScreenParams';
+import {ActionButton} from '../../shared/ActionButton';
+import {useState} from 'react';
 
 export function MealEdit(): React.JSX.Element {
   const {t} = useTranslation();
@@ -18,11 +19,15 @@ export function MealEdit(): React.JSX.Element {
   const route = useRoute<RouteProp<MealScreenParams, 'Edit'>>();
   const {editMeal, editIndex} = route.params;
 
+  const [editedMeal, setEditedMeal] = useState(editMeal);
+
   return (
     <View style={GlobalStyles.viewContainer}>
       <Input
         placeholder={t('meals.name')}
-        onChangeText={value => (editMeal.name = value)}
+        onChangeText={value => {
+          setEditedMeal(meal => ({...meal, name: value}));
+        }}
         defaultValue={editMeal.name}
       />
       <Select
@@ -35,26 +40,27 @@ export function MealEdit(): React.JSX.Element {
           return t(`meals.complexity.${item}`);
         }}
         onSelect={selectedItem => {
-          editMeal.complexity = selectedItem;
+          setEditedMeal(meal => ({...meal, complexity: selectedItem}));
         }}
         defaultValue={editMeal.complexity}
       />
 
       <View style={GlobalStyles.viewCentered}>
-        <MainButton
+        <ActionButton
           name="add-outline"
+          disabled={!editedMeal.name || !editedMeal.complexity}
           onPress={() => {
             navigation.navigate({
               name: 'List',
               params: {
-                editMeal: editMeal,
+                editMeal: editedMeal,
                 editIndex: editIndex,
               },
               merge: true,
             });
           }}>
           {t('meals.save')}
-        </MainButton>
+        </ActionButton>
       </View>
     </View>
   );
