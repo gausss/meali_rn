@@ -1,59 +1,25 @@
 import {
   NavigationProp,
-  RouteProp,
   useNavigation,
-  useRoute,
   useTheme,
 } from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
-import {Meal} from '../../domain/Meal';
+import {ActionButton} from '../../shared/ActionButton';
 import {Card} from '../../shared/Card';
+import {GlobalStyles} from '../../shared/GlobalStyles';
 import {Section} from '../../shared/Section';
 import {MealScreenParams} from './MealScreenParams';
-import {GlobalStyles} from '../../shared/GlobalStyles';
-import {ActionButton} from '../../shared/ActionButton';
+import {MealsContext} from '../../domain/MealReducer';
 
 export function MealList(): React.JSX.Element {
-  const {colors, dark} = useTheme();
+  const {colors} = useTheme();
   const {t} = useTranslation();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
-  const route = useRoute<RouteProp<MealScreenParams, 'List'>>();
+  const meals = useContext(MealsContext);
 
-  const [meals, setMeals] = useState<Meal[]>([]);
-
-  useEffect(() => {
-    if (route.params?.newMeal) {
-      const newMeal = route.params.newMeal;
-      setMeals(current => {
-        current.push(newMeal);
-        return current;
-      });
-      navigation.setParams({newMeal: undefined});
-    }
-  }, [navigation, route?.params?.newMeal]);
-
-  useEffect(() => {
-    if (route?.params?.editIndex !== undefined) {
-      const editIndex = route.params.editIndex;
-      if (!route.params?.editMeal) {
-        setMeals(current => {
-          current.splice(editIndex, 1);
-          return current;
-        });
-        navigation.setParams({editMeal: undefined, editIndex: undefined});
-      } else {
-        const editMeal = route.params.editMeal;
-        setMeals(current => {
-          current[editIndex] = editMeal;
-          return current;
-        });
-        navigation.setParams({editMeal: undefined, editIndex: undefined});
-      }
-    }
-  }, [navigation, route?.params?.editMeal, route?.params?.editIndex]);
-
+  console.log('Render MealList');
   return (
     <View style={GlobalStyles.viewContainer}>
       {meals.length ? (
@@ -69,16 +35,15 @@ export function MealList(): React.JSX.Element {
                 }}
               />
             )}
-            renderItem={({item, index}) => (
+            renderItem={({item: meal, index}) => (
               <TouchableHighlight
-                key={item.id}
+                key={meal.id}
                 underlayColor={colors.notification}
                 onPress={() => {
                   navigation.navigate({
                     name: 'Edit',
                     params: {
-                      editMeal: {...item},
-                      editIndex: index,
+                      index,
                     },
                     merge: true,
                   });
@@ -89,7 +54,7 @@ export function MealList(): React.JSX.Element {
                   }}>
                   <Text
                     style={{...GlobalStyles.defaultText, color: colors.text}}>
-                    {item.name}
+                    {meal.name}
                   </Text>
                 </View>
               </TouchableHighlight>

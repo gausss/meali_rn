@@ -1,7 +1,5 @@
-import {Meal} from '../../domain/Meal';
-
 export type MealScreenParams = {
-  List: {newMeal?: Meal; editMeal?: Meal; editIndex?: number};
+  List: undefined;
   Add: undefined;
-  Edit: {editMeal: Meal; editIndex: number};
+  Edit: {index: number};
 };

@@ -7,6 +7,8 @@ export default function PlanScreen(): React.JSX.Element {
   const {t} = useTranslation();
   const Stack = createNativeStackNavigator<PlanScreenParams>();
 
+  console.log('Render PlanScreen');
+
   return (
     <Stack.Navigator>
       <Stack.Screen

@@ -1,30 +1,16 @@
 export class Meal {
   id: string;
   name: string;
-  ingredients: Ingredient[];
   complexity?: Complexity;
 
-  constructor(
-    name: string,
-    ingredients: Ingredient[],
-    complexity?: Complexity,
-  ) {
+  constructor(name: string, complexity: Complexity) {
     this.id = IdGenerator.generate();
     this.name = name;
-    this.ingredients = ingredients;
     this.complexity = complexity;
   }
 }
 
 export type Complexity = 'EASY' | 'HARD';
-
-export interface Ingredient {
-  name: string;
-  count: number;
-  unit: Unit;
-}
-
-export type Unit = 'GRM' | 'ML' | 'UNIT';
 
 class IdGenerator {
   private static readonly base =

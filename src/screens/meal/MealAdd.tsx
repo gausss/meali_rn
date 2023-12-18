@@ -1,24 +1,22 @@
-import {
-  NavigationProp,
-  useNavigation,
-  useTheme,
-} from '@react-navigation/native';
-import {useState} from 'react';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {useContext, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
 import {Meal} from '../../domain/Meal';
+import {ActionButton} from '../../shared/ActionButton';
 import {GlobalStyles} from '../../shared/GlobalStyles';
 import {Input} from '../../shared/Input';
 import {Select} from '../../shared/Select';
 import {MealScreenParams} from './MealScreenParams';
-import {ActionButton} from '../../shared/ActionButton';
+import {MealsDispatchContext} from '../../domain/MealReducer';
 
 export function MealAdd(): React.JSX.Element {
   const {t} = useTranslation();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
+  const [addMeal, setAddMeal] = useState({} as Partial<Meal>);
+  const dispatch = useContext(MealsDispatchContext);
 
-  const [addMeal, setAddMeal] = useState({} as Meal);
-
+  console.log('Render MealAdd');
   return (
     <View style={GlobalStyles.viewContainer}>
       <Input
@@ -44,15 +42,10 @@ export function MealAdd(): React.JSX.Element {
         <ActionButton
           name="add-outline"
           disabled={!addMeal.name || !addMeal.complexity}
-          onPress={() =>
-            navigation.navigate({
-              name: 'List',
-              params: {
-                newMeal: addMeal,
-              },
-              merge: true,
-            })
-          }>
+          onPress={() => {
+            dispatch({type: 'add', meal: addMeal as Meal});
+            navigation.navigate('List');
+          }}>
           {t('meals.save')}
         </ActionButton>
       </View>

@@ -8,6 +8,7 @@ import {ActionButton} from '../../shared/ActionButton';
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
+  console.log('Render PlanList');
 
   return (
     <View style={GlobalStyles.viewContainer}>

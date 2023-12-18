@@ -10,6 +10,7 @@ export default function MealScreen(): React.JSX.Element {
   const {t} = useTranslation();
   const Stack = createNativeStackNavigator<MealScreenParams>();
 
+  console.log('Render MealScreen');
   return (
     <Stack.Navigator>
       <Stack.Screen
