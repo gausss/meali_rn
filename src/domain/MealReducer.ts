@@ -1,6 +1,5 @@
 import {createContext} from 'react';
 import {Meal} from './Meal';
-import {act} from 'react-test-renderer';
 
 export const MealsContext = createContext<Meal[]>([]);
 export const MealsDispatchContext = createContext<React.Dispatch<MealAction>>(
