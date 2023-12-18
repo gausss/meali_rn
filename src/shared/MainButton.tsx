@@ -5,13 +5,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export function MainButton(props: IconButtonProps): React.JSX.Element {
   const {colors} = useTheme();
-
+  console.log(props);
   return (
     <Icon.Button
       {...props}
       borderRadius={25}
       style={styles.buttonStyle}
-      backgroundColor={colors.primary}>
+      backgroundColor={props.disabled ? 'grey' : colors.primary}>
       {props.children}
     </Icon.Button>
   );
