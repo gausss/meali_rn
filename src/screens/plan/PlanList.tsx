@@ -2,13 +2,13 @@ import {useTheme} from '@react-navigation/native';
 import {useContext, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {MealsContext} from '../../domain/MealReducer';
 import {Plan, generatePlan} from '../../domain/Plan';
 import {ActionButton} from '../../shared/ActionButton';
 import {GlobalStyles} from '../../shared/GlobalStyles';
 import {ListItemSeparator} from '../../shared/List';
 import {Section} from '../../shared/Section';
+import {NoMealsPlan} from './NoMeals';
 import {PlanRow} from './PlanRow';
 
 export function PlanList(): React.JSX.Element {
@@ -23,25 +23,27 @@ export function PlanList(): React.JSX.Element {
       style={{
         ...GlobalStyles.viewContainer,
       }}>
-      {plan.length ? (
-        <FlatList
-          data={plan}
-          scrollEnabled={true}
-          ItemSeparatorComponent={() => <ListItemSeparator />}
-          renderItem={({item, index}) => (
-            <TouchableHighlight
-              key={item.index}
-              underlayColor={colors.notification}
-              onPress={() => {
-                console.log(item.meal.name);
-              }}>
-              <PlanRow item={item.meal} index={item.index} />
-            </TouchableHighlight>
-          )}
-        />
-      ) : (
-        <NoPlan />
-      )}
+      <View>
+        {plan.length && meals.length ? (
+          <FlatList
+            data={plan}
+            scrollEnabled={true}
+            ItemSeparatorComponent={() => <ListItemSeparator />}
+            renderItem={({item}) => (
+              <TouchableHighlight
+                key={item.index}
+                underlayColor={colors.notification}
+                onPress={() => {
+                  console.log(item.meal.name);
+                }}>
+                <PlanRow item={item.meal} index={item.index} />
+              </TouchableHighlight>
+            )}
+          />
+        ) : (
+          <NoPlan />
+        )}
+      </View>
 
       <View style={{...GlobalStyles.viewCentered}}>
         <ActionButton
@@ -72,30 +74,6 @@ function NoPlan(): React.JSX.Element {
           style={{...GlobalStyles.placeholderImage, tintColor: colors.text}}
         />
       </View>
-    </View>
-  );
-}
-
-function NoMealsPlan(): React.JSX.Element {
-  const {colors} = useTheme();
-  const {t} = useTranslation();
-
-  return (
-    <View
-      style={{
-        flexDirection: 'row',
-        gap: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Icon name="pizza-outline" style={{fontSize: 24, color: colors.text}} />
-      <Text
-        style={{
-          fontSize: GlobalStyles.defaultText.fontSize,
-          color: colors.text,
-        }}>
-        {t('plan.noMeals')}
-      </Text>
     </View>
   );
 }

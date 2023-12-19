@@ -13,6 +13,7 @@ import {Section} from '../../shared/Section';
 import {MealScreenParams} from './MealScreenParams';
 import {MealsContext} from '../../domain/MealReducer';
 import {ListItemSeparator} from '../../shared/List';
+import {MealRow} from './MealRow';
 
 export function MealList(): React.JSX.Element {
   const {colors} = useTheme();
@@ -29,9 +30,9 @@ export function MealList(): React.JSX.Element {
             data={meals}
             scrollEnabled={true}
             ItemSeparatorComponent={() => <ListItemSeparator />}
-            renderItem={({item: meal, index}) => (
+            renderItem={({item, index}) => (
               <TouchableHighlight
-                key={meal.id}
+                key={item.id}
                 underlayColor={colors.notification}
                 onPress={() => {
                   navigation.navigate({
@@ -42,15 +43,7 @@ export function MealList(): React.JSX.Element {
                     merge: true,
                   });
                 }}>
-                <View
-                  style={{
-                    padding: 15,
-                  }}>
-                  <Text
-                    style={{...GlobalStyles.defaultText, color: colors.text}}>
-                    {meal.name}
-                  </Text>
-                </View>
+                <MealRow meal={item} />
               </TouchableHighlight>
             )}
           />

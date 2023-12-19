@@ -9,6 +9,7 @@ export const GlobalStyles = StyleSheet.create({
     paddingHorizontal: 15,
     marginTop: 20,
     gap: 20,
+    height: '97%',
   },
   placeholderImage: {
     height: Dimensions.get('window').height * 0.43,
