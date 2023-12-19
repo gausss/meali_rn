@@ -15,7 +15,7 @@ export const GlobalStyles = StyleSheet.create({
     resizeMode: 'contain',
   },
   defaultText: {
-    fontSize: 14,
+    fontSize: 16,
   },
 });
 

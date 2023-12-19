@@ -5,6 +5,7 @@ import SelectDropdown, {
   SelectDropdownProps,
 } from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {GlobalStyles} from './GlobalStyles';
 
 export type SelectProps = SelectDropdownProps & {
   width?: DimensionValue;
@@ -45,21 +46,23 @@ export function Select(props: SelectProps): React.JSX.Element {
 const styles = StyleSheet.create({
   buttonTextStyle: {
     textAlign: 'left',
-    fontSize: 14,
+    fontSize: GlobalStyles.defaultText.fontSize,
   },
   buttonStyle: {
     height: 50,
     borderRadius: 12,
     padding: 15,
     width: '100%',
+    fontSize: GlobalStyles.defaultText.fontSize,
   },
   rowTextStyle: {
     textAlign: 'left',
-    fontSize: 14,
+    fontSize: GlobalStyles.defaultText.fontSize,
   },
   dropdownStyle: {
     borderRadius: 12,
     padding: 15,
     height: 'auto',
+    fontSize: GlobalStyles.defaultText.fontSize,
   },
 });

@@ -101,7 +101,11 @@ function NoMealsPlan(): React.JSX.Element {
         alignItems: 'center',
       }}>
       <Icon name="pizza-outline" style={{fontSize: 24, color: colors.text}} />
-      <Text style={{fontSize: 14, color: colors.text}}>
+      <Text
+        style={{
+          fontSize: GlobalStyles.defaultText.fontSize,
+          color: colors.text,
+        }}>
         {t('plan.noMeals')}
       </Text>
     </View>

@@ -5,6 +5,7 @@ import {
   TextInput,
   TextInputProps,
 } from 'react-native';
+import {GlobalStyles} from './GlobalStyles';
 
 type InputProps = TextInputProps & {
   width?: DimensionValue;
@@ -34,6 +35,6 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 12,
     padding: 15,
-    fontSize: 14,
+    fontSize: GlobalStyles.defaultText.fontSize,
   },
 });
