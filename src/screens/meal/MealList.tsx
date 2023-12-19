@@ -62,7 +62,7 @@ export function MealList(): React.JSX.Element {
           />
         </Card>
       ) : (
-        <MealsNotFound />
+        <NoMeals />
       )}
 
       <View style={GlobalStyles.viewCentered}>
@@ -76,7 +76,7 @@ export function MealList(): React.JSX.Element {
   );
 }
 
-function MealsNotFound(): React.JSX.Element {
+function NoMeals(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
 

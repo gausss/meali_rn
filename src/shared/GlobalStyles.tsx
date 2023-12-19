@@ -1,5 +1,5 @@
 import {DarkTheme, DefaultTheme} from '@react-navigation/native';
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 
 export const GlobalStyles = StyleSheet.create({
   viewCentered: {
@@ -11,7 +11,7 @@ export const GlobalStyles = StyleSheet.create({
     gap: 20,
   },
   placeholderImage: {
-    height: 380,
+    height: Dimensions.get('window').height * 0.43,
     resizeMode: 'contain',
   },
   defaultText: {
