@@ -2,52 +2,40 @@ import {useTheme} from '@react-navigation/native';
 import {useContext, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {MealsContext} from '../../domain/MealReducer';
+import {Plan, generatePlan} from '../../domain/Plan';
 import {ActionButton} from '../../shared/ActionButton';
 import {GlobalStyles} from '../../shared/GlobalStyles';
+import {ListItemSeparator} from '../../shared/List';
 import {Section} from '../../shared/Section';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {PlanRow} from './PlanRow';
 
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const meals = useContext(MealsContext);
-  const [plan, setPlan] = useState<{day: number; mealId: string}[]>([]);
+  const [plan, setPlan] = useState<Plan>([]);
 
   console.log('Render PlanList');
   return (
     <View
       style={{
         ...GlobalStyles.viewContainer,
-        justifyContent: meals.length ? 'flex-start' : 'space-between',
       }}>
       {plan.length ? (
         <FlatList
           data={plan}
           scrollEnabled={true}
-          ItemSeparatorComponent={() => (
-            <View
-              style={{
-                backgroundColor: colors.notification,
-                height: 1,
-              }}
-            />
-          )}
+          ItemSeparatorComponent={() => <ListItemSeparator />}
           renderItem={({item, index}) => (
             <TouchableHighlight
-              key={item.day}
+              key={item.index}
               underlayColor={colors.notification}
               onPress={() => {
-                console.log(item.mealId);
+                console.log(item.meal.name);
               }}>
-              <View
-                style={{
-                  padding: 15,
-                }}>
-                <Text style={{...GlobalStyles.defaultText, color: colors.text}}>
-                  {item.day} - {item.mealId}
-                </Text>
-              </View>
+              <PlanRow item={item.meal} index={item.index} />
             </TouchableHighlight>
           )}
         />
@@ -59,7 +47,7 @@ export function PlanList(): React.JSX.Element {
         <ActionButton
           name="reload-outline"
           disabled={!meals.length}
-          onPress={() => console.log('Pressed')}>
+          onPress={() => setPlan(generatePlan(meals))}>
           {t('plan.generate')}
         </ActionButton>
       </View>

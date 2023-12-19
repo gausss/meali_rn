@@ -12,6 +12,7 @@ import {GlobalStyles} from '../../shared/GlobalStyles';
 import {Section} from '../../shared/Section';
 import {MealScreenParams} from './MealScreenParams';
 import {MealsContext} from '../../domain/MealReducer';
+import {ListItemSeparator} from '../../shared/List';
 
 export function MealList(): React.JSX.Element {
   const {colors} = useTheme();
@@ -27,14 +28,7 @@ export function MealList(): React.JSX.Element {
           <FlatList
             data={meals}
             scrollEnabled={true}
-            ItemSeparatorComponent={() => (
-              <View
-                style={{
-                  backgroundColor: colors.notification,
-                  height: 1,
-                }}
-              />
-            )}
+            ItemSeparatorComponent={() => <ListItemSeparator />}
             renderItem={({item: meal, index}) => (
               <TouchableHighlight
                 key={meal.id}
