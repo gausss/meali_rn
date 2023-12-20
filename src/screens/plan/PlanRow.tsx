@@ -1,19 +1,20 @@
-import {StyleSheet, Text, View} from 'react-native';
-import {GlobalStyles} from '../../shared/GlobalStyles';
 import {useTheme} from '@react-navigation/native';
-import {Meal} from '../../domain/Meal';
 import {useTranslation} from 'react-i18next';
+import {StyleSheet, Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {Suggestion} from '../../domain/Plan';
 import {Badge} from '../../shared/Badge';
+import {GlobalStyles} from '../../shared/GlobalStyles';
 
 interface PlanRowProps {
-  item: Meal;
-  index: number;
+  suggestion: Suggestion;
 }
 
-export function PlanRow({item, index}: PlanRowProps): React.JSX.Element {
+export function PlanRow({suggestion}: PlanRowProps): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
 
+  console.log('Render PlanRow ' + suggestion.index);
   return (
     <View style={styles.rowContainer}>
       <View
@@ -22,9 +23,10 @@ export function PlanRow({item, index}: PlanRowProps): React.JSX.Element {
           borderColor: colors.notification,
           backgroundColor: colors.notification,
         }}>
-        <Text style={{...styles.indexText, color: colors.text}}>
-          {index + 1}
-        </Text>
+        <Icon
+          name={suggestion.pinned ? 'checkmark-outline' : 'add-outline'}
+          style={{...styles.iconStyle, color: colors.text}}
+        />
       </View>
       <View style={styles.content}>
         <Text
@@ -32,10 +34,10 @@ export function PlanRow({item, index}: PlanRowProps): React.JSX.Element {
             fontSize: GlobalStyles.defaultText.fontSize,
             color: colors.text,
           }}>
-          {item.name}
+          {suggestion.meal.name}
         </Text>
-        {item.complexity === 'HARD' ? (
-          <Badge text={t(`meals.complexity.${item.complexity}`)} />
+        {suggestion.meal.complexity === 'HARD' ? (
+          <Badge text={t(`meals.complexity.${suggestion.meal.complexity}`)} />
         ) : null}
       </View>
     </View>
@@ -48,17 +50,17 @@ const styles = StyleSheet.create({
     gap: 10,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingVertical: 15,
+    paddingVertical: 13.5,
   },
   indexCircle: {
     borderWidth: 3,
     borderRadius: 40,
     width: 50,
     height: 50,
-    paddingLeft: 12,
-    paddingTop: 3,
+    paddingLeft: 6,
+    paddingTop: 6,
   },
-  indexText: {
+  iconStyle: {
     fontSize: 32,
     fontWeight: 'bold',
   },

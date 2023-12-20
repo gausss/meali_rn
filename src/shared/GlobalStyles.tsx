@@ -4,6 +4,9 @@ import {Dimensions, StyleSheet} from 'react-native';
 export const GlobalStyles = StyleSheet.create({
   viewCentered: {
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
   },
   viewContainer: {
     paddingHorizontal: 15,

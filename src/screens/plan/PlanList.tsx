@@ -1,15 +1,23 @@
 import {useTheme} from '@react-navigation/native';
 import {useContext, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
+import {
+  Button,
+  FlatList,
+  Image,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 import {MealsContext} from '../../domain/MealReducer';
-import {Plan, generatePlan} from '../../domain/Plan';
+import {Plan, generateSuggestions} from '../../domain/Plan';
 import {ActionButton} from '../../shared/ActionButton';
 import {GlobalStyles} from '../../shared/GlobalStyles';
 import {ListItemSeparator} from '../../shared/List';
 import {Section} from '../../shared/Section';
 import {NoMealsPlan} from './NoMeals';
 import {PlanRow} from './PlanRow';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
@@ -27,16 +35,16 @@ export function PlanList(): React.JSX.Element {
         {plan.length && meals.length ? (
           <FlatList
             data={plan}
-            scrollEnabled={true}
+            scrollEnabled={false}
             ItemSeparatorComponent={() => <ListItemSeparator />}
             renderItem={({item}) => (
               <TouchableHighlight
                 key={item.index}
                 underlayColor={colors.notification}
                 onPress={() => {
-                  console.log(item.meal.name);
+                  item.pinned = true;
                 }}>
-                <PlanRow item={item.meal} index={item.index} />
+                <PlanRow suggestion={item} />
               </TouchableHighlight>
             )}
           />
@@ -45,13 +53,25 @@ export function PlanList(): React.JSX.Element {
         )}
       </View>
 
-      <View style={{...GlobalStyles.viewCentered}}>
+      <View style={GlobalStyles.viewCentered}>
         <ActionButton
-          name="reload-outline"
+          name="sparkles-outline"
           disabled={!meals.length}
-          onPress={() => setPlan(generatePlan(meals))}>
-          {t('plan.generate')}
+          onPress={() => setPlan(generateSuggestions(plan, [...meals]))}>
+          {plan.length ? t('plan.refresh') : t('plan.generate')}
         </ActionButton>
+        {plan.length ? (
+          <View>
+            <Icon.Button
+              name="trash-outline"
+              iconStyle={{color: '#BD271E'}}
+              style={{
+                backgroundColor: colors.background,
+              }}
+              onPress={() => setPlan([])}
+            />
+          </View>
+        ) : null}
       </View>
 
       {!meals.length ? <NoMealsPlan /> : null}

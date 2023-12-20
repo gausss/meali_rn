@@ -5,7 +5,14 @@ import {
 } from '@react-navigation/native';
 import React, {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
+import {
+  Button,
+  FlatList,
+  Image,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 import {ActionButton} from '../../shared/ActionButton';
 import {Card} from '../../shared/Card';
 import {GlobalStyles} from '../../shared/GlobalStyles';
@@ -23,7 +30,7 @@ export function MealList(): React.JSX.Element {
 
   console.log('Render MealList');
   return (
-    <View style={GlobalStyles.viewContainer}>
+    <View style={{...GlobalStyles.viewContainer, height: '84%'}}>
       {meals.length ? (
         <Card>
           <FlatList

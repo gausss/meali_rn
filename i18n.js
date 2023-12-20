@@ -11,6 +11,8 @@ const resources = {
         introDescription:
           'Erstelle einen Essensplan für die nächsten tage. Pinne deine Favoriten bis du zufrieden bist.',
         generate: 'Plan erstellen',
+        refresh: 'Neue Vorschläge',
+        reset: 'Zurücksetzen',
         noMeals: 'Gerichte erfassen',
       },
       meals: {
