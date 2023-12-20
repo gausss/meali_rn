@@ -35,14 +35,13 @@ const styles = StyleSheet.create({
     height: 60,
     position: 'absolute',
     bottom: 10,
-    right: '20%',
+    right: '21%',
   },
   arrow: {
-    marginTop: 5,
+    marginTop: 10,
     marginLeft: -10,
-    height: 60,
+    height: 50,
     width: 60,
     resizeMode: 'contain',
-    transform: [{rotate: '270deg'}],
   },
 });
