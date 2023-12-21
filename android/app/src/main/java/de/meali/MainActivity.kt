@@ -1,4 +1,4 @@
-package com.meali_rn
+package de.meali
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

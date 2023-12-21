@@ -1,4 +1,4 @@
-package com.meali_rn
+package de.meali
 
 import android.app.Application
 import com.facebook.react.PackageList
