@@ -4,6 +4,9 @@ import {initReactI18next} from 'react-i18next';
 const resources = {
   de: {
     translation: {
+      save: 'Speichern',
+      delete: 'Löschen',
+      cancel: 'Abbrechen',
       plan: {
         tabTitle: 'Plan',
         headerTitle: 'Essensplan',
@@ -13,6 +16,10 @@ const resources = {
         generate: 'Generieren',
         reset: 'Zurücksetzen',
         noMeals: 'Gerichte erfassen',
+        options: {
+          title: 'Einstellungen',
+          numSuggestions: 'Anzahl Vorschläge',
+        },
       },
       meals: {
         tabTitle: 'Gerichte',
@@ -22,8 +29,6 @@ const resources = {
         add: 'Gericht hinzufügen',
         create: 'Neues Gericht',
         edit: 'Gericht bearbeiten',
-        save: 'Speichern',
-        delete: 'Löschen',
         name: 'Name',
         ingredient: {
           name: 'Zutat',

@@ -4,29 +4,34 @@ import {
   StyleSheet,
   TextInput,
   TextInputProps,
+  View,
 } from 'react-native';
 import {GlobalStyles} from './GlobalStyles';
+import {Label} from './Label';
 
 type InputProps = TextInputProps & {
   width?: DimensionValue;
+  label?: string;
 };
 
 export function Input(props: InputProps): React.JSX.Element {
   const {colors} = useTheme();
 
   return (
-    <TextInput
-      {...props}
-      inputMode="text"
-      clearButtonMode="always"
-      placeholderTextColor="grey"
-      style={{
-        ...styles.textInputStyle,
-        color: colors.text,
-        backgroundColor: colors.card,
-        width: props.width,
-      }}
-    />
+    <View>
+      <Label text={props.label} />
+      <TextInput
+        {...props}
+        inputMode="text"
+        clearButtonMode="always"
+        style={{
+          ...styles.textInputStyle,
+          color: colors.text,
+          backgroundColor: colors.card,
+          width: props.width,
+        }}
+      />
+    </View>
   );
 }
 

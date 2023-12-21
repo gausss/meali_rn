@@ -20,14 +20,15 @@ export function MealAdd(): React.JSX.Element {
   return (
     <View style={GlobalStyles.viewContainer}>
       <Input
-        placeholder={t('meals.name')}
+        label={t('meals.name')}
         onChangeText={value => {
           setAddMeal(meal => ({...meal, name: value}));
         }}
       />
       <Select
-        defaultButtonText={t('meals.complexity.name')}
+        label={t('meals.complexity.name')}
         data={['EASY', 'HARD']}
+        defaultButtonText=" "
         rowTextForSelection={item => {
           return t(`meals.complexity.${item}`);
         }}
@@ -40,13 +41,13 @@ export function MealAdd(): React.JSX.Element {
       />
       <View style={GlobalStyles.viewCentered}>
         <ActionButton
-          name="add-outline"
+          name="checkmark-outline"
           disabled={!addMeal.name || !addMeal.complexity}
           onPress={() => {
             dispatch({type: 'add', meal: addMeal as Meal});
             navigation.navigate('List');
           }}>
-          {t('meals.save')}
+          {t('save')}
         </ActionButton>
       </View>
     </View>

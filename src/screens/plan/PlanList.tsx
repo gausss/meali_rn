@@ -10,12 +10,14 @@ import {ListItemSeparator} from '../../shared/List';
 import {Section} from '../../shared/Section';
 import {NoMealsPlan} from './NoMeals';
 import {PlanRow} from './PlanRow';
+import {OptionsContext} from '../../domain/OptionsContext';
 
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const meals = useContext(MealsContext);
   const plan = useContext(PlanContext);
+  const options = useContext(OptionsContext);
   const planDispatch = useContext(PlanDispatchContext);
 
   console.log('Render PlanList');
@@ -51,7 +53,12 @@ export function PlanList(): React.JSX.Element {
           name="sparkles-outline"
           disabled={!meals.length}
           onPress={() =>
-            planDispatch({type: 'generate', currentPlan: plan, meals: meals})
+            planDispatch({
+              type: 'generate',
+              currentPlan: plan,
+              meals: meals,
+              options: options,
+            })
           }>
           {t('plan.generate')}
         </ActionButton>

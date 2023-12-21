@@ -27,14 +27,14 @@ export function MealEdit(): React.JSX.Element {
   return (
     <View style={GlobalStyles.viewContainer}>
       <Input
-        placeholder={t('meals.name')}
+        label={t('meals.name')}
         onChangeText={value => {
           setEditedMeal(meal => ({...meal, name: value}));
         }}
         defaultValue={editedMeal.name}
       />
       <Select
-        defaultButtonText={t('meals.complexity.name')}
+        label={t('meals.complexity.name')}
         data={['EASY', 'HARD']}
         rowTextForSelection={item => {
           return t(`meals.complexity.${item}`);
@@ -60,7 +60,7 @@ export function MealEdit(): React.JSX.Element {
             });
             navigation.navigate('List');
           }}>
-          {t('meals.save')}
+          {t('save')}
         </ActionButton>
       </View>
     </View>
@@ -82,7 +82,7 @@ export function MealDeleteButton(): React.JSX.Element {
         });
         navigation.navigate('List');
       }}
-      title={t('meals.delete')}
+      title={t('delete')}
       color="red"
     />
   );

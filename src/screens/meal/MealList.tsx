@@ -23,7 +23,7 @@ export function MealList(): React.JSX.Element {
 
   console.log('Render MealList');
   return (
-    <View style={{...GlobalStyles.viewContainer, height: '84%'}}>
+    <View style={{...GlobalStyles.viewContainer, height: '82%'}}>
       {meals.length ? (
         <Card>
           <FlatList
