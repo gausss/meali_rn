@@ -13,7 +13,9 @@ export function MealRow({meal}: MealRowProps): React.JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Text style={{...GlobalStyles.defaultText, color: colors.text}}>
+      <Text
+        numberOfLines={1}
+        style={{...GlobalStyles.defaultText, color: colors.text, width: '90%'}}>
         {meal.name}
       </Text>
       <Icon

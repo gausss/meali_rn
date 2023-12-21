@@ -4,7 +4,6 @@ import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Suggestion} from '../../domain/Plan';
 import {Badge} from '../../shared/Badge';
-import {GlobalStyles} from '../../shared/GlobalStyles';
 
 interface PlanRowProps {
   suggestion: Suggestion;
@@ -21,24 +20,28 @@ export function PlanRow({suggestion}: PlanRowProps): React.JSX.Element {
         style={{
           ...styles.indexCircle,
           borderColor: colors.notification,
-          backgroundColor: colors.notification,
+          backgroundColor: suggestion.pinned ? 'green' : colors.notification,
         }}>
         <Icon
-          name={suggestion.pinned ? 'checkmark-outline' : 'add-outline'}
-          style={{...styles.iconStyle, color: colors.text}}
+          name={suggestion.pinned ? '' : 'add-outline'}
+          style={{
+            ...styles.iconStyle,
+            color: colors.text,
+          }}
         />
       </View>
       <View style={styles.content}>
         <Text
+          numberOfLines={1}
           style={{
-            fontSize: GlobalStyles.defaultText.fontSize,
+            fontSize: 24,
+            fontWeight: 'bold',
             color: colors.text,
+            width: '90%',
           }}>
           {suggestion.meal.name}
         </Text>
-        {suggestion.meal.complexity === 'HARD' ? (
-          <Badge text={t(`meals.complexity.${suggestion.meal.complexity}`)} />
-        ) : null}
+        {suggestion.meal.complexity === 'HARD' ? <Badge /> : null}
       </View>
     </View>
   );
@@ -47,28 +50,28 @@ export function PlanRow({suggestion}: PlanRowProps): React.JSX.Element {
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 15,
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingVertical: 13.5,
   },
   indexCircle: {
     borderWidth: 3,
-    borderRadius: 40,
-    width: 50,
-    height: 50,
-    paddingLeft: 6,
-    paddingTop: 6,
+    borderRadius: 15,
+    width: 30,
+    height: 30,
+    paddingLeft: 3.5,
+    paddingTop: 3,
   },
   iconStyle: {
-    fontSize: 32,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   content: {
+    paddingVertical: 10,
     flexDirection: 'row',
-    gap: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '80%',
+    width: '85%',
   },
 });

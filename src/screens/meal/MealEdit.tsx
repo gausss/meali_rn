@@ -7,7 +7,7 @@ import {
 import {useContext, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Button, View} from 'react-native';
-import {MealsContext, MealsDispatchContext} from '../../domain/MealReducer';
+import {MealsContext, MealsDispatchContext} from '../../domain/MealContext';
 import {ActionButton} from '../../shared/ActionButton';
 import {GlobalStyles} from '../../shared/GlobalStyles';
 import {Input} from '../../shared/Input';

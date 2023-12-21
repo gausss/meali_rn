@@ -9,9 +9,8 @@ const resources = {
         headerTitle: 'Essensplan',
         introHeading: 'Plan erstellen',
         introDescription:
-          'Erstelle einen Essensplan für die nächsten tage. Pinne deine Favoriten bis du zufrieden bist.',
-        generate: 'Plan erstellen',
-        refresh: 'Neue Vorschläge',
+          'Erstelle einen Essensplan für die nächsten Tage. Pinne deine Favoriten bis du zufrieden bist.',
+        generate: 'Generieren',
         reset: 'Zurücksetzen',
         noMeals: 'Gerichte erfassen',
       },

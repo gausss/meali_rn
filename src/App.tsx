@@ -9,7 +9,7 @@ import {
   MealsContext,
   MealsDispatchContext,
   mealReducer,
-} from './domain/MealReducer';
+} from './domain/MealContext';
 import MealScreen from './screens/meal/MealScreen';
 import Plan from './screens/plan/PlanScreen';
 import {Dark, Light} from './shared/GlobalStyles';

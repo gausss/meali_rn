@@ -5,22 +5,15 @@ import {
 } from '@react-navigation/native';
 import React, {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
-import {
-  Button,
-  FlatList,
-  Image,
-  Text,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
+import {MealsContext} from '../../domain/MealContext';
 import {ActionButton} from '../../shared/ActionButton';
 import {Card} from '../../shared/Card';
 import {GlobalStyles} from '../../shared/GlobalStyles';
-import {Section} from '../../shared/Section';
-import {MealScreenParams} from './MealScreenParams';
-import {MealsContext} from '../../domain/MealReducer';
 import {ListItemSeparator} from '../../shared/List';
+import {Section} from '../../shared/Section';
 import {MealRow} from './MealRow';
+import {MealScreenParams} from './MealScreenParams';
 
 export function MealList(): React.JSX.Element {
   const {colors} = useTheme();

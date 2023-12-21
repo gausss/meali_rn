@@ -8,7 +8,7 @@ import {GlobalStyles} from '../../shared/GlobalStyles';
 import {Input} from '../../shared/Input';
 import {Select} from '../../shared/Select';
 import {MealScreenParams} from './MealScreenParams';
-import {MealsDispatchContext} from '../../domain/MealReducer';
+import {MealsDispatchContext} from '../../domain/MealContext';
 
 export function MealAdd(): React.JSX.Element {
   const {t} = useTranslation();
