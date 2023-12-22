@@ -38,7 +38,7 @@ export default function PlanScreen(): React.JSX.Element {
         {plan.length ? (
           <Icon
             color={colors.primary}
-            size={22}
+            size={20}
             name="reload-outline"
             onPress={() => planDispatch({type: 'clear'})}
           />
@@ -46,8 +46,8 @@ export default function PlanScreen(): React.JSX.Element {
 
         <Icon
           color={colors.primary}
-          size={22}
-          name="options-outline"
+          size={21}
+          name="ellipsis-horizontal-circle-outline"
           onPress={() => navigation.navigate('Options')}
         />
       </View>
