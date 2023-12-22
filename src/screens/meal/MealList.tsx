@@ -5,7 +5,14 @@ import {
 } from '@react-navigation/native';
 import React, {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 import {MealsContext} from '../../domain/MealContext';
 import {ActionButton} from '../../shared/ActionButton';
 import {Card} from '../../shared/Card';
@@ -68,16 +75,16 @@ function NoMeals(): React.JSX.Element {
 
   return (
     <View>
-      <Text style={{...GlobalStyles.sectionTitle, color: colors.text}}>
-        {t('meals.introHeading')}
-      </Text>
       <Text style={{...GlobalStyles.sectionBody, color: colors.text}}>
         {t('meals.introDescription')}
       </Text>
       <View style={GlobalStyles.viewCentered}>
         <Image
-          source={require('../../img/Ravioli.png')}
-          style={{...GlobalStyles.placeholderImage, tintColor: colors.text}}
+          source={require('../../img/taco-clean.png')}
+          style={{
+            ...GlobalStyles.placeholderImage,
+            height: Dimensions.get('window').height * 0.3,
+          }}
         />
       </View>
     </View>

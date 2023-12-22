@@ -79,16 +79,13 @@ function NoPlan(): React.JSX.Element {
 
   return (
     <View>
-      <Text style={{...GlobalStyles.sectionTitle, color: colors.text}}>
-        {t('plan.introHeading')}
-      </Text>
       <Text style={{...GlobalStyles.sectionBody, color: colors.text}}>
         {t('plan.introDescription')}
       </Text>
       <View style={GlobalStyles.viewCentered}>
         <Image
-          source={require('../../img/Farfalle.png')}
-          style={{...GlobalStyles.placeholderImage, tintColor: colors.text}}
+          source={require('../../img/plan-fly.png')}
+          style={{...GlobalStyles.placeholderImage}}
         />
       </View>
       {!meals.length ? (

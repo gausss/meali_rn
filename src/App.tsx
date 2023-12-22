@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer, useTheme} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {useColorScheme} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
