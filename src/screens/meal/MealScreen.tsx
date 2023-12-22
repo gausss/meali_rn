@@ -7,6 +7,7 @@ import {MealList} from './MealList';
 import {MealScreenParams} from './MealScreenParams';
 import {Text} from 'react-native';
 import {useTheme} from '@react-navigation/native';
+import {GlobalStyles} from '../../shared/GlobalStyles';
 
 export default function MealScreen(): React.JSX.Element {
   const {t} = useTranslation();
@@ -25,9 +26,8 @@ export default function MealScreen(): React.JSX.Element {
           headerLeft: () => (
             <Text
               style={{
+                ...GlobalStyles.statusBarTitle,
                 color: colors.text,
-                fontSize: 20,
-                fontWeight: 'bold',
               }}>
               {t('meals.headerTitle')}
             </Text>
@@ -39,7 +39,7 @@ export default function MealScreen(): React.JSX.Element {
         component={MealAdd}
         options={{
           presentation: 'modal',
-          title: t('meals.create'),
+          title: ' ',
         }}
       />
       <Stack.Screen
@@ -47,7 +47,7 @@ export default function MealScreen(): React.JSX.Element {
         component={MealEdit}
         options={{
           presentation: 'modal',
-          title: t('meals.edit'),
+          title: ' ',
           headerRight: () => <MealDeleteButton />,
         }}
       />

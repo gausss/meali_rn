@@ -36,6 +36,10 @@ export const GlobalStyles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 15,
   },
+  statusBarTitle: {
+    fontSize: 26,
+    fontWeight: '700',
+  },
 });
 
 export const Light = {

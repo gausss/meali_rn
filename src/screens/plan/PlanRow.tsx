@@ -3,6 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Suggestion} from '../../domain/Plan';
 import {GlobalStyles} from '../../shared/GlobalStyles';
+import {Card} from '../../shared/Card';
 
 interface PlanRowProps {
   suggestion: Suggestion;

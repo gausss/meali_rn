@@ -14,6 +14,7 @@ import {GlobalStyles} from '../../shared/GlobalStyles';
 import {ListItemSeparator} from '../../shared/List';
 import {PlanRow} from './PlanRow';
 import {AppTabParams} from '../../App';
+import {Card} from '../../shared/Card';
 
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
@@ -29,8 +30,8 @@ export function PlanList(): React.JSX.Element {
       style={{
         ...GlobalStyles.viewContainer,
       }}>
-      <View>
-        {plan.length && meals.length ? (
+      {plan.length ? (
+        <Card>
           <FlatList
             data={plan}
             scrollEnabled={true}
@@ -46,10 +47,10 @@ export function PlanList(): React.JSX.Element {
               </TouchableHighlight>
             )}
           />
-        ) : (
-          <NoPlan />
-        )}
-      </View>
+        </Card>
+      ) : (
+        <NoPlan />
+      )}
 
       <View style={GlobalStyles.viewCentered}>
         <ActionButton

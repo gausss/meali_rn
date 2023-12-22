@@ -11,7 +11,7 @@ export function ActionButton(props: IconButtonProps): React.JSX.Element {
     <Icon.Button
       {...props}
       borderRadius={25}
-      iconStyle={{fontSize: GlobalStyles.defaultText.fontSize}}
+      iconStyle={{fontSize: GlobalStyles.defaultText.fontSize + 4}}
       style={styles.buttonStyle}
       backgroundColor={props.disabled ? 'grey' : colors.primary}>
       {props.children}

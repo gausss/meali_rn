@@ -21,6 +21,7 @@ import {
 import {PlanList} from './PlanList';
 import {PlanScreenParams} from './PlanScreenParams';
 import {PlanOptions} from './PlanOptions';
+import {GlobalStyles} from '../../shared/GlobalStyles';
 
 export default function PlanScreen(): React.JSX.Element {
   const {t} = useTranslation();
@@ -34,19 +35,25 @@ export default function PlanScreen(): React.JSX.Element {
 
   const resetPlanButton = () => {
     return (
-      <View style={{flexDirection: 'row', gap: 15}}>
+      <View style={{flexDirection: 'row', gap: 5}}>
         {plan.length ? (
-          <Icon
+          <Icon.Button
+            backgroundColor={'transparent'}
+            underlayColor={'transparent'}
+            iconStyle={{marginRight: 0}}
             color={colors.text}
-            size={20}
+            size={22}
             name="reload-outline"
             onPress={() => planDispatch({type: 'clear'})}
           />
         ) : null}
 
-        <Icon
+        <Icon.Button
+          backgroundColor={'transparent'}
+          underlayColor={'transparent'}
+          iconStyle={{marginRight: 0}}
           color={colors.text}
-          size={21}
+          size={22}
           name="settings-outline"
           onPress={() => navigation.navigate('Options')}
         />
@@ -71,9 +78,8 @@ export default function PlanScreen(): React.JSX.Element {
                   headerLeft: () => (
                     <Text
                       style={{
+                        ...GlobalStyles.statusBarTitle,
                         color: colors.text,
-                        fontSize: 20,
-                        fontWeight: 'bold',
                       }}>
                       {t('plan.headerTitle')}
                     </Text>

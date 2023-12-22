@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {useColorScheme} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -37,7 +37,7 @@ export default function App(): React.JSX.Element {
               options={{
                 headerShown: false,
                 title: t('plan.tabTitle'),
-                tabBarActiveTintColor: 'white',
+                tabBarActiveTintColor: isDarkMode ? 'white' : 'black',
                 tabBarIcon: ({size, color, focused}) => (
                   <Icon
                     name={focused ? 'calendar' : 'calendar-outline'}
@@ -53,7 +53,7 @@ export default function App(): React.JSX.Element {
               options={{
                 headerShown: false,
                 title: t('meals.tabTitle'),
-                tabBarActiveTintColor: 'white',
+                tabBarActiveTintColor: isDarkMode ? 'white' : 'black',
                 tabBarIcon: ({size, color, focused}) => (
                   <Icon
                     name={focused ? 'restaurant' : 'restaurant-outline'}
