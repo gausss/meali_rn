@@ -54,7 +54,7 @@ export function PlanList(): React.JSX.Element {
 
       <View style={GlobalStyles.viewCentered}>
         <ActionButton
-          name="sparkles-outline"
+          name="sparkles"
           disabled={!meals.length}
           onPress={() =>
             planDispatch({
