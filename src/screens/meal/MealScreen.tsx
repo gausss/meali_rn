@@ -42,7 +42,6 @@ export default function MealScreen(): React.JSX.Element {
         options={{
           headerStyle: {backgroundColor: colors.background},
           headerShadowVisible: false,
-          presentation: 'modal',
           title: t('meals.add'),
         }}
       />
@@ -52,7 +51,6 @@ export default function MealScreen(): React.JSX.Element {
         options={{
           headerStyle: {backgroundColor: colors.background},
           headerShadowVisible: false,
-          presentation: 'modal',
           title: t('meals.edit'),
         }}
       />

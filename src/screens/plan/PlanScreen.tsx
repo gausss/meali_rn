@@ -94,7 +94,6 @@ export default function PlanScreen(): React.JSX.Element {
                 options={{
                   headerStyle: {backgroundColor: colors.background},
                   headerShadowVisible: false,
-                  presentation: 'modal',
                   title: t('plan.options.title'),
                 }}
               />
