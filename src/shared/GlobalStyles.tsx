@@ -15,8 +15,8 @@ export const GlobalStyles = StyleSheet.create({
     height: '82%',
   },
   placeholderImage: {
-    height: Dimensions.get('window').height * 0.45,
-    margin: 20,
+    height: Dimensions.get('window').height * 0.4,
+    marginVertical: 35,
     resizeMode: 'contain',
   },
   defaultText: {
