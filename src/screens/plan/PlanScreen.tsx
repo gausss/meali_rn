@@ -74,6 +74,8 @@ export default function PlanScreen(): React.JSX.Element {
                 options={{
                   title: '',
                   headerTitleStyle: {fontSize: 22},
+                  headerStyle: {backgroundColor: colors.background},
+                  headerShadowVisible: false,
                   headerRight: resetPlanButton,
                   headerLeft: () => (
                     <Text
@@ -90,6 +92,8 @@ export default function PlanScreen(): React.JSX.Element {
                 name="Options"
                 component={PlanOptions}
                 options={{
+                  headerStyle: {backgroundColor: colors.background},
+                  headerShadowVisible: false,
                   presentation: 'modal',
                   title: t('plan.options.title'),
                 }}

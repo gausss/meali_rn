@@ -3,7 +3,6 @@ import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Suggestion} from '../../domain/Plan';
 import {GlobalStyles} from '../../shared/GlobalStyles';
-import {Card} from '../../shared/Card';
 
 interface PlanRowProps {
   suggestion: Suggestion;
@@ -66,8 +65,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: 25,
     height: 25,
-    paddingLeft: 1,
-    paddingTop: 1,
+    paddingLeft: 0.5,
+    paddingTop: 0.5,
   },
   iconStyle: {
     fontSize: 18,

@@ -55,6 +55,7 @@ export const Dark = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
+    card: '#151516',
     notification: '#212123',
   },
 };

@@ -23,6 +23,8 @@ export default function MealScreen(): React.JSX.Element {
         options={{
           title: '',
           headerTitleStyle: {fontSize: 22},
+          headerStyle: {backgroundColor: colors.background},
+          headerShadowVisible: false,
           headerLeft: () => (
             <Text
               style={{
@@ -38,6 +40,8 @@ export default function MealScreen(): React.JSX.Element {
         name="Add"
         component={MealAdd}
         options={{
+          headerStyle: {backgroundColor: colors.background},
+          headerShadowVisible: false,
           presentation: 'modal',
           title: ' ',
         }}
@@ -46,6 +50,8 @@ export default function MealScreen(): React.JSX.Element {
         name="Edit"
         component={MealEdit}
         options={{
+          headerStyle: {backgroundColor: colors.background},
+          headerShadowVisible: false,
           presentation: 'modal',
           title: ' ',
           headerRight: () => <MealDeleteButton />,

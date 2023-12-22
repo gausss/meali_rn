@@ -1,9 +1,8 @@
 import React, {useReducer} from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {useColorScheme} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   MealsContext,
@@ -13,6 +12,7 @@ import {
 import MealScreen from './screens/meal/MealScreen';
 import Plan from './screens/plan/PlanScreen';
 import {Dark, Light} from './shared/GlobalStyles';
+import {useColorScheme} from 'react-native';
 
 export type AppTabParams = {
   Plan: undefined;
@@ -21,13 +21,13 @@ export type AppTabParams = {
 
 export default function App(): React.JSX.Element {
   const {t} = useTranslation();
-  const isDarkMode = useColorScheme() === 'dark';
+  const dark = useColorScheme() === 'dark';
   const Tab = createBottomTabNavigator<AppTabParams>();
   const [meals, dispatch] = useReducer(mealReducer, []);
 
   console.log('Render App');
   return (
-    <NavigationContainer theme={isDarkMode ? Dark : Light}>
+    <NavigationContainer theme={dark ? Dark : Light}>
       <MealsContext.Provider value={meals}>
         <MealsDispatchContext.Provider value={dispatch}>
           <Tab.Navigator initialRouteName="Plan">
@@ -37,7 +37,7 @@ export default function App(): React.JSX.Element {
               options={{
                 headerShown: false,
                 title: t('plan.tabTitle'),
-                tabBarActiveTintColor: isDarkMode ? 'white' : 'black',
+                tabBarActiveTintColor: dark ? 'white' : 'black',
                 tabBarIcon: ({size, color, focused}) => (
                   <Icon
                     name={focused ? 'calendar' : 'calendar-outline'}
@@ -53,7 +53,7 @@ export default function App(): React.JSX.Element {
               options={{
                 headerShown: false,
                 title: t('meals.tabTitle'),
-                tabBarActiveTintColor: isDarkMode ? 'white' : 'black',
+                tabBarActiveTintColor: dark ? 'white' : 'black',
                 tabBarIcon: ({size, color, focused}) => (
                   <Icon
                     name={focused ? 'restaurant' : 'restaurant-outline'}
