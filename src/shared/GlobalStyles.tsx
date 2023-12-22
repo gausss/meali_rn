@@ -30,6 +30,12 @@ export const GlobalStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '400',
   },
+  badge: {
+    backgroundColor: 'orange',
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+    borderRadius: 15,
+  },
 });
 
 export const Light = {

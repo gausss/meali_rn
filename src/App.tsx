@@ -37,8 +37,13 @@ export default function App(): React.JSX.Element {
               options={{
                 headerShown: false,
                 title: t('plan.tabTitle'),
-                tabBarIcon: ({size, color}) => (
-                  <Icon name="calendar-outline" size={size} color={color} />
+                tabBarActiveTintColor: 'white',
+                tabBarIcon: ({size, color, focused}) => (
+                  <Icon
+                    name={focused ? 'calendar' : 'calendar-outline'}
+                    size={size}
+                    color={color}
+                  />
                 ),
               }}
             />
@@ -48,8 +53,13 @@ export default function App(): React.JSX.Element {
               options={{
                 headerShown: false,
                 title: t('meals.tabTitle'),
-                tabBarIcon: ({size, color}) => (
-                  <Icon name="restaurant-outline" size={size} color={color} />
+                tabBarActiveTintColor: 'white',
+                tabBarIcon: ({size, color, focused}) => (
+                  <Icon
+                    name={focused ? 'restaurant' : 'restaurant-outline'}
+                    size={size}
+                    color={color}
+                  />
                 ),
               }}
             />

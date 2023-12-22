@@ -6,7 +6,7 @@ import {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useReducer} from 'react';
 import {useTranslation} from 'react-i18next';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   OptionsContext,
@@ -37,7 +37,7 @@ export default function PlanScreen(): React.JSX.Element {
       <View style={{flexDirection: 'row', gap: 15}}>
         {plan.length ? (
           <Icon
-            color={colors.primary}
+            color={colors.text}
             size={20}
             name="reload-outline"
             onPress={() => planDispatch({type: 'clear'})}
@@ -45,9 +45,9 @@ export default function PlanScreen(): React.JSX.Element {
         ) : null}
 
         <Icon
-          color={colors.primary}
+          color={colors.text}
           size={21}
-          name="ellipsis-horizontal-circle-outline"
+          name="settings-outline"
           onPress={() => navigation.navigate('Options')}
         />
       </View>
@@ -65,8 +65,19 @@ export default function PlanScreen(): React.JSX.Element {
                 name="List"
                 component={PlanList}
                 options={{
-                  title: t('plan.headerTitle'),
+                  title: '',
+                  headerTitleStyle: {fontSize: 22},
                   headerRight: resetPlanButton,
+                  headerLeft: () => (
+                    <Text
+                      style={{
+                        color: colors.text,
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                      }}>
+                      {t('plan.headerTitle')}
+                    </Text>
+                  ),
                 }}
               />
               <Stack.Screen

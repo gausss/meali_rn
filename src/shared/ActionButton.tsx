@@ -11,6 +11,7 @@ export function ActionButton(props: IconButtonProps): React.JSX.Element {
     <Icon.Button
       {...props}
       borderRadius={25}
+      iconStyle={{fontSize: GlobalStyles.defaultText.fontSize}}
       style={styles.buttonStyle}
       backgroundColor={props.disabled ? 'grey' : colors.primary}>
       {props.children}
@@ -21,7 +22,7 @@ export function ActionButton(props: IconButtonProps): React.JSX.Element {
 const styles = StyleSheet.create({
   buttonStyle: {
     paddingVertical: 15,
-    paddingHorizontal: 25,
+    paddingHorizontal: 20,
     fontSize: GlobalStyles.defaultText.fontSize,
   },
 });

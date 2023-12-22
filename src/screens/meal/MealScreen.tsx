@@ -5,10 +5,13 @@ import {MealAdd} from './MealAdd';
 import {MealDeleteButton, MealEdit} from './MealEdit';
 import {MealList} from './MealList';
 import {MealScreenParams} from './MealScreenParams';
+import {Text} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 
 export default function MealScreen(): React.JSX.Element {
   const {t} = useTranslation();
   const Stack = createNativeStackNavigator<MealScreenParams>();
+  const {colors} = useTheme();
 
   console.log('Render MealScreen');
   return (
@@ -16,7 +19,20 @@ export default function MealScreen(): React.JSX.Element {
       <Stack.Screen
         name="List"
         component={MealList}
-        options={{title: t('meals.tabTitle')}}
+        options={{
+          title: '',
+          headerTitleStyle: {fontSize: 22},
+          headerLeft: () => (
+            <Text
+              style={{
+                color: colors.text,
+                fontSize: 20,
+                fontWeight: 'bold',
+              }}>
+              {t('meals.headerTitle')}
+            </Text>
+          ),
+        }}
       />
       <Stack.Screen
         name="Add"

@@ -2,7 +2,7 @@ import {useTheme} from '@react-navigation/native';
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Suggestion} from '../../domain/Plan';
-import {Badge} from '../../shared/Badge';
+import {GlobalStyles} from '../../shared/GlobalStyles';
 
 interface PlanRowProps {
   suggestion: Suggestion;
@@ -44,7 +44,9 @@ export function PlanRow({suggestion}: PlanRowProps): React.JSX.Element {
           style={{...styles.itemTitle, color: colors.text}}>
           {suggestion.meal.name}
         </Text>
-        {suggestion.meal.complexity === 'HARD' ? <Badge /> : null}
+        {suggestion.meal.complexity === 'HARD' ? (
+          <View style={GlobalStyles.badge} />
+        ) : null}
       </View>
     </View>
   );

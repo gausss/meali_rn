@@ -9,13 +9,13 @@ const resources = {
       cancel: 'Abbrechen',
       plan: {
         tabTitle: 'Plan',
-        headerTitle: 'Essensplan',
-        introHeading: 'Plan erstellen',
+        headerTitle: 'Plan',
+        introHeading: 'Essensplan erstellen',
         introDescription:
           'Erstelle einen Plan aus den generierten Vorschlägen. Pinne deine Favoriten bis du zufrieden bist.',
         generate: 'Generieren',
         reset: 'Zurücksetzen',
-        noMeals: 'Gerichte erfassen',
+        noMeals: 'Erfasse zuerst deine Gerichte.',
         options: {
           title: 'Einstellungen',
           numSuggestions: 'Anzahl Vorschläge',
@@ -23,6 +23,7 @@ const resources = {
       },
       meals: {
         tabTitle: 'Gerichte',
+        headerTitle: 'Gerichte',
         introHeading: 'Gerichte hinzufügen',
         introDescription:
           'Füge deine Lieblingsgerichte und Zutaten hinzu, um sie in zukünftigen Essensplänen zu sehen.',

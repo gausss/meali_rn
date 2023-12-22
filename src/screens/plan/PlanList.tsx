@@ -81,13 +81,6 @@ function NoPlan(): React.JSX.Element {
       <Text style={{...GlobalStyles.sectionTitle, color: colors.text}}>
         {t('plan.introHeading')}
       </Text>
-      {!meals.length ? (
-        <Text
-          style={{...GlobalStyles.sectionBody, color: colors.primary}}
-          onPress={() => navigation.navigate('Meals')}>
-          Erfasse zuerst deine Gerichte.
-        </Text>
-      ) : null}
       <Text style={{...GlobalStyles.sectionBody, color: colors.text}}>
         {t('plan.introDescription')}
       </Text>
@@ -97,6 +90,15 @@ function NoPlan(): React.JSX.Element {
           style={{...GlobalStyles.placeholderImage, tintColor: colors.text}}
         />
       </View>
+      {!meals.length ? (
+        <View style={{alignItems: 'center'}}>
+          <Text
+            style={{...GlobalStyles.sectionBody, color: colors.primary}}
+            onPress={() => navigation.navigate('Meals')}>
+            {t('plan.noMeals')}
+          </Text>
+        </View>
+      ) : null}
     </View>
   );
 }
