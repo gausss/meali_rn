@@ -43,7 +43,7 @@ export default function MealScreen(): React.JSX.Element {
           headerStyle: {backgroundColor: colors.background},
           headerShadowVisible: false,
           presentation: 'modal',
-          title: ' ',
+          title: t('meals.add'),
         }}
       />
       <Stack.Screen
@@ -53,8 +53,7 @@ export default function MealScreen(): React.JSX.Element {
           headerStyle: {backgroundColor: colors.background},
           headerShadowVisible: false,
           presentation: 'modal',
-          title: ' ',
-          headerRight: () => <MealDeleteButton />,
+          title: t('meals.edit'),
         }}
       />
     </Stack.Navigator>

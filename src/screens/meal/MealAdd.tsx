@@ -41,7 +41,7 @@ export function MealAdd(): React.JSX.Element {
       />
       <View style={GlobalStyles.viewCentered}>
         <ActionButton
-          name="checkmark-outline"
+          name=""
           disabled={!addMeal.name || !addMeal.complexity}
           onPress={() => {
             dispatch({type: 'add', meal: addMeal as Meal});

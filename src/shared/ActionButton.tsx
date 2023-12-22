@@ -7,13 +7,26 @@ import {GlobalStyles} from './GlobalStyles';
 export function ActionButton(props: IconButtonProps): React.JSX.Element {
   const {colors} = useTheme();
 
+  const backgroundColor = () => {
+    if (props.disabled) {
+      return 'grey';
+    } else if (props.backgroundColor) {
+      return props.backgroundColor;
+    } else {
+      return colors.primary;
+    }
+  };
+
   return (
     <Icon.Button
       {...props}
       borderRadius={25}
-      iconStyle={{fontSize: GlobalStyles.defaultText.fontSize + 4}}
+      iconStyle={{
+        fontSize: 20,
+        marginLeft: props.name.length > 0 ? 0 : -10,
+      }}
       style={styles.buttonStyle}
-      backgroundColor={props.disabled ? 'grey' : colors.primary}>
+      backgroundColor={backgroundColor()}>
       {props.children}
     </Icon.Button>
   );

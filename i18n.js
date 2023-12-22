@@ -10,7 +10,6 @@ const resources = {
       plan: {
         tabTitle: 'Plan',
         headerTitle: 'Plan',
-        introHeading: 'Essensplan erstellen',
         introDescription:
           'Erstelle einen Plan aus den generierten Vorschlägen. Pinne deine Favoriten bis du zufrieden bist.',
         generate: 'Generieren',
@@ -24,12 +23,10 @@ const resources = {
       meals: {
         tabTitle: 'Gerichte',
         headerTitle: 'Gerichte',
-        introHeading: 'Gerichte hinzufügen',
         introDescription:
           'Füge deine Lieblingsgerichte und Zutaten hinzu, um sie in zukünftigen Essensplänen zu sehen.',
         add: 'Hinzufügen',
-        create: 'Neues Gericht',
-        edit: 'Gericht bearbeiten',
+        edit: 'Gericht',
         name: 'Name',
         ingredient: {
           name: 'Zutat',

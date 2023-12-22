@@ -50,7 +50,7 @@ export function MealEdit(): React.JSX.Element {
 
       <View style={GlobalStyles.viewCentered}>
         <ActionButton
-          name="add-outline"
+          name=""
           disabled={!editedMeal.name || !editedMeal.complexity}
           onPress={() => {
             dispatch({
@@ -61,6 +61,18 @@ export function MealEdit(): React.JSX.Element {
             navigation.navigate('List');
           }}>
           {t('save')}
+        </ActionButton>
+        <ActionButton
+          name=""
+          backgroundColor="red"
+          onPress={() => {
+            dispatch({
+              type: 'delete',
+              index: route.params.index,
+            });
+            navigation.navigate('List');
+          }}>
+          {t('delete')}
         </ActionButton>
       </View>
     </View>

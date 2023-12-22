@@ -33,7 +33,7 @@ export default function PlanScreen(): React.JSX.Element {
     numSuggestions: 5,
   });
 
-  const resetPlanButton = () => {
+  const planActions = () => {
     return (
       <View style={{flexDirection: 'row', gap: 5}}>
         {plan.length ? (
@@ -76,7 +76,7 @@ export default function PlanScreen(): React.JSX.Element {
                   headerTitleStyle: {fontSize: 22},
                   headerStyle: {backgroundColor: colors.background},
                   headerShadowVisible: false,
-                  headerRight: resetPlanButton,
+                  headerRight: planActions,
                   headerLeft: () => (
                     <Text
                       style={{
