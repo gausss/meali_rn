@@ -7,7 +7,7 @@ export function Badge(): React.JSX.Element {
 const styles = StyleSheet.create({
   badgeContainer: {
     backgroundColor: '#FEC514',
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
     paddingVertical: 5,
     borderRadius: 15,
   },

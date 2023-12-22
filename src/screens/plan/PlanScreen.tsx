@@ -19,8 +19,8 @@ import {
   planReducer,
 } from '../../domain/PlanContext';
 import {PlanList} from './PlanList';
-import {OptionsCancelButton, PlanOptions} from './PlanOptions';
 import {PlanScreenParams} from './PlanScreenParams';
+import {PlanOptions} from './PlanOptions';
 
 export default function PlanScreen(): React.JSX.Element {
   const {t} = useTranslation();
@@ -33,21 +33,17 @@ export default function PlanScreen(): React.JSX.Element {
   });
 
   const resetPlanButton = () => {
-    return plan.length ? (
-      <View>
-        <Icon
-          color="red"
-          size={22}
-          name="trash-outline"
-          onPress={() => planDispatch({type: 'clear'})}
-        />
-      </View>
-    ) : null;
-  };
-
-  const settingsButton = () => {
     return (
-      <View>
+      <View style={{flexDirection: 'row', gap: 15}}>
+        {plan.length ? (
+          <Icon
+            color={colors.primary}
+            size={22}
+            name="reload-outline"
+            onPress={() => planDispatch({type: 'clear'})}
+          />
+        ) : null}
+
         <Icon
           color={colors.primary}
           size={22}
@@ -71,7 +67,6 @@ export default function PlanScreen(): React.JSX.Element {
                 options={{
                   title: t('plan.headerTitle'),
                   headerRight: resetPlanButton,
-                  headerLeft: settingsButton,
                 }}
               />
               <Stack.Screen
@@ -79,7 +74,6 @@ export default function PlanScreen(): React.JSX.Element {
                 component={PlanOptions}
                 options={{
                   presentation: 'modal',
-                  headerRight: () => <OptionsCancelButton />,
                   title: t('plan.options.title'),
                 }}
               />

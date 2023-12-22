@@ -1,5 +1,4 @@
 import {useTheme} from '@react-navigation/native';
-import {useTranslation} from 'react-i18next';
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Suggestion} from '../../domain/Plan';
@@ -11,7 +10,6 @@ interface PlanRowProps {
 
 export function PlanRow({suggestion}: PlanRowProps): React.JSX.Element {
   const {colors} = useTheme();
-  const {t} = useTranslation();
 
   console.log('Render PlanRow ' + suggestion.index);
   return (
@@ -20,25 +18,30 @@ export function PlanRow({suggestion}: PlanRowProps): React.JSX.Element {
         style={{
           ...styles.indexCircle,
           borderColor: colors.notification,
-          backgroundColor: suggestion.pinned ? 'green' : colors.notification,
+          backgroundColor: colors.notification,
         }}>
-        <Icon
-          name={suggestion.pinned ? '' : 'add-outline'}
-          style={{
-            ...styles.iconStyle,
-            color: colors.text,
-          }}
-        />
+        {!suggestion.pinned ? (
+          <Icon
+            name="add-outline"
+            style={{
+              ...styles.iconStyle,
+              color: colors.text,
+            }}
+          />
+        ) : (
+          <Icon
+            name="checkmark-sharp"
+            style={{
+              ...styles.iconStyle,
+              color: colors.text,
+            }}
+          />
+        )}
       </View>
       <View style={styles.content}>
         <Text
           numberOfLines={1}
-          style={{
-            fontSize: 24,
-            fontWeight: 'bold',
-            color: colors.text,
-            width: '90%',
-          }}>
+          style={{...styles.itemTitle, color: colors.text}}>
           {suggestion.meal.name}
         </Text>
         {suggestion.meal.complexity === 'HARD' ? <Badge /> : null}
@@ -58,14 +61,19 @@ const styles = StyleSheet.create({
   indexCircle: {
     borderWidth: 3,
     borderRadius: 15,
-    width: 30,
-    height: 30,
-    paddingLeft: 3.5,
-    paddingTop: 3,
+    width: 25,
+    height: 25,
+    paddingLeft: 1,
+    paddingTop: 1,
   },
   iconStyle: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  itemTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    width: '90%',
   },
   content: {
     paddingVertical: 10,

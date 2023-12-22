@@ -26,7 +26,7 @@ export function PlanOptions(): React.JSX.Element {
       <Select
         label={t('plan.options.numSuggestions')}
         defaultButtonText=" "
-        data={[1, 2, 3, 4, 5, 6]}
+        data={[1, 2, 3, 4, 5, 6, 7]}
         onSelect={selectedItem => {
           numSuggestions = selectedItem;
         }}
@@ -48,20 +48,5 @@ export function PlanOptions(): React.JSX.Element {
         </ActionButton>
       </View>
     </View>
-  );
-}
-
-export function OptionsCancelButton(): React.JSX.Element {
-  const {t} = useTranslation();
-  const navigation = useNavigation<NavigationProp<PlanScreenParams>>();
-
-  return (
-    <Button
-      onPress={() => {
-        navigation.navigate('List');
-      }}
-      title={t('cancel')}
-      color="red"
-    />
   );
 }

@@ -1,16 +1,19 @@
-import {useTheme} from '@react-navigation/native';
+import {
+  NavigationProp,
+  useNavigation,
+  useTheme,
+} from '@react-navigation/native';
 import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
 import {MealsContext} from '../../domain/MealContext';
+import {OptionsContext} from '../../domain/OptionsContext';
 import {PlanContext, PlanDispatchContext} from '../../domain/PlanContext';
 import {ActionButton} from '../../shared/ActionButton';
 import {GlobalStyles} from '../../shared/GlobalStyles';
 import {ListItemSeparator} from '../../shared/List';
-import {Section} from '../../shared/Section';
-import {NoMealsPlan} from './NoMeals';
 import {PlanRow} from './PlanRow';
-import {OptionsContext} from '../../domain/OptionsContext';
+import {AppTabParams} from '../../App';
 
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
@@ -63,8 +66,6 @@ export function PlanList(): React.JSX.Element {
           {t('plan.generate')}
         </ActionButton>
       </View>
-
-      {!meals.length ? <NoMealsPlan /> : null}
     </View>
   );
 }
@@ -72,12 +73,24 @@ export function PlanList(): React.JSX.Element {
 function NoPlan(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
+  const navigation = useNavigation<NavigationProp<AppTabParams>>();
+  const meals = useContext(MealsContext);
 
   return (
     <View>
-      <Section title={t('plan.introHeading')}>
-        <Text>{t('plan.introDescription')} </Text>
-      </Section>
+      <Text style={{...GlobalStyles.sectionTitle, color: colors.text}}>
+        {t('plan.introHeading')}
+      </Text>
+      {!meals.length ? (
+        <Text
+          style={{...GlobalStyles.sectionBody, color: colors.primary}}
+          onPress={() => navigation.navigate('Meals')}>
+          Erfasse zuerst deine Gerichte.
+        </Text>
+      ) : null}
+      <Text style={{...GlobalStyles.sectionBody, color: colors.text}}>
+        {t('plan.introDescription')}
+      </Text>
       <View style={GlobalStyles.viewCentered}>
         <Image
           source={require('../../img/Farfalle.png')}

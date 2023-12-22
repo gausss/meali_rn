@@ -14,10 +14,15 @@ import MealScreen from './screens/meal/MealScreen';
 import Plan from './screens/plan/PlanScreen';
 import {Dark, Light} from './shared/GlobalStyles';
 
+export type AppTabParams = {
+  Plan: undefined;
+  Meals: undefined;
+};
+
 export default function App(): React.JSX.Element {
   const {t} = useTranslation();
   const isDarkMode = useColorScheme() === 'dark';
-  const Tab = createBottomTabNavigator();
+  const Tab = createBottomTabNavigator<AppTabParams>();
   const [meals, dispatch] = useReducer(mealReducer, []);
 
   console.log('Render App');

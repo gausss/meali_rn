@@ -11,7 +11,6 @@ import {ActionButton} from '../../shared/ActionButton';
 import {Card} from '../../shared/Card';
 import {GlobalStyles} from '../../shared/GlobalStyles';
 import {ListItemSeparator} from '../../shared/List';
-import {Section} from '../../shared/Section';
 import {MealRow} from './MealRow';
 import {MealScreenParams} from './MealScreenParams';
 
@@ -23,7 +22,7 @@ export function MealList(): React.JSX.Element {
 
   console.log('Render MealList');
   return (
-    <View style={{...GlobalStyles.viewContainer, height: '82%'}}>
+    <View style={GlobalStyles.viewContainer}>
       {meals.length ? (
         <Card>
           <FlatList
@@ -69,9 +68,12 @@ function NoMeals(): React.JSX.Element {
 
   return (
     <View>
-      <Section title={t('meals.introHeading')}>
-        <Text>{t('meals.introDescription')}</Text>
-      </Section>
+      <Text style={{...GlobalStyles.sectionTitle, color: colors.text}}>
+        {t('meals.introHeading')}
+      </Text>
+      <Text style={{...GlobalStyles.sectionBody, color: colors.text}}>
+        {t('meals.introDescription')}
+      </Text>
       <View style={GlobalStyles.viewCentered}>
         <Image
           source={require('../../img/Ravioli.png')}

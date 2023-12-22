@@ -12,7 +12,7 @@ export const GlobalStyles = StyleSheet.create({
     paddingHorizontal: 15,
     marginTop: 20,
     gap: 20,
-    height: '97%',
+    height: '82%',
   },
   placeholderImage: {
     height: Dimensions.get('window').height * 0.43,
@@ -20,6 +20,15 @@ export const GlobalStyles = StyleSheet.create({
   },
   defaultText: {
     fontSize: 16,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  sectionBody: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
   },
 });
 

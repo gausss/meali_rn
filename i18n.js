@@ -12,7 +12,7 @@ const resources = {
         headerTitle: 'Essensplan',
         introHeading: 'Plan erstellen',
         introDescription:
-          'Erstelle einen Essensplan für die nächsten Tage. Pinne deine Favoriten bis du zufrieden bist.',
+          'Erstelle einen Plan aus den generierten Vorschlägen. Pinne deine Favoriten bis du zufrieden bist.',
         generate: 'Generieren',
         reset: 'Zurücksetzen',
         noMeals: 'Gerichte erfassen',
@@ -26,7 +26,7 @@ const resources = {
         introHeading: 'Gerichte hinzufügen',
         introDescription:
           'Füge deine Lieblingsgerichte und Zutaten hinzu, um sie in zukünftigen Essensplänen zu sehen.',
-        add: 'Gericht hinzufügen',
+        add: 'Hinzufügen',
         create: 'Neues Gericht',
         edit: 'Gericht bearbeiten',
         name: 'Name',
