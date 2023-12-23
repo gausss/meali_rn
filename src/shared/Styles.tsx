@@ -44,6 +44,13 @@ export const GlobalStyles = StyleSheet.create({
   listStyle: {
     borderRadius: 12,
   },
+  headeRow: {
+    flexDirection: 'row',
+    gap: 5,
+  },
+  headeIcon: {
+    marginRight: 0,
+  },
 });
 
 export const Light = {

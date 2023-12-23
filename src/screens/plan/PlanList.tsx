@@ -36,7 +36,7 @@ export function PlanList(): React.JSX.Element {
             style={GlobalStyles.listStyle}
             data={plan}
             scrollEnabled={true}
-            ItemSeparatorComponent={() => <ListItemSeparator />}
+            ItemSeparatorComponent={ListItemSeparator}
             renderItem={({item}) => (
               <TouchableHighlight
                 key={item.index}
@@ -90,7 +90,7 @@ function NoPlan(): React.JSX.Element {
         />
       </View>
       {!meals.length ? (
-        <View style={{alignItems: 'center'}}>
+        <View style={GlobalStyles.viewCentered}>
           <Text
             style={{...GlobalStyles.sectionBody, color: colors.primary}}
             onPress={() => navigation.navigate('Meals')}>

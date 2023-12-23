@@ -36,7 +36,7 @@ export function MealList(): React.JSX.Element {
             style={GlobalStyles.listStyle}
             data={meals}
             scrollEnabled={true}
-            ItemSeparatorComponent={() => <ListItemSeparator />}
+            ItemSeparatorComponent={ListItemSeparator}
             renderItem={({item, index}) => (
               <TouchableHighlight
                 key={item.id}

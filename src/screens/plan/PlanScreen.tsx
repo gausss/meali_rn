@@ -35,12 +35,12 @@ export default function PlanScreen(): React.JSX.Element {
 
   const planActions = () => {
     return (
-      <View style={{flexDirection: 'row', gap: 5}}>
+      <View style={GlobalStyles.headeRow}>
         {plan.length ? (
           <Icon.Button
             backgroundColor={'transparent'}
             underlayColor={'transparent'}
-            iconStyle={{marginRight: 0}}
+            iconStyle={GlobalStyles.headeIcon}
             color={colors.text}
             size={22}
             name="reload-outline"
@@ -51,7 +51,7 @@ export default function PlanScreen(): React.JSX.Element {
         <Icon.Button
           backgroundColor={'transparent'}
           underlayColor={'transparent'}
-          iconStyle={{marginRight: 0}}
+          iconStyle={GlobalStyles.headeIcon}
           color={colors.text}
           size={22}
           name="settings-outline"
@@ -60,6 +60,16 @@ export default function PlanScreen(): React.JSX.Element {
       </View>
     );
   };
+
+  const planTitle = () => (
+    <Text
+      style={{
+        ...GlobalStyles.statusBarTitle,
+        color: colors.text,
+      }}>
+      {t('plan.headerTitle')}
+    </Text>
+  );
 
   console.log('Render PlanScreen');
   return (
@@ -77,15 +87,7 @@ export default function PlanScreen(): React.JSX.Element {
                   headerStyle: {backgroundColor: colors.background},
                   headerShadowVisible: false,
                   headerRight: planActions,
-                  headerLeft: () => (
-                    <Text
-                      style={{
-                        ...GlobalStyles.statusBarTitle,
-                        color: colors.text,
-                      }}>
-                      {t('plan.headerTitle')}
-                    </Text>
-                  ),
+                  headerLeft: planTitle,
                 }}
               />
               <Stack.Screen

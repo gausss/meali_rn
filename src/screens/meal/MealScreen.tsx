@@ -13,6 +13,16 @@ export default function MealScreen(): React.JSX.Element {
   const Stack = createNativeStackNavigator<MealScreenParams>();
   const {colors} = useTheme();
 
+  const mealTitle = () => (
+    <Text
+      style={{
+        ...GlobalStyles.statusBarTitle,
+        color: colors.text,
+      }}>
+      {t('meals.headerTitle')}
+    </Text>
+  );
+
   console.log('Render MealScreen');
   return (
     <Stack.Navigator>
@@ -24,15 +34,7 @@ export default function MealScreen(): React.JSX.Element {
           headerTitleStyle: {fontSize: 22},
           headerStyle: {backgroundColor: colors.background},
           headerShadowVisible: false,
-          headerLeft: () => (
-            <Text
-              style={{
-                ...GlobalStyles.statusBarTitle,
-                color: colors.text,
-              }}>
-              {t('meals.headerTitle')}
-            </Text>
-          ),
+          headerLeft: mealTitle,
         }}
       />
       <Stack.Screen

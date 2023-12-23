@@ -13,9 +13,7 @@ export function MealRow({meal}: MealRowProps): React.JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Text
-        numberOfLines={1}
-        style={{...GlobalStyles.defaultText, color: colors.text, width: '90%'}}>
+      <Text numberOfLines={1} style={{...styles.rowTitle, color: colors.text}}>
         {meal.name}
       </Text>
       <Icon
@@ -33,5 +31,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
+  },
+  rowTitle: {
+    fontSize: GlobalStyles.defaultText.fontSize,
+    width: '90%',
   },
 });

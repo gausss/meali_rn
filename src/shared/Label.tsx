@@ -17,7 +17,7 @@ export function Label(props: LabelProps): React.JSX.Element {
 const styles = StyleSheet.create({
   labelStyle: {
     fontSize: GlobalStyles.defaultText.fontSize,
-    fontWeight: 'bold',
+    fontWeight: '600',
     margin: 10,
   },
 });
