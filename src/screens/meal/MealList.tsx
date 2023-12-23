@@ -42,7 +42,7 @@ export function MealList(): React.JSX.Element {
                 underlayColor={colors.notification}
                 onPress={() => {
                   navigation.navigate({
-                    name: 'Edit',
+                    name: 'Detail',
                     params: {
                       index,
                     },
@@ -59,7 +59,9 @@ export function MealList(): React.JSX.Element {
       )}
 
       <View style={GlobalStyles.viewCentered}>
-        <Button name="add-outline" onPress={() => navigation.navigate('Add')}>
+        <Button
+          name="add-outline"
+          onPress={() => navigation.navigate('Detail', {})}>
           {t('meals.add')}
         </Button>
       </View>

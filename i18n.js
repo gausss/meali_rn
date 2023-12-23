@@ -26,7 +26,7 @@ const resources = {
         introDescription:
           'Füge deine Lieblingsgerichte und Zutaten hinzu, um sie in zukünftigen Essensplänen zu sehen.',
         add: 'Hinzufügen',
-        edit: 'Bearbeiten',
+        detail: 'Gericht',
         name: 'Name',
         ingredient: {
           name: 'Zutat',

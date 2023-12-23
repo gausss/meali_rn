@@ -5,8 +5,8 @@ import SelectDropdown, {
   SelectDropdownProps,
 } from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {GlobalStyles} from './Styles';
 import {Label} from './Label';
+import {GlobalStyles} from './Styles';
 
 export type SelectProps = SelectDropdownProps & {
   width?: DimensionValue;
@@ -30,6 +30,7 @@ export function Select(props: SelectProps): React.JSX.Element {
           backgroundColor: colors.card,
           width: props.width || '100%',
         }}
+        defaultButtonText=" "
         dropdownOverlayColor="transparent"
         rowTextStyle={{...styles.rowTextStyle, color: colors.text}}
         selectedRowTextStyle={{color: colors.primary}}

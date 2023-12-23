@@ -1,13 +1,12 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {MealAdd} from './MealAdd';
-import {MealDeleteButton, MealEdit} from './MealEdit';
 import {MealList} from './MealList';
 import {MealScreenParams} from './MealScreenParams';
 import {Text} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {GlobalStyles} from '../../shared/Styles';
+import {MealDetail} from './MealDetail';
 
 export default function MealScreen(): React.JSX.Element {
   const {t} = useTranslation();
@@ -37,21 +36,12 @@ export default function MealScreen(): React.JSX.Element {
         }}
       />
       <Stack.Screen
-        name="Add"
-        component={MealAdd}
+        name="Detail"
+        component={MealDetail}
         options={{
           headerStyle: {backgroundColor: colors.background},
           headerShadowVisible: false,
-          title: t('meals.add'),
-        }}
-      />
-      <Stack.Screen
-        name="Edit"
-        component={MealEdit}
-        options={{
-          headerStyle: {backgroundColor: colors.background},
-          headerShadowVisible: false,
-          title: t('meals.edit'),
+          title: t('meals.detail'),
         }}
       />
     </Stack.Navigator>
