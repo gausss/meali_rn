@@ -33,6 +33,7 @@ export function MealList(): React.JSX.Element {
       {meals.length ? (
         <Card>
           <FlatList
+            style={GlobalStyles.listStyle}
             data={meals}
             scrollEnabled={true}
             ItemSeparatorComponent={() => <ListItemSeparator />}

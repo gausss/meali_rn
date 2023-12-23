@@ -23,6 +23,5 @@ const styles = StyleSheet.create({
   cardContainer: {
     height: 'auto',
     borderRadius: 12,
-    paddingVertical: 15,
   },
 });

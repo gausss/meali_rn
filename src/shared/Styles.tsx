@@ -41,6 +41,9 @@ export const GlobalStyles = StyleSheet.create({
     fontSize: 26,
     fontWeight: '700',
   },
+  listStyle: {
+    borderRadius: 12,
+  },
 });
 
 export const Light = {
@@ -56,7 +59,6 @@ export const Dark = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
-    card: '#1C1C1E',
     notification: '#212123',
     primary: '#5e9d5e',
   },

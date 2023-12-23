@@ -10,11 +10,11 @@ import {MealsContext} from '../../domain/MealContext';
 import {OptionsContext} from '../../domain/OptionsContext';
 import {PlanContext, PlanDispatchContext} from '../../domain/PlanContext';
 import {Button} from '../../shared/Button';
-import {GlobalStyles} from '../../shared/Styles';
-import {ListItemSeparator} from '../../shared/List';
-import {PlanRow} from './PlanRow';
-import {AppTabParams} from '../../App';
 import {Card} from '../../shared/Card';
+import {ListItemSeparator} from '../../shared/List';
+import {GlobalStyles} from '../../shared/Styles';
+import {PlanRow} from './PlanRow';
+import {HomeTabParams} from '../../App';
 
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
@@ -33,6 +33,7 @@ export function PlanList(): React.JSX.Element {
       {plan.length ? (
         <Card>
           <FlatList
+            style={GlobalStyles.listStyle}
             data={plan}
             scrollEnabled={true}
             ItemSeparatorComponent={() => <ListItemSeparator />}
@@ -74,7 +75,7 @@ export function PlanList(): React.JSX.Element {
 function NoPlan(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
-  const navigation = useNavigation<NavigationProp<AppTabParams>>();
+  const navigation = useNavigation<NavigationProp<HomeTabParams>>();
   const meals = useContext(MealsContext);
 
   return (
