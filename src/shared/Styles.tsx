@@ -32,7 +32,7 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: '400',
   },
   badge: {
-    backgroundColor: 'orange',
+    backgroundColor: '#ff9149',
     paddingHorizontal: 5,
     paddingVertical: 5,
     borderRadius: 15,
@@ -48,6 +48,7 @@ export const Light = {
   colors: {
     ...DefaultTheme.colors,
     notification: '#E0DEE7',
+    primary: '#5e9d5e',
   },
 };
 
@@ -55,7 +56,8 @@ export const Dark = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
-    card: '#151516',
+    card: '#1C1C1E',
     notification: '#212123',
+    primary: '#5e9d5e',
   },
 };

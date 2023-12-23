@@ -14,9 +14,9 @@ import {
   View,
 } from 'react-native';
 import {MealsContext} from '../../domain/MealContext';
-import {ActionButton} from '../../shared/ActionButton';
+import {Button} from '../../shared/Button';
 import {Card} from '../../shared/Card';
-import {GlobalStyles} from '../../shared/GlobalStyles';
+import {GlobalStyles} from '../../shared/Styles';
 import {ListItemSeparator} from '../../shared/List';
 import {MealRow} from './MealRow';
 import {MealScreenParams} from './MealScreenParams';
@@ -59,11 +59,9 @@ export function MealList(): React.JSX.Element {
       )}
 
       <View style={GlobalStyles.viewCentered}>
-        <ActionButton
-          name="add-outline"
-          onPress={() => navigation.navigate('Add')}>
+        <Button name="add-outline" onPress={() => navigation.navigate('Add')}>
           {t('meals.add')}
-        </ActionButton>
+        </Button>
       </View>
     </View>
   );

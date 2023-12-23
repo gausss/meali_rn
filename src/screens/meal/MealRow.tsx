@@ -1,6 +1,6 @@
 import {useTheme} from '@react-navigation/native';
 import {StyleSheet, Text, View} from 'react-native';
-import {GlobalStyles} from '../../shared/GlobalStyles';
+import {GlobalStyles} from '../../shared/Styles';
 import {Meal} from '../../domain/Meal';
 import Icon from 'react-native-vector-icons/Ionicons';
 

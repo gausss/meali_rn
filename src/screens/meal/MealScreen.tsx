@@ -7,7 +7,7 @@ import {MealList} from './MealList';
 import {MealScreenParams} from './MealScreenParams';
 import {Text} from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {GlobalStyles} from '../../shared/GlobalStyles';
+import {GlobalStyles} from '../../shared/Styles';
 
 export default function MealScreen(): React.JSX.Element {
   const {t} = useTranslation();

@@ -1,11 +1,11 @@
 import {useTheme} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React from 'react';
 import {DimensionValue, StyleSheet, View} from 'react-native';
 import SelectDropdown, {
   SelectDropdownProps,
 } from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {GlobalStyles} from './GlobalStyles';
+import {GlobalStyles} from './Styles';
 import {Label} from './Label';
 
 export type SelectProps = SelectDropdownProps & {

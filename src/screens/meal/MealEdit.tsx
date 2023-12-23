@@ -6,10 +6,10 @@ import {
 } from '@react-navigation/native';
 import {useContext, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Button, View} from 'react-native';
+import {View} from 'react-native';
 import {MealsContext, MealsDispatchContext} from '../../domain/MealContext';
-import {ActionButton} from '../../shared/ActionButton';
-import {GlobalStyles} from '../../shared/GlobalStyles';
+import {Button} from '../../shared/Button';
+import {GlobalStyles} from '../../shared/Styles';
 import {Input} from '../../shared/Input';
 import {Select} from '../../shared/Select';
 import {MealScreenParams} from './MealScreenParams';
@@ -49,7 +49,7 @@ export function MealEdit(): React.JSX.Element {
       />
 
       <View style={GlobalStyles.viewCentered}>
-        <ActionButton
+        <Button
           name=""
           disabled={!editedMeal.name || !editedMeal.complexity}
           onPress={() => {
@@ -61,8 +61,8 @@ export function MealEdit(): React.JSX.Element {
             navigation.navigate('List');
           }}>
           {t('save')}
-        </ActionButton>
-        <ActionButton
+        </Button>
+        <Button
           name=""
           backgroundColor="red"
           onPress={() => {
@@ -73,7 +73,7 @@ export function MealEdit(): React.JSX.Element {
             navigation.navigate('List');
           }}>
           {t('delete')}
-        </ActionButton>
+        </Button>
       </View>
     </View>
   );

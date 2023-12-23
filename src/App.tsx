@@ -11,7 +11,7 @@ import {
 } from './domain/MealContext';
 import MealScreen from './screens/meal/MealScreen';
 import Plan from './screens/plan/PlanScreen';
-import {Dark, Light} from './shared/GlobalStyles';
+import {Dark, Light} from './shared/Styles';
 import {useColorScheme} from 'react-native';
 
 export type AppTabParams = {

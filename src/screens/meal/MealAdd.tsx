@@ -3,8 +3,8 @@ import {useContext, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
 import {Meal} from '../../domain/Meal';
-import {ActionButton} from '../../shared/ActionButton';
-import {GlobalStyles} from '../../shared/GlobalStyles';
+import {Button} from '../../shared/Button';
+import {GlobalStyles} from '../../shared/Styles';
 import {Input} from '../../shared/Input';
 import {Select} from '../../shared/Select';
 import {MealScreenParams} from './MealScreenParams';
@@ -40,7 +40,7 @@ export function MealAdd(): React.JSX.Element {
         }}
       />
       <View style={GlobalStyles.viewCentered}>
-        <ActionButton
+        <Button
           name=""
           disabled={!addMeal.name || !addMeal.complexity}
           onPress={() => {
@@ -48,7 +48,7 @@ export function MealAdd(): React.JSX.Element {
             navigation.navigate('List');
           }}>
           {t('save')}
-        </ActionButton>
+        </Button>
       </View>
     </View>
   );

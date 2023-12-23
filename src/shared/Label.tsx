@@ -1,6 +1,6 @@
 import {useTheme} from '@react-navigation/native';
 import {StyleSheet, Text} from 'react-native';
-import {GlobalStyles} from './GlobalStyles';
+import {GlobalStyles} from './Styles';
 
 type LabelProps = {
   text?: string;

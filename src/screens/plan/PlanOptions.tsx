@@ -1,14 +1,14 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Button, View} from 'react-native';
+import {View} from 'react-native';
 import {
   OptionsContext,
   OptionsDispatchContext,
 } from '../../domain/OptionsContext';
 import {PlanDispatchContext} from '../../domain/PlanContext';
-import {ActionButton} from '../../shared/ActionButton';
-import {GlobalStyles} from '../../shared/GlobalStyles';
+import {Button} from '../../shared/Button';
+import {GlobalStyles} from '../../shared/Styles';
 import {Select} from '../../shared/Select';
 import {PlanScreenParams} from './PlanScreenParams';
 
@@ -33,8 +33,8 @@ export function PlanOptions(): React.JSX.Element {
         defaultValue={options.numSuggestions}
       />
       <View style={GlobalStyles.viewCentered}>
-        <ActionButton
-          name="checkmark-outline"
+        <Button
+          name=""
           disabled={!options.numSuggestions}
           onPress={() => {
             optionsDispatch({
@@ -45,7 +45,7 @@ export function PlanOptions(): React.JSX.Element {
             navigation.navigate('List');
           }}>
           {t('save')}
-        </ActionButton>
+        </Button>
       </View>
     </View>
   );

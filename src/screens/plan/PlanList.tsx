@@ -9,8 +9,8 @@ import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
 import {MealsContext} from '../../domain/MealContext';
 import {OptionsContext} from '../../domain/OptionsContext';
 import {PlanContext, PlanDispatchContext} from '../../domain/PlanContext';
-import {ActionButton} from '../../shared/ActionButton';
-import {GlobalStyles} from '../../shared/GlobalStyles';
+import {Button} from '../../shared/Button';
+import {GlobalStyles} from '../../shared/Styles';
 import {ListItemSeparator} from '../../shared/List';
 import {PlanRow} from './PlanRow';
 import {AppTabParams} from '../../App';
@@ -53,7 +53,7 @@ export function PlanList(): React.JSX.Element {
       )}
 
       <View style={GlobalStyles.viewCentered}>
-        <ActionButton
+        <Button
           name="sparkles"
           disabled={!meals.length}
           onPress={() =>
@@ -65,7 +65,7 @@ export function PlanList(): React.JSX.Element {
             })
           }>
           {t('plan.generate')}
-        </ActionButton>
+        </Button>
       </View>
     </View>
   );

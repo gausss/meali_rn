@@ -21,7 +21,7 @@ import {
 import {PlanList} from './PlanList';
 import {PlanScreenParams} from './PlanScreenParams';
 import {PlanOptions} from './PlanOptions';
-import {GlobalStyles} from '../../shared/GlobalStyles';
+import {GlobalStyles} from '../../shared/Styles';
 
 export default function PlanScreen(): React.JSX.Element {
   const {t} = useTranslation();

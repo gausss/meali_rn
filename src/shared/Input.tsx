@@ -6,7 +6,7 @@ import {
   TextInputProps,
   View,
 } from 'react-native';
-import {GlobalStyles} from './GlobalStyles';
+import {GlobalStyles} from './Styles';
 import {Label} from './Label';
 
 type InputProps = TextInputProps & {
