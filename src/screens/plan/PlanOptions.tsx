@@ -1,4 +1,3 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
@@ -10,11 +9,9 @@ import {PlanDispatchContext} from '../../domain/PlanContext';
 import {Select} from '../../shared/Select';
 import {GlobalStyles} from '../../shared/Styles';
 import {Toggle} from '../../shared/Toggle';
-import {PlanScreenParams} from './PlanScreenParams';
 
 export function PlanOptions(): React.JSX.Element {
   const {t} = useTranslation();
-  const navigation = useNavigation<NavigationProp<PlanScreenParams>>();
   const options = useContext(OptionsContext);
   const optionsDispatch = useContext(OptionsDispatchContext);
   const planDispatch = useContext(PlanDispatchContext);
@@ -26,12 +23,13 @@ export function PlanOptions(): React.JSX.Element {
         label={t('plan.options.numSuggestions')}
         defaultButtonText=" "
         data={[1, 2, 3, 4, 5, 6, 7]}
-        onSelect={selectedItem =>
+        onSelect={selectedItem => {
           optionsDispatch({
             type: 'update',
             options: {...options, numSuggestions: selectedItem},
-          })
-        }
+          });
+          planDispatch({type: 'length', length: selectedItem});
+        }}
         defaultValue={options.numSuggestions}
       />
       <Toggle

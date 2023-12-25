@@ -25,10 +25,15 @@ type PlanPinAction = {
   type: 'togglePin';
   index: number;
 };
+type PlanLengthAction = {
+  type: 'length';
+  length: number;
+};
 type PlanAction =
   | PlanClearAction
   | PlanGenerateAction
   | PlanPinAction
+  | PlanLengthAction
   | PlanInitAction;
 
 export function planReducer(state: Plan, action: PlanAction): Plan {
@@ -52,6 +57,9 @@ export function planReducer(state: Plan, action: PlanAction): Plan {
         suggestion.pinned = !suggestion.pinned;
       }
       return {...state, suggestions: [...state.suggestions]};
+    }
+    case 'length': {
+      return {...state, suggestions: state.suggestions.slice(0, action.length)};
     }
   }
 }

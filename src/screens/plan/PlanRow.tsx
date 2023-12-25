@@ -32,7 +32,7 @@ export function PlanRow({
         }}>
         {!suggestion.pinned ? (
           <Icon
-            name="add-outline"
+            name="lock-open-outline"
             style={{
               ...styles.iconStyle,
               color: colors.text,
@@ -40,7 +40,7 @@ export function PlanRow({
           />
         ) : (
           <Icon
-            name="checkmark-sharp"
+            name="lock-closed"
             style={{
               ...styles.iconStyle,
               color: colors.text,

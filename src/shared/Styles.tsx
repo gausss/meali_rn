@@ -21,7 +21,7 @@ export const GlobalStyles = StyleSheet.create({
     resizeMode: 'contain',
   },
   placeholderImageMeal: {
-    height: Dimensions.get('window').height * 0.3,
+    height: Dimensions.get('window').height * 0.25,
     marginVertical: 35,
     resizeMode: 'contain',
   },

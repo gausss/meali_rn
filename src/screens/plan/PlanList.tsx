@@ -58,7 +58,8 @@ export function PlanList(): React.JSX.Element {
           disabled={
             !meals.length ||
             (plan.generated &&
-              !plan.suggestions.some(suggestion => suggestion.pinned === false))
+              plan.suggestions.filter(suggestion => suggestion.pinned)
+                .length === options.numSuggestions)
           }
           onPress={() => {
             if (plan.generated) {
