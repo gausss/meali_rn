@@ -60,6 +60,21 @@ export function Home(): React.JSX.Element {
   const Tab = createBottomTabNavigator<HomeTabParams>();
   const [meals, dispatch] = useReducer(mealReducer, []);
 
+  const planTabIcon = ({size, color, focused}) => (
+    <Icon
+      name={focused ? 'calendar' : 'calendar-outline'}
+      size={size}
+      color={color}
+    />
+  );
+  const mealTabIcon = ({size, color, focused}) => (
+    <Icon
+      name={focused ? 'restaurant' : 'restaurant-outline'}
+      size={size}
+      color={color}
+    />
+  );
+
   console.log('Render Home');
   return (
     <MealsContext.Provider value={meals}>
@@ -72,13 +87,7 @@ export function Home(): React.JSX.Element {
               headerShown: false,
               title: t('plan.tabTitle'),
               tabBarActiveTintColor: dark ? 'white' : 'black',
-              tabBarIcon: ({size, color, focused}) => (
-                <Icon
-                  name={focused ? 'calendar' : 'calendar-outline'}
-                  size={size}
-                  color={color}
-                />
-              ),
+              tabBarIcon: planTabIcon,
             }}
           />
           <Tab.Screen
@@ -88,13 +97,7 @@ export function Home(): React.JSX.Element {
               headerShown: false,
               title: t('meals.tabTitle'),
               tabBarActiveTintColor: dark ? 'white' : 'black',
-              tabBarIcon: ({size, color, focused}) => (
-                <Icon
-                  name={focused ? 'restaurant' : 'restaurant-outline'}
-                  size={size}
-                  color={color}
-                />
-              ),
+              tabBarIcon: mealTabIcon,
             }}
           />
         </Tab.Navigator>
