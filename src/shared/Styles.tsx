@@ -39,8 +39,8 @@ export const GlobalStyles = StyleSheet.create({
   },
   badge: {
     backgroundColor: '#ff9149',
-    paddingHorizontal: 5,
-    paddingVertical: 5,
+    paddingHorizontal: 2,
+    paddingVertical: 2,
     borderRadius: 15,
   },
   statusBarTitle: {

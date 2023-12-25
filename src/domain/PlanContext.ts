@@ -2,6 +2,7 @@ import {createContext} from 'react';
 import {Meal} from './Meal';
 import {Plan} from './Plan';
 import {Options} from './OptionsContext';
+import {format} from 'date-fns';
 
 export const PlanContext = createContext<Plan>([]);
 export const PlanDispatchContext = createContext<React.Dispatch<PlanAction>>(
@@ -47,7 +48,11 @@ function generateSuggestions(
     }
 
     const randomIndex = Math.floor(Math.random() * meals.length);
-    suggestions.push({index, meal: meals[randomIndex], pinned: false});
+    suggestions.push({
+      index,
+      meal: meals[randomIndex],
+      pinned: false,
+    });
   }
 
   return suggestions;

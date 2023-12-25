@@ -1,8 +1,11 @@
 import {useTheme} from '@react-navigation/native';
+import {format} from 'date-fns';
+import {de} from 'date-fns/locale';
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Suggestion} from '../../domain/Plan';
 import {GlobalStyles} from '../../shared/Styles';
+const {add} = require('date-fns');
 
 interface PlanRowProps {
   suggestion: Suggestion;
@@ -10,6 +13,7 @@ interface PlanRowProps {
 
 export function PlanRow({suggestion}: PlanRowProps): React.JSX.Element {
   const {colors} = useTheme();
+  const today = new Date();
 
   console.log('Render PlanRow ' + suggestion.index);
   return (
@@ -38,12 +42,17 @@ export function PlanRow({suggestion}: PlanRowProps): React.JSX.Element {
           />
         )}
       </View>
-      <View style={styles.content}>
-        <Text
-          numberOfLines={1}
-          style={{...styles.itemTitle, color: colors.text}}>
-          {suggestion.meal.name}
-        </Text>
+      <View>
+        <View style={styles.content}>
+          <Text style={{...styles.suggestionDay}}>
+            {format(add(today, {days: suggestion.index}), 'EEEE', {locale: de})}
+          </Text>
+          <Text
+            numberOfLines={1}
+            style={{...styles.suggestionMeal, color: colors.text}}>
+            {suggestion.meal.name}
+          </Text>
+        </View>
         {suggestion.meal.complexity === 'HARD' ? (
           <View style={GlobalStyles.badge} />
         ) : null}
@@ -72,16 +81,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  itemTitle: {
+  suggestionMeal: {
     fontSize: 20,
     fontWeight: 'bold',
-    width: '90%',
+  },
+  suggestionDay: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: 'grey',
   },
   content: {
     paddingVertical: 10,
-    flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '85%',
+    alignItems: 'flex-start',
   },
 });
