@@ -7,9 +7,9 @@ import {
   OptionsDispatchContext,
 } from '../../domain/OptionsContext';
 import {PlanDispatchContext} from '../../domain/PlanContext';
-import {Button} from '../../shared/Button';
-import {GlobalStyles} from '../../shared/Styles';
 import {Select} from '../../shared/Select';
+import {GlobalStyles} from '../../shared/Styles';
+import {Toggle} from '../../shared/Toggle';
 import {PlanScreenParams} from './PlanScreenParams';
 
 export function PlanOptions(): React.JSX.Element {
@@ -18,7 +18,6 @@ export function PlanOptions(): React.JSX.Element {
   const options = useContext(OptionsContext);
   const optionsDispatch = useContext(OptionsDispatchContext);
   const planDispatch = useContext(PlanDispatchContext);
-  let numSuggestions = options.numSuggestions;
 
   console.log('Render PlanOptions');
   return (
@@ -27,26 +26,24 @@ export function PlanOptions(): React.JSX.Element {
         label={t('plan.options.numSuggestions')}
         defaultButtonText=" "
         data={[1, 2, 3, 4, 5, 6, 7]}
-        onSelect={selectedItem => {
-          numSuggestions = selectedItem;
-        }}
+        onSelect={selectedItem =>
+          optionsDispatch({
+            type: 'update',
+            options: {...options, numSuggestions: selectedItem},
+          })
+        }
         defaultValue={options.numSuggestions}
       />
-      <View style={GlobalStyles.viewCentered}>
-        <Button
-          name=""
-          disabled={!options.numSuggestions}
-          onPress={() => {
-            optionsDispatch({
-              type: 'update',
-              options: {...options, numSuggestions: numSuggestions},
-            });
-            planDispatch({type: 'clear'});
-            navigation.navigate('List');
-          }}>
-          {t('save')}
-        </Button>
-      </View>
+      <Toggle
+        label={t('plan.options.showWeekdays')}
+        value={options.showWeekdays}
+        onValueChange={value =>
+          optionsDispatch({
+            type: 'update',
+            options: {...options, showWeekdays: value},
+          })
+        }
+      />
     </View>
   );
 }

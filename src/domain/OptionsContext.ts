@@ -2,9 +2,13 @@ import {createContext} from 'react';
 
 export interface Options {
   numSuggestions: number;
+  showWeekdays: boolean;
 }
 
-export const OptionsContext = createContext<Options>({numSuggestions: 6});
+export const OptionsContext = createContext<Options>({
+  numSuggestions: 6,
+  showWeekdays: true,
+});
 export const OptionsDispatchContext = createContext<
   React.Dispatch<OptionsAction>
 >(() => {});

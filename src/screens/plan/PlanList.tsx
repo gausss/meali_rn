@@ -29,7 +29,7 @@ export function PlanList(): React.JSX.Element {
       style={{
         ...GlobalStyles.viewContainer,
       }}>
-      {plan.generated ? (
+      {plan.generated && options.numSuggestions ? (
         <FlatList
           style={GlobalStyles.listStyle}
           data={plan.suggestions}

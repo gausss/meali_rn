@@ -7,6 +7,7 @@ import SelectDropdown, {
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Label} from './Label';
 import {GlobalStyles} from './Styles';
+import {Card} from './Card';
 
 export type SelectProps = SelectDropdownProps & {
   width?: DimensionValue;
@@ -17,34 +18,38 @@ export function Select(props: SelectProps): React.JSX.Element {
   const {colors} = useTheme();
 
   return (
-    <View>
-      <Label text={props.label} />
-      <SelectDropdown
-        {...props}
-        buttonTextStyle={{
-          ...styles.buttonTextStyle,
-          color: colors.text,
-        }}
-        buttonStyle={{
-          ...styles.buttonStyle,
-          backgroundColor: colors.card,
-          width: props.width || '100%',
-        }}
-        defaultButtonText=" "
-        dropdownOverlayColor="transparent"
-        statusBarTranslucent={true}
-        rowTextStyle={{...styles.rowTextStyle, color: colors.text}}
-        selectedRowTextStyle={{color: colors.primary}}
-        dropdownStyle={{...styles.dropdownStyle, backgroundColor: colors.card}}
-        renderDropdownIcon={() => (
-          <Icon name="chevron-down-outline" color={colors.text} />
-        )}
-        dropdownIconPosition="right"
-        onSelect={(selectedItem, index) => {
-          props.onSelect(selectedItem, index);
-        }}
-      />
-    </View>
+    <Card>
+      <View style={GlobalStyles.inputStyle}>
+        <Label text={props.label} />
+        <SelectDropdown
+          {...props}
+          buttonTextStyle={{
+            ...styles.buttonTextStyle,
+            color: colors.text,
+          }}
+          buttonStyle={{
+            ...styles.buttonStyle,
+            backgroundColor: colors.card,
+          }}
+          defaultButtonText=" "
+          dropdownOverlayColor="transparent"
+          statusBarTranslucent={true}
+          rowTextStyle={{...styles.rowTextStyle, color: colors.text}}
+          selectedRowTextStyle={{color: colors.primary}}
+          dropdownStyle={{
+            ...styles.dropdownStyle,
+            backgroundColor: colors.card,
+          }}
+          renderDropdownIcon={() => (
+            <Icon name="chevron-down-outline" color={colors.text} />
+          )}
+          dropdownIconPosition="right"
+          onSelect={(selectedItem, index) => {
+            props.onSelect(selectedItem, index);
+          }}
+        />
+      </View>
+    </Card>
   );
 }
 
@@ -56,8 +61,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     height: 50,
     borderRadius: 12,
-    padding: 15,
-    width: '100%',
+    width: '55%',
     fontSize: GlobalStyles.defaultText.fontSize,
   },
   rowTextStyle: {

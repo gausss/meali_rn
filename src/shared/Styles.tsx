@@ -12,7 +12,7 @@ export const GlobalStyles = StyleSheet.create({
     paddingHorizontal: 15,
     marginTop: 5,
     justifyContent: 'space-between',
-    gap: 20,
+    gap: 15,
     maxHeight: '95%',
   },
   placeholderImagePlan: {
@@ -59,6 +59,13 @@ export const GlobalStyles = StyleSheet.create({
   },
   headeIcon: {
     marginRight: 0,
+  },
+  inputStyle: {
+    paddingEnd: 20,
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 

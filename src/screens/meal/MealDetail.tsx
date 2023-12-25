@@ -8,13 +8,13 @@ import {
 import {useContext, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
+import {Meal} from '../../domain/Meal';
 import {MealsContext, MealsDispatchContext} from '../../domain/MealContext';
 import {Button} from '../../shared/Button';
-import {GlobalStyles} from '../../shared/Styles';
 import {Input} from '../../shared/Input';
 import {Select} from '../../shared/Select';
+import {GlobalStyles} from '../../shared/Styles';
 import {MealScreenParams} from './MealScreenParams';
-import {Meal} from '../../domain/Meal';
 
 export function MealDetail(): React.JSX.Element {
   const {t} = useTranslation();
@@ -79,6 +79,7 @@ export function MealDetail(): React.JSX.Element {
           <Button
             name=""
             backgroundColor={colors.background}
+            color="red"
             onPress={() => {
               dispatch({
                 type: 'delete',

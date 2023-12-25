@@ -5,6 +5,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Suggestion} from '../../domain/Plan';
 import {GlobalStyles} from '../../shared/Styles';
+import {useContext} from 'react';
+import {OptionsContext} from '../../domain/OptionsContext';
 const {add} = require('date-fns');
 
 interface PlanRowProps {
@@ -17,6 +19,7 @@ export function PlanRow({
   generated,
 }: PlanRowProps): React.JSX.Element {
   const {colors} = useTheme();
+  const options = useContext(OptionsContext);
 
   console.log('Render PlanRow ' + suggestion.index);
   return (
@@ -47,11 +50,13 @@ export function PlanRow({
       </View>
       <View>
         <View style={styles.content}>
-          <Text style={{...styles.suggestionDay}}>
-            {format(add(generated, {days: suggestion.index}), 'EEEE', {
-              locale: de,
-            })}
-          </Text>
+          {options.showWeekdays ? (
+            <Text style={{...styles.suggestionDay}}>
+              {format(add(generated, {days: suggestion.index}), 'EEEE', {
+                locale: de,
+              })}
+            </Text>
+          ) : null}
           <View style={GlobalStyles.row}>
             <Text
               numberOfLines={1}

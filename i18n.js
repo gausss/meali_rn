@@ -19,6 +19,7 @@ const resources = {
         options: {
           title: 'Einstellungen',
           numSuggestions: 'Anzahl Vorschläge',
+          showWeekdays: 'Wochentage',
         },
       },
       meals: {
