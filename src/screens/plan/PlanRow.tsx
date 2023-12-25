@@ -9,11 +9,14 @@ const {add} = require('date-fns');
 
 interface PlanRowProps {
   suggestion: Suggestion;
+  generated: Date;
 }
 
-export function PlanRow({suggestion}: PlanRowProps): React.JSX.Element {
+export function PlanRow({
+  suggestion,
+  generated,
+}: PlanRowProps): React.JSX.Element {
   const {colors} = useTheme();
-  const today = new Date();
 
   console.log('Render PlanRow ' + suggestion.index);
   return (
@@ -45,7 +48,9 @@ export function PlanRow({suggestion}: PlanRowProps): React.JSX.Element {
       <View>
         <View style={styles.content}>
           <Text style={{...styles.suggestionDay}}>
-            {format(add(today, {days: suggestion.index}), 'EEEE', {locale: de})}
+            {format(add(generated, {days: suggestion.index}), 'EEEE', {
+              locale: de,
+            })}
           </Text>
           <View style={GlobalStyles.row}>
             <Text

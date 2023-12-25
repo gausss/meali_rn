@@ -29,10 +29,10 @@ export function PlanList(): React.JSX.Element {
       style={{
         ...GlobalStyles.viewContainer,
       }}>
-      {plan.length ? (
+      {plan.generated ? (
         <FlatList
           style={GlobalStyles.listStyle}
-          data={plan}
+          data={plan.suggestions}
           scrollEnabled={true}
           renderItem={({item, index}) => (
             <Card>
@@ -41,9 +41,9 @@ export function PlanList(): React.JSX.Element {
                 style={GlobalStyles.listStyle}
                 underlayColor={colors.notification}
                 onPress={() => {
-                  planDispatch({type: 'togglePin', currentPlan: plan, index});
+                  planDispatch({type: 'togglePin', index});
                 }}>
-                <PlanRow suggestion={item} />
+                <PlanRow generated={plan.generated} suggestion={item} />
               </TouchableHighlight>
             </Card>
           )}
@@ -57,18 +57,25 @@ export function PlanList(): React.JSX.Element {
           name="sparkles"
           disabled={
             !meals.length ||
-            (Boolean(plan.length) &&
-              !plan?.some(suggestion => suggestion.pinned === false))
+            (plan.generated &&
+              !plan.suggestions.some(suggestion => suggestion.pinned === false))
           }
-          onPress={() =>
-            planDispatch({
-              type: 'generate',
-              currentPlan: plan,
-              meals: meals,
-              options: options,
-            })
-          }>
-          {plan.length ? t('plan.more') : t('plan.generate')}
+          onPress={() => {
+            if (plan.generated) {
+              planDispatch({
+                type: 'generateMore',
+                meals: meals,
+                options: options,
+              });
+            } else {
+              planDispatch({
+                type: 'init',
+                meals: meals,
+                options: options,
+              });
+            }
+          }}>
+          {plan.generated ? t('plan.more') : t('plan.generate')}
         </Button>
       </View>
     </View>

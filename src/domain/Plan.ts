@@ -6,4 +6,7 @@ export interface Suggestion {
   pinned: boolean;
 }
 
-export type Plan = Suggestion[];
+export interface Plan {
+  generated: Date;
+  suggestions: Suggestion[];
+}

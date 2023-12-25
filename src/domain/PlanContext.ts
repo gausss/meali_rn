@@ -3,7 +3,7 @@ import {Meal} from './Meal';
 import {Options} from './OptionsContext';
 import {Plan} from './Plan';
 
-export const PlanContext = createContext<Plan>([]);
+export const PlanContext = createContext<Plan>({} as Plan);
 export const PlanDispatchContext = createContext<React.Dispatch<PlanAction>>(
   () => {},
 );
@@ -11,50 +11,63 @@ export const PlanDispatchContext = createContext<React.Dispatch<PlanAction>>(
 type PlanClearAction = {
   type: 'clear';
 };
-type PlanGenerateAction = {
-  type: 'generate';
+type PlanInitAction = {
+  type: 'init';
   meals: Meal[];
-  currentPlan: Plan;
+  options: Options;
+};
+type PlanGenerateAction = {
+  type: 'generateMore';
+  meals: Meal[];
   options: Options;
 };
 type PlanPinAction = {
   type: 'togglePin';
-  currentPlan: Plan;
   index: number;
 };
-type PlanAction = PlanClearAction | PlanGenerateAction | PlanPinAction;
+type PlanAction =
+  | PlanClearAction
+  | PlanGenerateAction
+  | PlanPinAction
+  | PlanInitAction;
 
-export function planReducer(plan: Plan, action: PlanAction) {
+export function planReducer(state: Plan, action: PlanAction): Plan {
   switch (action.type) {
     case 'clear': {
-      return [];
+      return {} as Plan;
     }
-    case 'generate': {
+    case 'init': {
       return generateSuggestions(
-        action.currentPlan,
+        {generated: new Date(), suggestions: []},
         action.meals,
         action.options,
       );
     }
+    case 'generateMore': {
+      return generateSuggestions(state, action.meals, action.options);
+    }
     case 'togglePin': {
-      let suggestion = plan[action.index];
+      let suggestion = state.suggestions[action.index];
       if (suggestion) {
         suggestion.pinned = !suggestion.pinned;
       }
-      return [...plan];
+      return {...state, suggestions: [...state.suggestions]};
     }
   }
 }
 
 function generateSuggestions(
-  currentPlan: Plan,
+  currentPlan: Readonly<Plan>,
   meals: Meal[],
   options: Options,
 ): Plan {
-  const suggestions: Plan = [];
+  const suggestions = [];
   for (let index = 0; index < options.numSuggestions; index++) {
-    if (currentPlan.length > index && currentPlan[index].pinned) {
-      suggestions.push(currentPlan[index]);
+    if (
+      currentPlan.suggestions.length > index &&
+      currentPlan.suggestions[index].pinned
+    ) {
+      suggestions.push(currentPlan.suggestions[index]);
       continue;
     }
 
@@ -66,5 +79,5 @@ function generateSuggestions(
     });
   }
 
-  return suggestions;
+  return {...currentPlan, suggestions};
 }

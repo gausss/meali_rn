@@ -21,18 +21,18 @@ type MealDeleteAction = {
 };
 type MealAction = MealAddAction | MealEditAction | MealDeleteAction;
 
-export function mealReducer(meals: Meal[], action: MealAction) {
+export function mealReducer(state: Meal[], action: MealAction): Meal[] {
   switch (action.type) {
     case 'add': {
-      return [...meals, action.meal];
+      return [...state, action.meal];
     }
     case 'edit': {
-      meals[action.index] = action.meal;
-      return [...meals];
+      state[action.index] = action.meal;
+      return [...state];
     }
     case 'delete': {
-      meals.splice(action.index, 1);
-      return [...meals];
+      state.splice(action.index, 1);
+      return [...state];
     }
   }
 }

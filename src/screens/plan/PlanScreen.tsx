@@ -4,7 +4,7 @@ import {
   useTheme,
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useReducer} from 'react';
+import {Reducer, useReducer} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -18,17 +18,18 @@ import {
   PlanDispatchContext,
   planReducer,
 } from '../../domain/PlanContext';
-import {PlanList} from './PlanList';
-import {PlanScreenParams} from './PlanScreenParams';
-import {PlanOptions} from './PlanOptions';
 import {GlobalStyles} from '../../shared/Styles';
+import {PlanList} from './PlanList';
+import {PlanOptions} from './PlanOptions';
+import {PlanScreenParams} from './PlanScreenParams';
+import {Plan} from '../../domain/Plan';
 
 export default function PlanScreen(): React.JSX.Element {
   const {t} = useTranslation();
   const {colors} = useTheme();
   const navigation = useNavigation<NavigationProp<PlanScreenParams>>();
   const Stack = createNativeStackNavigator<PlanScreenParams>();
-  const [plan, planDispatch] = useReducer(planReducer, []);
+  const [plan, planDispatch] = useReducer(planReducer, {} as Plan);
   const [options, optionsDispatch] = useReducer(optionsReducer, {
     numSuggestions: 5,
   });
@@ -36,7 +37,7 @@ export default function PlanScreen(): React.JSX.Element {
   const planActions = () => {
     return (
       <View style={GlobalStyles.row}>
-        {plan.length ? (
+        {plan.generated ? (
           <Icon.Button
             backgroundColor={'transparent'}
             underlayColor={'transparent'}

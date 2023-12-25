@@ -15,7 +15,7 @@ type OptionsUpdateAcion = {
 };
 type OptionsAction = OptionsUpdateAcion;
 
-export function optionsReducer(options: Options, action: OptionsAction) {
+export function optionsReducer(state: Options, action: OptionsAction): Options {
   switch (action.type) {
     case 'update': {
       return {...action.options};
