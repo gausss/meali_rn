@@ -83,8 +83,7 @@ function NoMeals(): React.JSX.Element {
         <Image
           source={require('../../img/taco-clean.png')}
           style={{
-            ...GlobalStyles.placeholderImage,
-            height: Dimensions.get('window').height * 0.3,
+            ...GlobalStyles.placeholderImageMeal,
           }}
         />
       </View>

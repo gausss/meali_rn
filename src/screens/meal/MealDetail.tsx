@@ -3,6 +3,7 @@ import {
   RouteProp,
   useNavigation,
   useRoute,
+  useTheme,
 } from '@react-navigation/native';
 import {useContext, useState} from 'react';
 import {useTranslation} from 'react-i18next';
@@ -17,6 +18,7 @@ import {Meal} from '../../domain/Meal';
 
 export function MealDetail(): React.JSX.Element {
   const {t} = useTranslation();
+  const {colors} = useTheme();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
   const route = useRoute<RouteProp<MealScreenParams, 'Detail'>>();
   const dispatch = useContext(MealsDispatchContext);
@@ -24,7 +26,7 @@ export function MealDetail(): React.JSX.Element {
   const editIndex = route.params.index;
 
   const [localMeal, setLocalMeal] = useState(
-    editIndex !== undefined ? meals[editIndex] : ({} as Meal),
+    editIndex !== undefined ? meals[editIndex] : ({complexity: 'EASY'} as Meal),
   );
 
   console.log('Render MealEdit');
@@ -76,7 +78,7 @@ export function MealDetail(): React.JSX.Element {
         {editIndex !== undefined ? (
           <Button
             name=""
-            backgroundColor="#c1535d"
+            backgroundColor={colors.background}
             onPress={() => {
               dispatch({
                 type: 'delete',

@@ -10,12 +10,18 @@ export const GlobalStyles = StyleSheet.create({
   },
   viewContainer: {
     paddingHorizontal: 15,
-    marginTop: 20,
+    marginTop: 5,
+    justifyContent: 'space-between',
     gap: 20,
-    height: '82%',
+    maxHeight: '95%',
   },
-  placeholderImage: {
+  placeholderImagePlan: {
     height: Dimensions.get('window').height * 0.4,
+    marginVertical: 35,
+    resizeMode: 'contain',
+  },
+  placeholderImageMeal: {
+    height: Dimensions.get('window').height * 0.3,
     marginVertical: 35,
     resizeMode: 'contain',
   },

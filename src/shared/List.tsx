@@ -13,3 +13,7 @@ export function ListItemSeparator(): React.JSX.Element {
     />
   );
 }
+
+export function ListItemMargin(): React.JSX.Element {
+  return <View />;
+}

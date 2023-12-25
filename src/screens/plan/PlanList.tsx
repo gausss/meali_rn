@@ -6,15 +6,14 @@ import {
 import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
+import {HomeTabParams} from '../../App';
 import {MealsContext} from '../../domain/MealContext';
 import {OptionsContext} from '../../domain/OptionsContext';
 import {PlanContext, PlanDispatchContext} from '../../domain/PlanContext';
 import {Button} from '../../shared/Button';
 import {Card} from '../../shared/Card';
-import {ListItemSeparator} from '../../shared/List';
 import {GlobalStyles} from '../../shared/Styles';
 import {PlanRow} from './PlanRow';
-import {HomeTabParams} from '../../App';
 
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
@@ -31,24 +30,24 @@ export function PlanList(): React.JSX.Element {
         ...GlobalStyles.viewContainer,
       }}>
       {plan.length ? (
-        <Card>
-          <FlatList
-            style={GlobalStyles.listStyle}
-            data={plan}
-            scrollEnabled={true}
-            ItemSeparatorComponent={ListItemSeparator}
-            renderItem={({item}) => (
+        <FlatList
+          style={GlobalStyles.listStyle}
+          data={plan}
+          scrollEnabled={true}
+          renderItem={({item}) => (
+            <Card>
               <TouchableHighlight
                 key={item.index}
+                style={GlobalStyles.listStyle}
                 underlayColor={colors.notification}
                 onPress={() => {
                   item.pinned = !item.pinned;
                 }}>
                 <PlanRow suggestion={item} />
               </TouchableHighlight>
-            )}
-          />
-        </Card>
+            </Card>
+          )}
+        />
       ) : (
         <NoPlan />
       )}
@@ -86,7 +85,7 @@ function NoPlan(): React.JSX.Element {
       <View style={GlobalStyles.viewCentered}>
         <Image
           source={require('../../img/plan-fly.png')}
-          style={{...GlobalStyles.placeholderImage}}
+          style={{...GlobalStyles.placeholderImagePlan}}
         />
       </View>
       {!meals.length ? (

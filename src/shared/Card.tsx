@@ -23,5 +23,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     height: 'auto',
     borderRadius: 12,
+    marginBottom: 10,
   },
 });
