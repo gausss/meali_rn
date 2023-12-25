@@ -1,8 +1,7 @@
 import {createContext} from 'react';
 import {Meal} from './Meal';
-import {Plan} from './Plan';
 import {Options} from './OptionsContext';
-import {format} from 'date-fns';
+import {Plan} from './Plan';
 
 export const PlanContext = createContext<Plan>([]);
 export const PlanDispatchContext = createContext<React.Dispatch<PlanAction>>(
@@ -18,7 +17,12 @@ type PlanGenerateAction = {
   currentPlan: Plan;
   options: Options;
 };
-type PlanAction = PlanClearAction | PlanGenerateAction;
+type PlanPinAction = {
+  type: 'togglePin';
+  currentPlan: Plan;
+  index: number;
+};
+type PlanAction = PlanClearAction | PlanGenerateAction | PlanPinAction;
 
 export function planReducer(plan: Plan, action: PlanAction) {
   switch (action.type) {
@@ -31,6 +35,13 @@ export function planReducer(plan: Plan, action: PlanAction) {
         action.meals,
         action.options,
       );
+    }
+    case 'togglePin': {
+      let suggestion = plan[action.index];
+      if (suggestion) {
+        suggestion.pinned = !suggestion.pinned;
+      }
+      return [...plan];
     }
   }
 }

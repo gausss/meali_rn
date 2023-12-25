@@ -12,7 +12,8 @@ const resources = {
         headerTitle: 'Plan',
         introDescription:
           'Erstelle einen Plan aus den generierten Vorschlägen. Pinne deine Favoriten bis du zufrieden bist.',
-        generate: 'Generieren',
+        generate: 'Plan erstellen',
+        more: 'Neue Vorschläge',
         reset: 'Zurücksetzen',
         noMeals: 'Erfasse zuerst deine Gerichte.',
         options: {

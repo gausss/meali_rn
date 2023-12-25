@@ -35,7 +35,7 @@ export default function PlanScreen(): React.JSX.Element {
 
   const planActions = () => {
     return (
-      <View style={GlobalStyles.headeRow}>
+      <View style={GlobalStyles.row}>
         {plan.length ? (
           <Icon.Button
             backgroundColor={'transparent'}

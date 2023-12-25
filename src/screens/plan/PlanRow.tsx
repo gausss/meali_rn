@@ -47,15 +47,17 @@ export function PlanRow({suggestion}: PlanRowProps): React.JSX.Element {
           <Text style={{...styles.suggestionDay}}>
             {format(add(today, {days: suggestion.index}), 'EEEE', {locale: de})}
           </Text>
-          <Text
-            numberOfLines={1}
-            style={{...styles.suggestionMeal, color: colors.text}}>
-            {suggestion.meal.name}
-          </Text>
+          <View style={GlobalStyles.row}>
+            <Text
+              numberOfLines={1}
+              style={{...styles.suggestionMeal, color: colors.text}}>
+              {suggestion.meal.name}
+            </Text>
+            {suggestion.meal.complexity === 'HARD' ? (
+              <View style={GlobalStyles.badge} />
+            ) : null}
+          </View>
         </View>
-        {suggestion.meal.complexity === 'HARD' ? (
-          <View style={GlobalStyles.badge} />
-        ) : null}
       </View>
     </View>
   );

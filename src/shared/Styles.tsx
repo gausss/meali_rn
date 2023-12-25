@@ -39,8 +39,10 @@ export const GlobalStyles = StyleSheet.create({
   },
   badge: {
     backgroundColor: '#ff9149',
-    paddingHorizontal: 2,
-    paddingVertical: 2,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+    width: 5,
+    height: 5,
     borderRadius: 15,
   },
   statusBarTitle: {
@@ -50,8 +52,9 @@ export const GlobalStyles = StyleSheet.create({
   listStyle: {
     borderRadius: 12,
   },
-  headeRow: {
+  row: {
     flexDirection: 'row',
+    alignItems: 'center',
     gap: 5,
   },
   headeIcon: {

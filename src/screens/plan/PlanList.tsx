@@ -34,14 +34,14 @@ export function PlanList(): React.JSX.Element {
           style={GlobalStyles.listStyle}
           data={plan}
           scrollEnabled={true}
-          renderItem={({item}) => (
+          renderItem={({item, index}) => (
             <Card>
               <TouchableHighlight
                 key={item.index}
                 style={GlobalStyles.listStyle}
                 underlayColor={colors.notification}
                 onPress={() => {
-                  item.pinned = !item.pinned;
+                  planDispatch({type: 'togglePin', currentPlan: plan, index});
                 }}>
                 <PlanRow suggestion={item} />
               </TouchableHighlight>
@@ -55,7 +55,11 @@ export function PlanList(): React.JSX.Element {
       <View style={GlobalStyles.viewCentered}>
         <Button
           name="sparkles"
-          disabled={!meals.length}
+          disabled={
+            !meals.length ||
+            (Boolean(plan.length) &&
+              !plan?.some(suggestion => suggestion.pinned === false))
+          }
           onPress={() =>
             planDispatch({
               type: 'generate',
@@ -64,7 +68,7 @@ export function PlanList(): React.JSX.Element {
               options: options,
             })
           }>
-          {t('plan.generate')}
+          {plan.length ? t('plan.more') : t('plan.generate')}
         </Button>
       </View>
     </View>
