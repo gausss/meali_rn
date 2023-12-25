@@ -34,6 +34,7 @@ export function MealDetail(): React.JSX.Element {
     <View style={GlobalStyles.viewContainer}>
       <Input
         label={t('meals.name')}
+        autoFocus={true}
         onChangeText={value => {
           setLocalMeal(meal => ({...meal, name: value}));
         }}
