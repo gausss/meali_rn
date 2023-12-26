@@ -15,6 +15,11 @@ export const GlobalStyles = StyleSheet.create({
     gap: 15,
     maxHeight: '95%',
   },
+  placeholderBuyListImage: {
+    height: Dimensions.get('window').height * 0.25,
+    marginVertical: 35,
+    resizeMode: 'contain',
+  },
   placeholderImagePlan: {
     height: Dimensions.get('window').height * 0.4,
     marginVertical: 35,

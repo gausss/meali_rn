@@ -27,6 +27,7 @@ import {PlanList} from './PlanList';
 import {PlanOptions} from './PlanOptions';
 import {PlanScreenParams} from './PlanScreenParams';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {BuyList} from './BuyList';
 
 export default function PlanScreen(): React.JSX.Element {
   const {t} = useTranslation();
@@ -67,15 +68,26 @@ export default function PlanScreen(): React.JSX.Element {
     return (
       <View style={GlobalStyles.row}>
         {plan.generated ? (
-          <Icon.Button
-            backgroundColor={'transparent'}
-            underlayColor={'transparent'}
-            iconStyle={GlobalStyles.headeIcon}
-            color={colors.text}
-            size={22}
-            name="reload-outline"
-            onPress={() => planDispatch({type: 'clear'})}
-          />
+          <View style={GlobalStyles.row}>
+            <Icon.Button
+              backgroundColor={'transparent'}
+              underlayColor={'transparent'}
+              iconStyle={GlobalStyles.headeIcon}
+              color={colors.text}
+              size={22}
+              name="receipt-outline"
+              onPress={() => navigation.navigate('Buy')}
+            />
+            <Icon.Button
+              backgroundColor={'transparent'}
+              underlayColor={'transparent'}
+              iconStyle={GlobalStyles.headeIcon}
+              color={colors.text}
+              size={22}
+              name="reload-outline"
+              onPress={() => planDispatch({type: 'clear'})}
+            />
+          </View>
         ) : null}
 
         <Icon.Button
@@ -127,6 +139,16 @@ export default function PlanScreen(): React.JSX.Element {
                   headerStyle: {backgroundColor: colors.background},
                   headerShadowVisible: false,
                   title: t('plan.options.title'),
+                }}
+              />
+              <Stack.Screen
+                name="Buy"
+                component={BuyList}
+                options={{
+                  headerStyle: {backgroundColor: colors.background},
+                  presentation: 'modal',
+                  headerShadowVisible: false,
+                  title: t('buy.title'),
                 }}
               />
             </Stack.Navigator>

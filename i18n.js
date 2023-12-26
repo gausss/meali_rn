@@ -7,6 +7,12 @@ const resources = {
       save: 'Speichern',
       delete: 'Löschen',
       cancel: 'Abbrechen',
+      buy: {
+        title: 'Einkaufsliste',
+        introDescription:
+          'Pinne Geriche in deinem Plan um dafür eine Einkaufsliste zu sehen.',
+        copy: 'Kopieren',
+      },
       plan: {
         tabTitle: 'Plan',
         headerTitle: 'Plan',
@@ -39,6 +45,8 @@ const resources = {
             GRM: 'Gramm',
             ML: 'Milliliter',
             UNIT: 'Stück',
+            CAN: 'Dose',
+            PACK: 'Packung',
           },
         },
         complexity: {
