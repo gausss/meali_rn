@@ -5,31 +5,61 @@ import {
   useRoute,
   useTheme,
 } from '@react-navigation/native';
-import {useContext, useState} from 'react';
+import {useContext, useMemo, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {StyleSheet, View} from 'react-native';
+import {Button as NativeButton, StyleSheet, Text, View} from 'react-native';
+import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Ingredient, Meal} from '../../domain/Meal';
 import {MealsContext, MealsDispatchContext} from '../../domain/MealContext';
 import {Button} from '../../shared/Button';
 import {Card} from '../../shared/Card';
 import {Input} from '../../shared/Input';
 import {Label} from '../../shared/Label';
+import {ListItemSeparator} from '../../shared/List';
 import {Select} from '../../shared/Select';
 import {GlobalStyles} from '../../shared/Styles';
 import {MealScreenParams} from './MealScreenParams';
-import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
-import {ListItemSeparator} from '../../shared/List';
-import {Text} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 export function MealDetail(): React.JSX.Element {
   const {t} = useTranslation();
-  const {colors} = useTheme();
+  const {dark, colors} = useTheme();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
   const route = useRoute<RouteProp<MealScreenParams, 'Detail'>>();
   const dispatch = useContext(MealsDispatchContext);
   const meals = useContext(MealsContext);
   const editIndex = route.params.index;
+
+  const styles = useMemo(
+    () =>
+      StyleSheet.create({
+        ingredientRow: {
+          height: 50,
+          padding: 10,
+          paddingRight: 25,
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexDirection: 'row',
+        },
+        insetList: {
+          borderBottomLeftRadius: 12,
+          borderBottomRightRadius: 12,
+        },
+        ingredientCard: {
+          maxHeight: 280,
+        },
+        ingredientRemove: {
+          backgroundColor: dark ? '#444444' : '#cccccc',
+          padding: 1,
+          borderRadius: 25,
+        },
+        ingredientAdd: {
+          padding: 1,
+          borderRadius: 25,
+        },
+      }),
+    [dark],
+  );
 
   const [localMeal, setLocalMeal] = useState<Partial<Meal>>(
     editIndex?.toString()
@@ -49,7 +79,7 @@ export function MealDetail(): React.JSX.Element {
     <View style={GlobalStyles.viewContainer}>
       <Input
         label={t('meals.name')}
-        autoFocus={true}
+        autoFocus={editIndex?.toString() ? false : true}
         onChangeText={value => {
           setLocalMeal(meal => ({...meal, name: value}));
         }}
@@ -74,10 +104,9 @@ export function MealDetail(): React.JSX.Element {
         <View style={styles.ingredientCard}>
           <View style={GlobalStyles.inputStyle}>
             <Label text={t('meals.ingredient.title')} />
-            <Button
-              label={t('meals.add')}
-              backgroundColor={colors.card}
-              textColor={colors.primary}
+            <NativeButton
+              title={'+'}
+              color={colors.text}
               onPress={() =>
                 navigation.navigate('Ingredient', {
                   updateIngredient: addIngredient,
@@ -91,29 +120,29 @@ export function MealDetail(): React.JSX.Element {
             scrollEnabled={true}
             ItemSeparatorComponent={ListItemSeparator}
             renderItem={({item, index}) => (
-              <TouchableHighlight
-                key={item.name}
-                underlayColor={colors.notification}
-                onPress={() => {
-                  setLocalMeal(meal => {
-                    meal.ingredients?.splice(index, 1);
-                    return {...meal};
-                  });
-                }}>
-                <View style={styles.ingredientRow}>
-                  <Text
-                    style={{...GlobalStyles.defaultText, color: colors.text}}>
-                    {item.count}
-                    <Text> {t(`meals.ingredient.unitType.${item.unit}`)}</Text>
-                    <Text> {item.name}</Text>
-                  </Text>
+              <View style={styles.ingredientRow}>
+                <Text style={{...GlobalStyles.defaultText, color: colors.text}}>
+                  {item.count}
+                  <Text> {t(`meals.ingredient.unitType.${item.unit}`)}</Text>
+                  <Text> {item.name}</Text>
+                </Text>
+                <TouchableHighlight
+                  key={item.name}
+                  underlayColor={colors.notification}
+                  style={styles.ingredientRemove}
+                  onPress={() => {
+                    setLocalMeal(meal => {
+                      meal.ingredients?.splice(index, 1);
+                      return {...meal};
+                    });
+                  }}>
                   <Icon
-                    name="trash"
-                    color={'red'}
+                    name="close-outline"
+                    color={dark ? 'black' : 'white'}
                     size={GlobalStyles.defaultText.fontSize}
                   />
-                </View>
-              </TouchableHighlight>
+                </TouchableHighlight>
+              </View>
             )}
           />
         </View>
@@ -157,21 +186,3 @@ export function MealDetail(): React.JSX.Element {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  ingredientRow: {
-    height: 50,
-    padding: 10,
-    paddingRight: 25,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  insetList: {
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12,
-  },
-  ingredientCard: {
-    maxHeight: 280,
-  },
-});

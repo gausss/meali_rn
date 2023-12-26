@@ -13,7 +13,7 @@ export class Meal {
   static copy(meal: Partial<Meal>): Partial<Meal> {
     return {
       ...meal,
-      ingredients: meal.ingredients?.map(ingredient => ({...ingredient})),
+      ingredients: meal?.ingredients?.map(ingredient => ({...ingredient})),
     };
   }
 }

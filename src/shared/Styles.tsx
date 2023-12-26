@@ -86,6 +86,7 @@ export const Dark = {
   colors: {
     ...DarkTheme.colors,
     notification: '#212123',
+    card: '#151515',
     primary: '#5e9d5e',
   },
 };
