@@ -2,6 +2,9 @@ import {createContext} from 'react';
 import {Meal} from './Meal';
 import {Options} from './OptionsContext';
 import {Plan} from './Plan';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export const PLAN_STORAGE_KEY = 'meali.plan';
 
 export const PlanContext = createContext<Plan>({} as Plan);
 export const PlanDispatchContext = createContext<React.Dispatch<PlanAction>>(
@@ -29,39 +32,62 @@ type PlanLengthAction = {
   type: 'length';
   length: number;
 };
+type PlanRestoreAction = {
+  type: 'restore';
+  plan: Plan;
+};
 type PlanAction =
   | PlanClearAction
   | PlanGenerateAction
   | PlanPinAction
   | PlanLengthAction
+  | PlanRestoreAction
   | PlanInitAction;
 
 export function planReducer(state: Plan, action: PlanAction): Plan {
+  let stateUpdated = state;
   switch (action.type) {
+    case 'restore': {
+      return action.plan;
+    }
     case 'clear': {
-      return {} as Plan;
+      stateUpdated = {} as Plan;
+      break;
     }
     case 'init': {
-      return generateSuggestions(
+      stateUpdated = generateSuggestions(
         {generated: new Date(), suggestions: []},
         action.meals,
         action.options,
       );
+      break;
     }
     case 'generateMore': {
-      return generateSuggestions(state, action.meals, action.options);
+      stateUpdated = generateSuggestions(state, action.meals, action.options);
+      break;
     }
     case 'togglePin': {
       let suggestion = state.suggestions[action.index];
       if (suggestion) {
         suggestion.pinned = !suggestion.pinned;
       }
-      return {...state, suggestions: [...state.suggestions]};
+
+      stateUpdated = {...state, suggestions: [...state.suggestions]};
+      break;
     }
     case 'length': {
-      return {...state, suggestions: state.suggestions.slice(0, action.length)};
+      if (state.suggestions) {
+        stateUpdated = {
+          ...state,
+          suggestions: state.suggestions.slice(0, action.length),
+        };
+      }
+      break;
     }
   }
+
+  AsyncStorage.setItem(PLAN_STORAGE_KEY, JSON.stringify(stateUpdated));
+  return stateUpdated;
 }
 
 function generateSuggestions(

@@ -31,6 +31,7 @@ const resources = {
         detail: 'Gericht',
         name: 'Name',
         ingredient: {
+          title: 'Zutaten',
           name: 'Zutat',
           count: 'Anzahl',
           unit: 'Einheit',

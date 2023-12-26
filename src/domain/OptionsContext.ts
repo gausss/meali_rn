@@ -1,4 +1,7 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createContext} from 'react';
+
+export const OPTIONS_STORAGE_KEY = 'meali.options';
 
 export interface Options {
   numSuggestions: number;
@@ -20,9 +23,14 @@ type OptionsUpdateAcion = {
 type OptionsAction = OptionsUpdateAcion;
 
 export function optionsReducer(state: Options, action: OptionsAction): Options {
+  let stateUpdated;
   switch (action.type) {
     case 'update': {
-      return {...action.options};
+      stateUpdated = {...action.options};
+      break;
     }
   }
+
+  AsyncStorage.setItem(OPTIONS_STORAGE_KEY, JSON.stringify(stateUpdated));
+  return stateUpdated;
 }

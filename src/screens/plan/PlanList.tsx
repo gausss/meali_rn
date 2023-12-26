@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/native';
 import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, Image, Text, TouchableHighlight, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import {HomeTabParams} from '../../App';
 import {MealsContext} from '../../domain/MealContext';
 import {OptionsContext} from '../../domain/OptionsContext';
@@ -14,6 +14,7 @@ import {Button} from '../../shared/Button';
 import {Card} from '../../shared/Card';
 import {GlobalStyles} from '../../shared/Styles';
 import {PlanRow} from './PlanRow';
+import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
 
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
@@ -54,7 +55,8 @@ export function PlanList(): React.JSX.Element {
 
       <View style={GlobalStyles.viewCentered}>
         <Button
-          name="sparkles"
+          icon="sparkles"
+          label={plan.generated ? t('plan.more') : t('plan.generate')}
           disabled={
             !meals.length ||
             (plan.generated &&
@@ -75,9 +77,8 @@ export function PlanList(): React.JSX.Element {
                 options: options,
               });
             }
-          }}>
-          {plan.generated ? t('plan.more') : t('plan.generate')}
-        </Button>
+          }}
+        />
       </View>
     </View>
   );

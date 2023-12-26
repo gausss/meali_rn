@@ -7,6 +7,7 @@ import {Text} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {GlobalStyles} from '../../shared/Styles';
 import {MealDetail} from './MealDetail';
+import {IngredientDetail} from './IngredientDetail';
 
 export default function MealScreen(): React.JSX.Element {
   const {t} = useTranslation();
@@ -44,6 +45,15 @@ export default function MealScreen(): React.JSX.Element {
           headerStyle: {backgroundColor: colors.background},
           headerShadowVisible: false,
           title: t('meals.detail'),
+        }}
+      />
+      <Stack.Screen
+        name="Ingredient"
+        component={IngredientDetail}
+        options={{
+          headerStyle: {backgroundColor: colors.background},
+          headerShadowVisible: false,
+          title: '',
         }}
       />
     </Stack.Navigator>

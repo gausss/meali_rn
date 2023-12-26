@@ -67,6 +67,9 @@ export const GlobalStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  defaultBorder: {
+    borderRadius: 12,
+  },
 });
 
 export const Light = {

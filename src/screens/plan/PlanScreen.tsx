@@ -4,16 +4,20 @@ import {
   useTheme,
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Reducer, useReducer} from 'react';
+import {useEffect, useReducer} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
+  OPTIONS_STORAGE_KEY,
+  Options,
   OptionsContext,
   OptionsDispatchContext,
   optionsReducer,
 } from '../../domain/OptionsContext';
+import {Plan} from '../../domain/Plan';
 import {
+  PLAN_STORAGE_KEY,
   PlanContext,
   PlanDispatchContext,
   planReducer,
@@ -22,7 +26,7 @@ import {GlobalStyles} from '../../shared/Styles';
 import {PlanList} from './PlanList';
 import {PlanOptions} from './PlanOptions';
 import {PlanScreenParams} from './PlanScreenParams';
-import {Plan} from '../../domain/Plan';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function PlanScreen(): React.JSX.Element {
   const {t} = useTranslation();
@@ -34,6 +38,30 @@ export default function PlanScreen(): React.JSX.Element {
     numSuggestions: 5,
     showWeekdays: true,
   });
+
+  useEffect(() => {
+    AsyncStorage.getItem(OPTIONS_STORAGE_KEY).then(value => {
+      console.log('Loading Options from storage');
+      if (value) {
+        optionsDispatch({
+          type: 'update',
+          options: JSON.parse(value),
+        });
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    AsyncStorage.getItem(PLAN_STORAGE_KEY).then(value => {
+      console.log('Loading Plan from storage');
+      if (value) {
+        planDispatch({
+          type: 'restore',
+          plan: JSON.parse(value),
+        });
+      }
+    });
+  }, []);
 
   const planActions = () => {
     return (

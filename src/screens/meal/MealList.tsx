@@ -5,19 +5,13 @@ import {
 } from '@react-navigation/native';
 import React, {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  Text,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import {Image, Text, View} from 'react-native';
+import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
 import {MealsContext} from '../../domain/MealContext';
 import {Button} from '../../shared/Button';
 import {Card} from '../../shared/Card';
-import {GlobalStyles} from '../../shared/Styles';
 import {ListItemSeparator} from '../../shared/List';
+import {GlobalStyles} from '../../shared/Styles';
 import {MealRow} from './MealRow';
 import {MealScreenParams} from './MealScreenParams';
 
@@ -61,10 +55,10 @@ export function MealList(): React.JSX.Element {
 
       <View style={GlobalStyles.viewCentered}>
         <Button
-          name="add-outline"
-          onPress={() => navigation.navigate('Detail', {})}>
-          {t('meals.add')}
-        </Button>
+          icon="add-outline"
+          label={t('meals.add')}
+          onPress={() => navigation.navigate('Detail', {})}
+        />
       </View>
     </View>
   );

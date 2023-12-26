@@ -2,12 +2,26 @@ export class Meal {
   id: string;
   name: string;
   complexity?: Complexity;
+  ingredients?: Ingredient[];
 
   constructor(name: string, complexity: Complexity) {
     this.id = IdGenerator.generate();
     this.name = name;
     this.complexity = complexity;
   }
+
+  static copy(meal: Partial<Meal>): Partial<Meal> {
+    return {
+      ...meal,
+      ingredients: meal.ingredients?.map(ingredient => ({...ingredient})),
+    };
+  }
+}
+
+export interface Ingredient {
+  count: number;
+  unit: 'GRM' | 'ML' | 'UNIT';
+  name: string;
 }
 
 export type Complexity = 'EASY' | 'HARD';

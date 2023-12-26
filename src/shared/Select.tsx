@@ -38,7 +38,7 @@ export function Select(props: SelectProps): React.JSX.Element {
           selectedRowTextStyle={{color: colors.primary}}
           dropdownStyle={{
             ...styles.dropdownStyle,
-            backgroundColor: colors.card,
+            backgroundColor: colors.notification,
           }}
           renderDropdownIcon={() => (
             <Icon name="chevron-down-outline" color={colors.text} />

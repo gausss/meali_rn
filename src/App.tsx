@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useEffect, useReducer} from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
@@ -11,6 +11,7 @@ import {useTranslation} from 'react-i18next';
 import {useColorScheme} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
+  MEAL_STORAGE_KEY,
   MealsContext,
   MealsDispatchContext,
   mealReducer,
@@ -18,6 +19,8 @@ import {
 import MealScreen from './screens/meal/MealScreen';
 import Plan from './screens/plan/PlanScreen';
 import {Dark, Light} from './shared/Styles';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type AppStackParams = {
   Home: undefined;
@@ -39,7 +42,7 @@ export default function App(): React.JSX.Element {
         }}>
         <Stack.Screen
           name="Home"
-          component={Home}
+          component={gestureHandlerRootHOC(Home)}
           options={{
             headerShown: false,
           }}
@@ -58,7 +61,19 @@ export function Home(): React.JSX.Element {
   const {t} = useTranslation();
   const dark = useColorScheme() === 'dark';
   const Tab = createBottomTabNavigator<HomeTabParams>();
-  const [meals, dispatch] = useReducer(mealReducer, []);
+  const [meals, mealDispatch] = useReducer(mealReducer, []);
+
+  useEffect(() => {
+    console.log('Loading Meals from storage');
+    AsyncStorage.getItem(MEAL_STORAGE_KEY).then(value => {
+      if (value) {
+        mealDispatch({
+          type: 'restore',
+          meals: JSON.parse(value),
+        });
+      }
+    });
+  }, []);
 
   const planTabIcon = ({size, color, focused}) => (
     <Icon
@@ -78,7 +93,7 @@ export function Home(): React.JSX.Element {
   console.log('Render Home');
   return (
     <MealsContext.Provider value={meals}>
-      <MealsDispatchContext.Provider value={dispatch}>
+      <MealsDispatchContext.Provider value={mealDispatch}>
         <Tab.Navigator initialRouteName="Plan">
           <Tab.Screen
             name="Plan"
