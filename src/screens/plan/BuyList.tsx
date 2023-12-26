@@ -1,7 +1,7 @@
 import {useTheme} from '@react-navigation/native';
 import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Image, Text, View} from 'react-native';
+import {Image, Share, Text, View} from 'react-native';
 import {Ingredient} from '../../domain/Meal';
 import {PlanContext} from '../../domain/PlanContext';
 import {GlobalStyles} from '../../shared/Styles';
@@ -14,6 +14,12 @@ export function BuyList(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const plan = useContext(PlanContext);
+
+  const shareList = async (share: string) => {
+    await Share.share({
+      message: share,
+    });
+  };
 
   const groups = [
     ...plan.suggestions
@@ -60,8 +66,8 @@ export function BuyList(): React.JSX.Element {
           />
           <View style={GlobalStyles.viewCentered}>
             <Button
-              label={t('buy.copy')}
-              onPress={() => Clipboard.setStrings(groups)}
+              icon="share-outline"
+              onPress={() => shareList(groups.join('\n'))}
             />
           </View>
         </View>

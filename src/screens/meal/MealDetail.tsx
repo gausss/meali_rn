@@ -102,11 +102,12 @@ export function MealDetail(): React.JSX.Element {
 
       <Card>
         <View style={styles.ingredientCard}>
-          <View style={GlobalStyles.inputStyle}>
+          <View style={{...GlobalStyles.inputStyle, paddingEnd: 0}}>
             <Label text={t('meals.ingredient.title')} />
-            <NativeButton
-              title={'+'}
-              color={colors.text}
+            <Button
+              label={'+'}
+              textColor={colors.text}
+              backgroundColor="transparent"
               onPress={() =>
                 navigation.navigate('Ingredient', {
                   updateIngredient: addIngredient,
