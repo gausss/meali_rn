@@ -6,11 +6,13 @@ export const OPTIONS_STORAGE_KEY = 'meali.options';
 export interface Options {
   numSuggestions: number;
   showWeekdays: boolean;
+  startDay: number;
 }
 
 export const OptionsContext = createContext<Options>({
   numSuggestions: 6,
   showWeekdays: true,
+  startDay: 1,
 });
 export const OptionsDispatchContext = createContext<
   React.Dispatch<OptionsAction>

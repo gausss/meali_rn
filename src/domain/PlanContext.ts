@@ -3,6 +3,7 @@ import {Meal} from './Meal';
 import {Options} from './OptionsContext';
 import {Plan} from './Plan';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {addDays} from 'date-fns';
 
 export const PLAN_STORAGE_KEY = 'meali.plan';
 
@@ -28,6 +29,9 @@ type PlanPinAction = {
   type: 'togglePin';
   index: number;
 };
+type PlanClearAction = {
+  type: 'clear';
+};
 type PlanLengthAction = {
   type: 'length';
   length: number;
@@ -42,6 +46,7 @@ type PlanAction =
   | PlanPinAction
   | PlanLengthAction
   | PlanRestoreAction
+  | PlanClearAction
   | PlanInitAction;
 
 export function planReducer(state: Plan, action: PlanAction): Plan {
@@ -58,6 +63,10 @@ export function planReducer(state: Plan, action: PlanAction): Plan {
           return suggestion;
         }),
       };
+      break;
+    }
+    case 'clear': {
+      stateUpdated = {} as Plan;
       break;
     }
     case 'init': {

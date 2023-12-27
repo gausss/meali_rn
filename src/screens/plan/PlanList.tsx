@@ -27,7 +27,7 @@ export function PlanList(): React.JSX.Element {
   console.log('Render PlanList');
   return (
     <View style={GlobalStyles.viewContainer}>
-      {plan.generated && options.numSuggestions ? (
+      {meals.length && plan.generated && options.numSuggestions ? (
         <FlatList
           style={GlobalStyles.listStyle}
           data={plan.suggestions}
@@ -51,9 +51,8 @@ export function PlanList(): React.JSX.Element {
       )}
 
       <View style={GlobalStyles.viewCentered}>
-        {!plan.generated ? (
+        {!meals.length || !plan.generated ? (
           <Button
-            icon="sparkles"
             label={t('plan.generate')}
             disabled={!meals.length}
             onPress={() => {
@@ -68,6 +67,7 @@ export function PlanList(): React.JSX.Element {
           <View style={GlobalStyles.row}>
             <Button
               icon="reload"
+              textColor="white"
               disabled={
                 !meals.length ||
                 (plan.generated &&
@@ -83,11 +83,11 @@ export function PlanList(): React.JSX.Element {
               }}
             />
             <Button
-              icon="lock-open-outline"
+              icon="trash-outline"
               backgroundColor={colors.background}
               onPress={() => {
                 planDispatch({
-                  type: 'resetPins',
+                  type: 'clear',
                 });
               }}
             />

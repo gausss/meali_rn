@@ -7,7 +7,7 @@ import {
 } from '@react-navigation/native';
 import {useContext, useMemo, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Button as NativeButton, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Ingredient, Meal} from '../../domain/Meal';
@@ -135,7 +135,7 @@ export function MealDetail(): React.JSX.Element {
                   <Text>
                     {item.unit
                       ? t(`meals.ingredient.unitType.${item.unit}`)
-                      : null}
+                      : 'x'}
                   </Text>
                   <Text> {item.name}</Text>
                 </Text>

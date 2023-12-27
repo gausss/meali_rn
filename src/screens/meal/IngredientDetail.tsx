@@ -57,13 +57,7 @@ export function IngredientDetail(): React.JSX.Element {
       <View style={GlobalStyles.viewCentered}>
         <Button
           label={t('meals.add')}
-          disabled={
-            !(
-              localIngredient.name &&
-              localIngredient.count &&
-              localIngredient.unit
-            )
-          }
+          disabled={!(localIngredient.name && localIngredient.count)}
           onPress={() => {
             route.params.updateIngredient(localIngredient as Ingredient);
             navigation.goBack();

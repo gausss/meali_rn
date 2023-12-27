@@ -1,14 +1,12 @@
 import {useTheme} from '@react-navigation/native';
 import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Image, Share, Text, View} from 'react-native';
+import {FlatList, Image, Share, Text, View} from 'react-native';
 import {Ingredient} from '../../domain/Meal';
 import {PlanContext} from '../../domain/PlanContext';
-import {GlobalStyles} from '../../shared/Styles';
-import {FlatList} from 'react-native';
-import {ListItemSeparator} from '../../shared/List';
 import {Button} from '../../shared/Button';
-import Clipboard from '@react-native-clipboard/clipboard';
+import {ListItemSeparator} from '../../shared/List';
+import {GlobalStyles} from '../../shared/Styles';
 
 export function BuyList(): React.JSX.Element {
   const {colors} = useTheme();
@@ -36,9 +34,11 @@ export function BuyList(): React.JSX.Element {
       .values(),
   ].map(
     ingredients =>
-      `${ingredients.reduce((acc, item) => acc + item.count, 0)} ${t(
-        'meals.ingredient.unitType.' + ingredients[0].unit,
-      )} ${ingredients[0].name}`,
+      `${ingredients.reduce((acc, item) => acc + item.count, 0)} ${
+        ingredients[0].unit
+          ? t('meals.ingredient.unitType.' + ingredients[0].unit)
+          : 'x'
+      } ${ingredients[0].name}`,
   );
 
   console.log('Render BuyList');

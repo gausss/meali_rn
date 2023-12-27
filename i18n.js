@@ -25,7 +25,12 @@ const resources = {
         options: {
           title: 'Einstellungen',
           numSuggestions: 'Anzahl Vorschläge',
-          showWeekdays: 'Wochentage anzeigen',
+          showWeekdays: 'Tage anzeigen',
+          startDay: 'Tage starten',
+        },
+        days: {
+          0: 'Erstelldatum',
+          1: '1 Tag verzögert',
         },
       },
       meals: {

@@ -42,6 +42,24 @@ export function PlanOptions(): React.JSX.Element {
           })
         }
       />
+      <Select
+        label={t('plan.options.startDay')}
+        defaultButtonText=" "
+        data={[0, 1]}
+        rowTextForSelection={item => {
+          return t(`plan.days.${item}`);
+        }}
+        buttonTextAfterSelection={item => {
+          return t(`plan.days.${item}`);
+        }}
+        onSelect={selectedItem => {
+          optionsDispatch({
+            type: 'update',
+            options: {...options, startDay: selectedItem},
+          });
+        }}
+        defaultValue={options.startDay}
+      />
     </View>
   );
 }

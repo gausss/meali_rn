@@ -38,6 +38,7 @@ export default function PlanScreen(): React.JSX.Element {
   const [options, optionsDispatch] = useReducer(optionsReducer, {
     numSuggestions: 5,
     showWeekdays: true,
+    startDay: 0,
   });
 
   useEffect(() => {

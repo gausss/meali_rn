@@ -13,7 +13,7 @@ export const GlobalStyles = StyleSheet.create({
     marginTop: 25,
     justifyContent: 'space-between',
     gap: 15,
-    maxHeight: '93%',
+    maxHeight: '92%',
   },
   placeholderBuyListImage: {
     height: Dimensions.get('window').height * 0.25,
@@ -42,8 +42,16 @@ export const GlobalStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '400',
   },
-  badge: {
+  badgeWarn: {
     backgroundColor: '#ff9149',
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+    width: 5,
+    height: 5,
+    borderRadius: 15,
+  },
+  badgeInfo: {
+    backgroundColor: '#5e9d5e',
     paddingHorizontal: 5,
     paddingVertical: 5,
     width: 5,

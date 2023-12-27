@@ -52,9 +52,15 @@ export function PlanRow({
         <View style={styles.content}>
           {options.showWeekdays ? (
             <Text style={{...styles.suggestionDay}}>
-              {format(add(generated, {days: suggestion.index}), 'EEEE', {
-                locale: de,
-              })}
+              {format(
+                add(generated, {
+                  days: suggestion.index + options.startDay || 0,
+                }),
+                'EEEE',
+                {
+                  locale: de,
+                },
+              )}
             </Text>
           ) : null}
           <View style={GlobalStyles.row}>
@@ -64,7 +70,7 @@ export function PlanRow({
               {suggestion.meal.name}
             </Text>
             {suggestion.meal.complexity === 'HARD' ? (
-              <View style={GlobalStyles.badge} />
+              <View style={GlobalStyles.badgeWarn} />
             ) : null}
           </View>
         </View>
