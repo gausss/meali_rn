@@ -26,10 +26,7 @@ export function PlanList(): React.JSX.Element {
 
   console.log('Render PlanList');
   return (
-    <View
-      style={{
-        ...GlobalStyles.viewContainer,
-      }}>
+    <View style={GlobalStyles.viewContainer}>
       {plan.generated && options.numSuggestions ? (
         <FlatList
           style={GlobalStyles.listStyle}
@@ -54,31 +51,48 @@ export function PlanList(): React.JSX.Element {
       )}
 
       <View style={GlobalStyles.viewCentered}>
-        <Button
-          icon="sparkles"
-          label={plan.generated ? t('plan.more') : t('plan.generate')}
-          disabled={
-            !meals.length ||
-            (plan.generated &&
-              plan.suggestions.filter(suggestion => suggestion.pinned)
-                .length === options.numSuggestions)
-          }
-          onPress={() => {
-            if (plan.generated) {
-              planDispatch({
-                type: 'generateMore',
-                meals: meals,
-                options: options,
-              });
-            } else {
+        {!plan.generated ? (
+          <Button
+            icon="sparkles"
+            label={t('plan.generate')}
+            disabled={!meals.length}
+            onPress={() => {
               planDispatch({
                 type: 'init',
                 meals: meals,
                 options: options,
               });
-            }
-          }}
-        />
+            }}
+          />
+        ) : (
+          <View style={GlobalStyles.row}>
+            <Button
+              icon="reload"
+              disabled={
+                !meals.length ||
+                (plan.generated &&
+                  plan.suggestions.filter(suggestion => suggestion.pinned)
+                    .length === options.numSuggestions)
+              }
+              onPress={() => {
+                planDispatch({
+                  type: 'generateMore',
+                  meals: meals,
+                  options: options,
+                });
+              }}
+            />
+            <Button
+              icon="lock-open-outline"
+              backgroundColor={colors.background}
+              onPress={() => {
+                planDispatch({
+                  type: 'resetPins',
+                });
+              }}
+            />
+          </View>
+        )}
       </View>
     </View>
   );

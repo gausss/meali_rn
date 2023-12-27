@@ -11,8 +11,8 @@ export const PlanDispatchContext = createContext<React.Dispatch<PlanAction>>(
   () => {},
 );
 
-type PlanClearAction = {
-  type: 'clear';
+type PlanResetPinsAction = {
+  type: 'resetPins';
 };
 type PlanInitAction = {
   type: 'init';
@@ -37,7 +37,7 @@ type PlanRestoreAction = {
   plan: Plan;
 };
 type PlanAction =
-  | PlanClearAction
+  | PlanResetPinsAction
   | PlanGenerateAction
   | PlanPinAction
   | PlanLengthAction
@@ -50,8 +50,14 @@ export function planReducer(state: Plan, action: PlanAction): Plan {
     case 'restore': {
       return action.plan;
     }
-    case 'clear': {
-      stateUpdated = {} as Plan;
+    case 'resetPins': {
+      stateUpdated = {
+        ...state,
+        suggestions: state.suggestions.map(suggestion => {
+          suggestion.pinned = false;
+          return suggestion;
+        }),
+      };
       break;
     }
     case 'init': {

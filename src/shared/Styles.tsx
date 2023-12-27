@@ -10,7 +10,7 @@ export const GlobalStyles = StyleSheet.create({
   },
   viewContainer: {
     paddingHorizontal: 15,
-    marginTop: 5,
+    marginTop: 25,
     justifyContent: 'space-between',
     gap: 15,
     maxHeight: '95%',
@@ -60,7 +60,7 @@ export const GlobalStyles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
+    gap: 10,
   },
   headeIcon: {
     marginRight: 0,

@@ -21,18 +21,21 @@ export function Button(props: ButtonProps): React.JSX.Element {
     <TouchableHighlight
       {...props}
       underlayColor={colors.notification}
-      style={{borderRadius: 25}}>
+      style={styles.highlightStyle}>
       <View
         style={{
           ...styles.buttonStyle,
           backgroundColor: props.disabled
             ? 'grey'
             : props.backgroundColor || colors.primary,
+          width: props.label ? 'auto' : 55,
+          height: props.label ? 'auto' : 55,
+          paddingHorizontal: props.label ? 25 : 0,
         }}>
         {props.icon ? (
           <Icon
             color={props.textColor || 'white'}
-            style={styles.textStyle}
+            style={{...styles.textStyle, fontSize: 22}}
             name={props.icon}
           />
         ) : null}
@@ -51,6 +54,9 @@ export function Button(props: ButtonProps): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
+  highlightStyle: {
+    borderRadius: 30,
+  },
   buttonStyle: {
     flexDirection: 'row',
     paddingVertical: 15,
@@ -58,7 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
-    borderRadius: 25,
+    borderRadius: 30,
   },
   textStyle: {
     fontSize: GlobalStyles.defaultText.fontSize,

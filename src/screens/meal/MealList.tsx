@@ -56,7 +56,6 @@ export function MealList(): React.JSX.Element {
       <View style={GlobalStyles.viewCentered}>
         <Button
           icon="add-outline"
-          label={t('meals.add')}
           onPress={() => navigation.navigate('Detail', {})}
         />
       </View>

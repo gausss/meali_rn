@@ -54,8 +54,8 @@ export function MealDetail(): React.JSX.Element {
           borderRadius: 25,
         },
         ingredientAdd: {
-          padding: 1,
-          borderRadius: 25,
+          padding: 10,
+          alignItems: 'center',
         },
       }),
     [dark],
@@ -102,18 +102,26 @@ export function MealDetail(): React.JSX.Element {
 
       <Card>
         <View style={styles.ingredientCard}>
-          <View style={{...GlobalStyles.inputStyle, paddingEnd: 0}}>
+          <View style={GlobalStyles.inputStyle}>
             <Label text={t('meals.ingredient.title')} />
-            <Button
-              label={'+'}
-              textColor={colors.text}
-              backgroundColor="transparent"
-              onPress={() =>
-                navigation.navigate('Ingredient', {
-                  updateIngredient: addIngredient,
-                })
-              }
+          </View>
+          <ListItemSeparator />
+          <TouchableHighlight
+            underlayColor={colors.notification}
+            style={styles.ingredientAdd}
+            onPress={() => {
+              navigation.navigate('Ingredient', {
+                updateIngredient: addIngredient,
+              });
+            }}>
+            <Icon
+              name="add-outline"
+              color={colors.text}
+              size={GlobalStyles.defaultText.fontSize}
             />
+          </TouchableHighlight>
+          <View style={{paddingBottom: localMeal.ingredients?.length ? 0 : 20}}>
+            <ListItemSeparator />
           </View>
           <FlatList
             style={styles.insetList}
@@ -123,8 +131,12 @@ export function MealDetail(): React.JSX.Element {
             renderItem={({item, index}) => (
               <View style={styles.ingredientRow}>
                 <Text style={{...GlobalStyles.defaultText, color: colors.text}}>
-                  {item.count}
-                  <Text> {t(`meals.ingredient.unitType.${item.unit}`)}</Text>
+                  {item.count ? item.count + ' ' : null}
+                  <Text>
+                    {item.unit
+                      ? t(`meals.ingredient.unitType.${item.unit}`)
+                      : null}
+                  </Text>
                   <Text> {item.name}</Text>
                 </Text>
                 <TouchableHighlight

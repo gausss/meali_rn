@@ -78,15 +78,6 @@ export default function PlanScreen(): React.JSX.Element {
               name="receipt-outline"
               onPress={() => navigation.navigate('Buy')}
             />
-            <Icon.Button
-              backgroundColor={'transparent'}
-              underlayColor={'transparent'}
-              iconStyle={GlobalStyles.headeIcon}
-              color={colors.text}
-              size={22}
-              name="reload-outline"
-              onPress={() => planDispatch({type: 'clear'})}
-            />
           </View>
         ) : null}
 
