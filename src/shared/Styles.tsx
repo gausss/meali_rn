@@ -13,7 +13,7 @@ export const GlobalStyles = StyleSheet.create({
     marginTop: 25,
     justifyContent: 'space-between',
     gap: 15,
-    maxHeight: '95%',
+    maxHeight: '93%',
   },
   placeholderBuyListImage: {
     height: Dimensions.get('window').height * 0.25,
