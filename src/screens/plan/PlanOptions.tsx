@@ -16,7 +16,6 @@ export function PlanOptions(): React.JSX.Element {
   const optionsDispatch = useContext(OptionsDispatchContext);
   const planDispatch = useContext(PlanDispatchContext);
 
-  console.log('Render PlanOptions');
   return (
     <View style={GlobalStyles.viewContainer}>
       <Select

@@ -24,7 +24,6 @@ export default function MealScreen(): React.JSX.Element {
     </Text>
   );
 
-  console.log('Render MealScreen');
   return (
     <Stack.Navigator>
       <Stack.Screen

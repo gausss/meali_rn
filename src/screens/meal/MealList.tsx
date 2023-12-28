@@ -21,7 +21,6 @@ export function MealList(): React.JSX.Element {
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
   const meals = useContext(MealsContext);
 
-  console.log('Render MealList');
   return (
     <View style={GlobalStyles.viewContainer}>
       {meals.length ? (

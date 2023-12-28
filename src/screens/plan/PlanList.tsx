@@ -24,7 +24,6 @@ export function PlanList(): React.JSX.Element {
   const options = useContext(OptionsContext);
   const planDispatch = useContext(PlanDispatchContext);
 
-  console.log('Render PlanList');
   return (
     <View style={GlobalStyles.viewContainer}>
       {meals.length && plan.generated && options.numSuggestions ? (

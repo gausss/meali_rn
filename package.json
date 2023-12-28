@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios-se": "react-native run-ios --simulator='iPhone SE (3rd generation)'",
     "ios": "react-native run-ios --simulator='iPhone 15'",
-    "ios-release": "react-native run-ios --mode Release --device='iPhone von Sven'",
+    "ios-release": "react-native run-ios --mode=Release --device='iPhone von Sven'",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",

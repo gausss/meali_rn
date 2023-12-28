@@ -41,7 +41,6 @@ export function BuyList(): React.JSX.Element {
       } ${ingredients[0].name}`,
   );
 
-  console.log('Render BuyList');
   return (
     <View
       style={{

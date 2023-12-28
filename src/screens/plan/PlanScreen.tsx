@@ -43,7 +43,6 @@ export default function PlanScreen(): React.JSX.Element {
 
   useEffect(() => {
     AsyncStorage.getItem(OPTIONS_STORAGE_KEY).then(value => {
-      console.log('Loading Options from storage');
       if (value) {
         optionsDispatch({
           type: 'update',
@@ -55,7 +54,6 @@ export default function PlanScreen(): React.JSX.Element {
 
   useEffect(() => {
     AsyncStorage.getItem(PLAN_STORAGE_KEY).then(value => {
-      console.log('Loading Plan from storage');
       if (value) {
         planDispatch({
           type: 'restore',
@@ -105,7 +103,6 @@ export default function PlanScreen(): React.JSX.Element {
     </Text>
   );
 
-  console.log('Render PlanScreen');
   return (
     <OptionsContext.Provider value={options}>
       <OptionsDispatchContext.Provider value={optionsDispatch}>

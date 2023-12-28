@@ -22,7 +22,6 @@ export function IngredientDetail(): React.JSX.Element {
     {},
   );
 
-  console.log('Render MealEdit');
   return (
     <View style={GlobalStyles.viewContainer}>
       <Input

@@ -21,7 +21,6 @@ export function PlanRow({
   const {colors} = useTheme();
   const options = useContext(OptionsContext);
 
-  console.log('Render PlanRow ' + suggestion.index);
   return (
     <View style={styles.rowContainer}>
       <View

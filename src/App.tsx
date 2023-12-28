@@ -30,7 +30,6 @@ export default function App(): React.JSX.Element {
   const dark = useColorScheme() === 'dark';
   const Stack = createNativeStackNavigator<AppStackParams>();
 
-  console.log('Render App');
   return (
     <NavigationContainer theme={dark ? Dark : Light}>
       <Stack.Navigator
@@ -65,7 +64,6 @@ export function Home(): React.JSX.Element {
   const [meals, mealDispatch] = useReducer(mealReducer, []);
 
   useEffect(() => {
-    console.log('Loading Meals from storage');
     AsyncStorage.getItem(MEAL_STORAGE_KEY).then(value => {
       if (value) {
         mealDispatch({
@@ -91,7 +89,6 @@ export function Home(): React.JSX.Element {
     />
   );
 
-  console.log('Render Home');
   return (
     <MealsContext.Provider value={meals}>
       <MealsDispatchContext.Provider value={mealDispatch}>
