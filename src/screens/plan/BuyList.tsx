@@ -1,5 +1,5 @@
 import {useTheme} from '@react-navigation/native';
-import {useContext} from 'react';
+import {useContext, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, Image, Share, Text, View} from 'react-native';
 import {Ingredient} from '../../domain/Meal';
@@ -67,6 +67,7 @@ export function BuyList(): React.JSX.Element {
           <View style={GlobalStyles.viewCentered}>
             <Button
               icon="share-outline"
+              backgroundColor={colors.background}
               onPress={() => shareList(groups.join('\n'))}
             />
           </View>

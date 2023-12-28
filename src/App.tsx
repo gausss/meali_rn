@@ -36,6 +36,7 @@ export default function App(): React.JSX.Element {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
+          orientation: 'portrait',
           navigationBarColor: dark
             ? DarkTheme.colors.card
             : DefaultTheme.colors.card,

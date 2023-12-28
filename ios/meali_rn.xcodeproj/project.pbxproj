@@ -475,7 +475,7 @@
 				DEVELOPMENT_TEAM = V5CJ3339YJ;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = meali_rn/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Meali;
+				INFOPLIST_KEY_CFBundleDisplayName = Shoku;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -504,7 +504,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V5CJ3339YJ;
 				INFOPLIST_FILE = meali_rn/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Meali;
+				INFOPLIST_KEY_CFBundleDisplayName = Shoku;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
