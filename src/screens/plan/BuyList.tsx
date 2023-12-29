@@ -13,11 +13,11 @@ export function BuyList(): React.JSX.Element {
   const {t} = useTranslation();
   const plan = useContext(PlanContext);
 
-  const shareList = async (share: string) => {
-    await Share.share({
-      message: share,
-    });
-  };
+  // const shareList = async (share: string) => {
+  //   await Share.share({
+  //     message: share,
+  //   });
+  // };
 
   const groups = [
     ...plan.suggestions
@@ -63,13 +63,13 @@ export function BuyList(): React.JSX.Element {
               </View>
             )}
           />
-          <View style={GlobalStyles.viewCentered}>
+          {/* <View style={GlobalStyles.viewCentered}>
             <Button
               icon="share-outline"
               backgroundColor={colors.background}
               onPress={() => shareList(groups.join('\n'))}
             />
-          </View>
+          </View> */}
         </View>
       ) : (
         <NoPlan />
