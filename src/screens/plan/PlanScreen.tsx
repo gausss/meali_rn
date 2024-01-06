@@ -9,6 +9,7 @@ import {useEffect, useReducer} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useTourGuideController} from 'rn-tourguide';
 import {
   OPTIONS_STORAGE_KEY,
   OptionsContext,
@@ -39,6 +40,8 @@ export default function PlanScreen(): React.JSX.Element {
     showWeekdays: true,
     startDay: 0,
   });
+
+  const {start} = useTourGuideController('plan');
 
   useEffect(() => {
     AsyncStorage.getItem(OPTIONS_STORAGE_KEY).then(value => {
@@ -72,9 +75,9 @@ export default function PlanScreen(): React.JSX.Element {
               underlayColor={'transparent'}
               iconStyle={GlobalStyles.headeIcon}
               color={colors.text}
-              size={22}
-              name="receipt-outline"
-              onPress={() => navigation.navigate('Buy')}
+              size={28}
+              name="help-circle-outline"
+              onPress={() => start()}
             />
           </View>
         ) : null}

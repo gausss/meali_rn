@@ -1,5 +1,6 @@
 import React, {useEffect, useReducer} from 'react';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   DarkTheme,
@@ -9,7 +10,9 @@ import {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useTranslation} from 'react-i18next';
 import {useColorScheme} from 'react-native';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {TourGuideProvider} from 'rn-tourguide';
 import {
   MEAL_STORAGE_KEY,
   MealsContext,
@@ -19,36 +22,49 @@ import {
 import MealScreen from './screens/meal/MealScreen';
 import Plan from './screens/plan/PlanScreen';
 import {Dark, Light} from './shared/Styles';
-import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type AppStackParams = {
   Home: undefined;
 };
 
 export default function App(): React.JSX.Element {
+  const {t} = useTranslation();
   const dark = useColorScheme() === 'dark';
   const Stack = createNativeStackNavigator<AppStackParams>();
 
   return (
-    <NavigationContainer theme={dark ? Dark : Light}>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          orientation: 'portrait',
-          navigationBarColor: dark
-            ? DarkTheme.colors.card
-            : DefaultTheme.colors.card,
-        }}>
-        <Stack.Screen
-          name="Home"
-          component={gestureHandlerRootHOC(Home)}
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <TourGuideProvider
+      {...{
+        androidStatusBarVisible: true,
+        borderRadius: 12,
+        persistTooltip: true,
+        backdropColor: dark ? 'rgba(999, 999, 999, 0.6)' : 'rgba(0, 0, 0, 0.6)',
+        labels: {
+          previous: t('guide.back'),
+          next: t('guide.next'),
+          skip: t('guide.skip'),
+          finish: t('guide.finish'),
+        },
+      }}>
+      <NavigationContainer theme={dark ? Dark : Light}>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            orientation: 'portrait',
+            navigationBarColor: dark
+              ? DarkTheme.colors.card
+              : DefaultTheme.colors.card,
+          }}>
+          <Stack.Screen
+            name="Home"
+            component={gestureHandlerRootHOC(Home)}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </TourGuideProvider>
   );
 }
 

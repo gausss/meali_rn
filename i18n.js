@@ -60,6 +60,19 @@ const resources = {
           HARD: 'Aufwändig',
         },
       },
+      guide: {
+        next: 'Weiter',
+        back: 'Zurück',
+        skip: 'Abbrechen',
+        finish: 'Fertig',
+        meal: 'Ein Essensvorschlag für den gezeigten Tag. In den Optionen kann die Anzahl der Vorschläge/Tage angepasst werden.',
+        pin: 'Pinne einen Vorschlag durch einmal antippen. Das Schloss Icon zeigt ob ein Vorschlag gepinnt ist oder nicht.',
+        generate:
+          'Generiere neue Vorschläge für deinen Plan. Gepinnte Vorschläge bleiben erhalten.',
+        buy: 'Zeigt eine Einkaufsliste aller Gerichte die gepinnt sind.',
+        reset:
+          'Hier kann der aktuelle Plan zurückgesetzt werden, z.B. wenn der geplante Zeitraum vorbei ist.',
+      },
     },
   },
 };

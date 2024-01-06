@@ -6,6 +6,8 @@ import {
 import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image, Text, View} from 'react-native';
+import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
+import {useTourGuideController} from 'rn-tourguide';
 import {HomeTabParams} from '../../App';
 import {MealsContext} from '../../domain/MealContext';
 import {OptionsContext} from '../../domain/OptionsContext';
@@ -14,15 +16,17 @@ import {Button} from '../../shared/Button';
 import {Card} from '../../shared/Card';
 import {GlobalStyles} from '../../shared/Styles';
 import {PlanRow} from './PlanRow';
-import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
+import {PlanScreenParams} from './PlanScreenParams';
 
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
+  const navigation = useNavigation<NavigationProp<PlanScreenParams>>();
   const meals = useContext(MealsContext);
   const plan = useContext(PlanContext);
   const options = useContext(OptionsContext);
   const planDispatch = useContext(PlanDispatchContext);
+  const {TourGuideZone} = useTourGuideController('plan');
 
   return (
     <View style={GlobalStyles.viewContainer}>
@@ -63,33 +67,65 @@ export function PlanList(): React.JSX.Element {
             }}
           />
         ) : (
-          <View style={GlobalStyles.row}>
-            <Button
-              icon="reload"
-              textColor="white"
-              disabled={
-                !meals.length ||
-                (plan.generated &&
-                  plan.suggestions.filter(suggestion => suggestion.pinned)
-                    .length === options.numSuggestions)
-              }
-              onPress={() => {
-                planDispatch({
-                  type: 'generateMore',
-                  meals: meals,
-                  options: options,
-                });
-              }}
-            />
-            <Button
-              icon="trash-outline"
-              backgroundColor={colors.background}
-              onPress={() => {
-                planDispatch({
-                  type: 'clear',
-                });
-              }}
-            />
+          <View
+            style={{
+              ...GlobalStyles.row,
+              justifyContent: 'space-between',
+              paddingHorizontal: 10,
+              width: '100%',
+            }}>
+            <View style={GlobalStyles.row}>
+              <TourGuideZone
+                zone={3}
+                text={t('guide.generate')}
+                tooltipBottomOffset={50}
+                shape="circle">
+                <Button
+                  icon="reload"
+                  textColor="white"
+                  disabled={
+                    !meals.length ||
+                    (plan.generated &&
+                      plan.suggestions.filter(suggestion => suggestion.pinned)
+                        .length === options.numSuggestions)
+                  }
+                  onPress={() => {
+                    planDispatch({
+                      type: 'generateMore',
+                      meals: meals,
+                      options: options,
+                    });
+                  }}
+                />
+              </TourGuideZone>
+              <TourGuideZone
+                zone={4}
+                text={t('guide.buy')}
+                tooltipBottomOffset={50}
+                shape="circle">
+                <Button
+                  backgroundColor={colors.background}
+                  icon="receipt-outline"
+                  onPress={() => navigation.navigate('Buy')}
+                />
+              </TourGuideZone>
+            </View>
+
+            <TourGuideZone
+              zone={5}
+              text={t('guide.reset')}
+              tooltipBottomOffset={50}
+              shape="circle">
+              <Button
+                icon="trash-outline"
+                backgroundColor={colors.background}
+                onPress={() => {
+                  planDispatch({
+                    type: 'clear',
+                  });
+                }}
+              />
+            </TourGuideZone>
           </View>
         )}
       </View>
