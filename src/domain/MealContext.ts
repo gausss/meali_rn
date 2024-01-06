@@ -1,7 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createContext} from 'react';
 import {Meal} from './Meal';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {NativeScreenNavigationContainer} from 'react-native-screens';
 
 export const MEAL_STORAGE_KEY = 'meali.meals';
 

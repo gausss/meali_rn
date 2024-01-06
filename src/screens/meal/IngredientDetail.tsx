@@ -18,15 +18,17 @@ export function IngredientDetail(): React.JSX.Element {
   const {t} = useTranslation();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
   const route = useRoute<RouteProp<MealScreenParams, 'Ingredient'>>();
-  const [localIngredient, setLocalIngredient] = useState<Partial<Ingredient>>(
-    {},
-  );
+  const [localIngredient, setLocalIngredient] = useState<Partial<Ingredient>>({
+    count: 1,
+    unit: 'UNIT',
+  });
 
   return (
     <View style={GlobalStyles.viewContainer}>
       <Input
         label={t('meals.ingredient.name')}
         autoFocus={true}
+        inputMode="text"
         onChangeText={value => {
           setLocalIngredient({...localIngredient, name: value});
         }}
@@ -35,6 +37,7 @@ export function IngredientDetail(): React.JSX.Element {
       <Input
         label={t('meals.ingredient.count')}
         inputMode="numeric"
+        defaultValue={localIngredient.count?.toString()}
         onChangeText={value => {
           setLocalIngredient({...localIngredient, count: Number(value)});
         }}
@@ -42,6 +45,7 @@ export function IngredientDetail(): React.JSX.Element {
       <Select
         label={t('meals.ingredient.unit')}
         data={['GRM', 'ML', 'UNIT']}
+        defaultValue={localIngredient.unit}
         rowTextForSelection={item => {
           return t(`meals.ingredient.unitType.${item}`);
         }}

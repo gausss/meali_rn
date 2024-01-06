@@ -98,8 +98,8 @@ export const Dark = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
-    notification: '#212123',
-    card: '#151515',
+    notification: '#232323',
+    card: '#181818',
     primary: '#5e9d5e',
   },
 };

@@ -35,7 +35,6 @@ export function Select(props: SelectProps): React.JSX.Element {
           dropdownOverlayColor="transparent"
           statusBarTranslucent={true}
           rowTextStyle={{...styles.rowTextStyle, color: colors.text}}
-          selectedRowTextStyle={{color: colors.primary}}
           dropdownStyle={{
             ...styles.dropdownStyle,
             backgroundColor: colors.notification,

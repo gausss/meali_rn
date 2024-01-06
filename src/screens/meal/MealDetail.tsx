@@ -54,7 +54,7 @@ export function MealDetail(): React.JSX.Element {
           borderRadius: 25,
         },
         ingredientAdd: {
-          padding: 10,
+          padding: 12,
           alignItems: 'center',
         },
       }),
@@ -78,6 +78,7 @@ export function MealDetail(): React.JSX.Element {
     <View style={GlobalStyles.viewContainer}>
       <Input
         label={t('meals.name')}
+        inputMode="text"
         autoFocus={editIndex?.toString() ? false : true}
         onChangeText={value => {
           setLocalMeal(meal => ({...meal, name: value}));

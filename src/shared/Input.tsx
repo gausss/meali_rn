@@ -24,7 +24,6 @@ export function Input(props: InputProps): React.JSX.Element {
         <Label text={props.label} />
         <TextInput
           {...props}
-          inputMode="text"
           clearButtonMode="always"
           selectionColor={colors.primary}
           style={{...styles.inputStyle, color: colors.text}}

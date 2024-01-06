@@ -1,10 +1,9 @@
 import {useTheme} from '@react-navigation/native';
-import {useContext, useEffect} from 'react';
+import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, Image, Share, Text, View} from 'react-native';
+import {FlatList, Image, Text, View} from 'react-native';
 import {Ingredient} from '../../domain/Meal';
 import {PlanContext} from '../../domain/PlanContext';
-import {Button} from '../../shared/Button';
 import {ListItemSeparator} from '../../shared/List';
 import {GlobalStyles} from '../../shared/Styles';
 

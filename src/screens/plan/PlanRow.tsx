@@ -7,7 +7,7 @@ import {Suggestion} from '../../domain/Plan';
 import {GlobalStyles} from '../../shared/Styles';
 import {useContext} from 'react';
 import {OptionsContext} from '../../domain/OptionsContext';
-const {add} = require('date-fns');
+import {add} from 'date-fns';
 
 interface PlanRowProps {
   suggestion: Suggestion;
@@ -88,11 +88,11 @@ const styles = StyleSheet.create({
   },
   indexCircle: {
     borderWidth: 3,
-    borderRadius: 15,
-    width: 25,
-    height: 25,
-    paddingLeft: 0.5,
-    paddingTop: 0.5,
+    borderRadius: 35,
+    width: 35,
+    height: 35,
+    paddingLeft: 5,
+    paddingTop: 5,
   },
   iconStyle: {
     fontSize: 18,

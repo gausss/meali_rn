@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   NavigationProp,
   useNavigation,
@@ -10,7 +11,6 @@ import {Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   OPTIONS_STORAGE_KEY,
-  Options,
   OptionsContext,
   OptionsDispatchContext,
   optionsReducer,
@@ -23,11 +23,10 @@ import {
   planReducer,
 } from '../../domain/PlanContext';
 import {GlobalStyles} from '../../shared/Styles';
+import {BuyList} from './BuyList';
 import {PlanList} from './PlanList';
 import {PlanOptions} from './PlanOptions';
 import {PlanScreenParams} from './PlanScreenParams';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {BuyList} from './BuyList';
 
 export default function PlanScreen(): React.JSX.Element {
   const {t} = useTranslation();
@@ -134,7 +133,8 @@ export default function PlanScreen(): React.JSX.Element {
                 name="Buy"
                 component={BuyList}
                 options={{
-                  headerStyle: {backgroundColor: colors.background},
+                  headerStyle: {backgroundColor: colors.card},
+                  contentStyle: {backgroundColor: colors.card},
                   presentation: 'modal',
                   headerShadowVisible: false,
                   title: t('buy.title'),

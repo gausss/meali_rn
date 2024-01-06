@@ -10,7 +10,7 @@ const resources = {
       buy: {
         title: 'Einkaufsliste',
         introDescription:
-          'Pinne Geriche in deinem Plan um dafür eine Einkaufsliste zu sehen.',
+          'Pinne Gerichte, indem du auf einen Vorschlag in deinem Plan drückst, um dafür eine Einkaufsliste zu sehen.',
         copy: 'Kopieren',
       },
       plan: {
@@ -29,8 +29,8 @@ const resources = {
           startDay: 'Tage starten',
         },
         days: {
-          0: 'Erstelldatum',
-          1: '1 Tag verzögert',
+          0: 'am Erstelldatum',
+          1: 'am Tag danach',
         },
       },
       meals: {
