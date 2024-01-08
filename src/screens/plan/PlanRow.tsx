@@ -28,17 +28,12 @@ export function PlanRow({
 
   if (isFirst) {
     return (
-      <TourGuideZone
-        zone={1}
-        keepTooltipPosition={true}
-        text={t('guide.meal')}
-        borderRadius={16}>
+      <TourGuideZone zone={1} keepTooltipPosition={true} text={t('guide.meal')}>
         <View style={styles.rowContainer}>
           <TourGuideZone
             zone={2}
             text={t('guide.pin')}
-            keepTooltipPosition={true}
-            borderRadius={16}>
+            keepTooltipPosition={true}>
             <View
               style={{
                 ...styles.indexCircle,

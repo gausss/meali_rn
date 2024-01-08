@@ -69,9 +69,9 @@ const resources = {
         pin: 'Pinne einen Vorschlag durch einmal antippen. Das Schloss Icon zeigt ob ein Vorschlag gepinnt ist oder nicht.',
         generate:
           'Generiere neue Vorschläge für deinen Plan. Gepinnte Vorschläge bleiben erhalten.',
-        buy: 'Zeigt eine Einkaufsliste aller Gerichte die gepinnt sind.',
+        buy: 'Zeige eine Einkaufsliste aller Gerichte die gepinnt sind.',
         reset:
-          'Hier kann der aktuelle Plan zurückgesetzt werden, z.B. wenn der geplante Zeitraum vorbei ist.',
+          'Setze deinen Plan zurück, z.B. wenn der geplante Zeitraum vorbei ist.',
       },
     },
   },

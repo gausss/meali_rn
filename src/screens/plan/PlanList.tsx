@@ -78,8 +78,7 @@ export function PlanList(): React.JSX.Element {
               <TourGuideZone
                 zone={3}
                 text={t('guide.generate')}
-                tooltipBottomOffset={50}
-                shape="circle">
+                tooltipBottomOffset={50}>
                 <Button
                   icon="reload"
                   textColor="white"
@@ -101,8 +100,7 @@ export function PlanList(): React.JSX.Element {
               <TourGuideZone
                 zone={4}
                 text={t('guide.buy')}
-                tooltipBottomOffset={50}
-                shape="circle">
+                tooltipBottomOffset={50}>
                 <Button
                   backgroundColor={colors.background}
                   icon="receipt-outline"
@@ -114,8 +112,7 @@ export function PlanList(): React.JSX.Element {
             <TourGuideZone
               zone={5}
               text={t('guide.reset')}
-              tooltipBottomOffset={50}
-              shape="circle">
+              tooltipBottomOffset={50}>
               <Button
                 icon="trash-outline"
                 backgroundColor={colors.background}

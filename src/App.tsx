@@ -36,9 +36,9 @@ export default function App(): React.JSX.Element {
     <TourGuideProvider
       {...{
         androidStatusBarVisible: true,
-        borderRadius: 12,
+        borderRadius: 4,
         persistTooltip: true,
-        backdropColor: dark ? 'rgba(999, 999, 999, 0.6)' : 'rgba(0, 0, 0, 0.6)',
+        backdropColor: 'rgba(0, 0, 0, 0.6)',
         labels: {
           previous: t('guide.back'),
           next: t('guide.next'),
