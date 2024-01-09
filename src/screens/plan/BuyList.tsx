@@ -1,22 +1,23 @@
 import {useTheme} from '@react-navigation/native';
 import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, Image, Text, View} from 'react-native';
+import {FlatList, Image, Share, Text, View} from 'react-native';
 import {Ingredient} from '../../domain/Meal';
 import {PlanContext} from '../../domain/PlanContext';
 import {ListItemSeparator} from '../../shared/List';
 import {GlobalStyles} from '../../shared/Styles';
+import {Button} from '../../shared/Button';
 
 export function BuyList(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const plan = useContext(PlanContext);
 
-  // const shareList = async (share: string) => {
-  //   await Share.share({
-  //     message: share,
-  //   });
-  // };
+  const shareList = async (share: string) => {
+    await Share.share({
+      message: share,
+    });
+  };
 
   const groups = [
     ...plan.suggestions
@@ -34,9 +35,9 @@ export function BuyList(): React.JSX.Element {
   ].map(
     ingredients =>
       `${ingredients.reduce((acc, item) => acc + item.count, 0)} ${
-        ingredients[0].unit
-          ? t('meals.ingredient.unitType.' + ingredients[0].unit)
-          : 'x'
+        ingredients[0].unit === 'UNIT'
+          ? 'x'
+          : t('meals.ingredient.unitType.' + ingredients[0].unit)
       } ${ingredients[0].name}`,
   );
 
@@ -44,6 +45,7 @@ export function BuyList(): React.JSX.Element {
     <View
       style={{
         ...GlobalStyles.viewContainer,
+        maxHeight: '80%',
       }}>
       {plan.suggestions.some(item => item.pinned) ? (
         <View>
@@ -62,13 +64,13 @@ export function BuyList(): React.JSX.Element {
               </View>
             )}
           />
-          {/* <View style={GlobalStyles.viewCentered}>
+          <View style={{...GlobalStyles.viewCentered, marginTop: 15}}>
             <Button
               icon="share-outline"
               backgroundColor={colors.background}
               onPress={() => shareList(groups.join('\n'))}
             />
-          </View> */}
+          </View>
         </View>
       ) : (
         <NoPlan />

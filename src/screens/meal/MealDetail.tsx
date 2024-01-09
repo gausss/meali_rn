@@ -133,9 +133,9 @@ export function MealDetail(): React.JSX.Element {
                 <Text style={{...GlobalStyles.defaultText, color: colors.text}}>
                   {item.count ? item.count + ' ' : null}
                   <Text>
-                    {item.unit
-                      ? t(`meals.ingredient.unitType.${item.unit}`)
-                      : 'x'}
+                    {item.unit === 'UNIT'
+                      ? 'x'
+                      : t(`meals.ingredient.unitType.${item.unit}`)}
                   </Text>
                   <Text> {item.name}</Text>
                 </Text>

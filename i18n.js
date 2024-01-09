@@ -49,9 +49,7 @@ const resources = {
           unitType: {
             GRM: 'Gramm',
             ML: 'Milliliter',
-            UNIT: 'Stück',
-            CAN: 'Dose',
-            PACK: 'Packung',
+            UNIT: '',
           },
         },
         complexity: {
