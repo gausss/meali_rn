@@ -34,11 +34,9 @@ export function BuyList(): React.JSX.Element {
       .values(),
   ].map(
     ingredients =>
-      `${ingredients.reduce((acc, item) => acc + item.count, 0)} ${
-        ingredients[0].unit === 'UNIT'
-          ? 'x'
-          : t('meals.ingredient.unitType.' + ingredients[0].unit)
-      } ${ingredients[0].name}`,
+      `${ingredients.reduce((acc, item) => acc + item.count, 0)} ${t(
+        'meals.ingredient.unitType.' + ingredients[0].unit,
+      )} ${ingredients[0].name}`,
   );
 
   return (

@@ -22,7 +22,7 @@ export function MealList(): React.JSX.Element {
   const meals = useContext(MealsContext);
 
   return (
-    <View style={GlobalStyles.viewContainer}>
+    <View style={{...GlobalStyles.viewContainer, maxHeight: '80%'}}>
       {meals.length ? (
         <Card>
           <FlatList

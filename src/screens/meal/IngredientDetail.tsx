@@ -44,7 +44,7 @@ export function IngredientDetail(): React.JSX.Element {
       />
       <Select
         label={t('meals.ingredient.unit')}
-        data={['GRM', 'ML', 'UNIT']}
+        data={['GRM', 'ML', 'UNIT', 'CAN', 'PACK']}
         defaultValue={localIngredient.unit}
         rowTextForSelection={item => {
           return t(`meals.ingredient.unitType.${item}`);

@@ -46,7 +46,7 @@ export function MealDetail(): React.JSX.Element {
           borderBottomRightRadius: 12,
         },
         ingredientCard: {
-          maxHeight: 280,
+          maxHeight: 300,
         },
         ingredientRemove: {
           backgroundColor: dark ? '#444444' : '#cccccc',
@@ -102,8 +102,16 @@ export function MealDetail(): React.JSX.Element {
 
       <Card>
         <View style={styles.ingredientCard}>
-          <View style={GlobalStyles.inputStyle}>
+          <View
+            style={{
+              paddingEnd: 20,
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+            }}>
             <Label text={t('meals.ingredient.title')} />
+            <Text style={{paddingStart: 10, paddingBottom: 5, color: 'grey'}}>
+              {t('meals.ingredient.explanation')}
+            </Text>
           </View>
           <ListItemSeparator />
           <TouchableHighlight
@@ -132,11 +140,7 @@ export function MealDetail(): React.JSX.Element {
               <View style={styles.ingredientRow}>
                 <Text style={{...GlobalStyles.defaultText, color: colors.text}}>
                   {item.count ? item.count + ' ' : null}
-                  <Text>
-                    {item.unit === 'UNIT'
-                      ? 'x'
-                      : t(`meals.ingredient.unitType.${item.unit}`)}
-                  </Text>
+                  <Text>{t(`meals.ingredient.unitType.${item.unit}`)}</Text>
                   <Text> {item.name}</Text>
                 </Text>
                 <TouchableHighlight

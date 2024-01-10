@@ -43,13 +43,16 @@ const resources = {
         name: 'Name',
         ingredient: {
           title: 'Zutaten',
+          explanation: 'Optional. Wird für die Einkaufsliste verwendet.',
           name: 'Zutat',
           count: 'Anzahl',
           unit: 'Einheit',
           unitType: {
             GRM: 'Gramm',
             ML: 'Milliliter',
-            UNIT: '',
+            UNIT: 'Stück',
+            CAN: 'Dose',
+            PACK: 'Packung',
           },
         },
         complexity: {

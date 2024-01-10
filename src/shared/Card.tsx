@@ -1,11 +1,12 @@
 import {useTheme} from '@react-navigation/native';
-import {StyleSheet, View} from 'react-native';
+import {DimensionValue, StyleSheet, View} from 'react-native';
 
 interface CardProps {
   children: React.ReactNode;
+  maxHeight?: DimensionValue | undefined;
 }
 
-export function Card({children}: CardProps): React.JSX.Element {
+export function Card({children, maxHeight}: CardProps): React.JSX.Element {
   const {colors} = useTheme();
 
   return (
@@ -13,6 +14,7 @@ export function Card({children}: CardProps): React.JSX.Element {
       style={{
         ...styles.cardContainer,
         backgroundColor: colors.card,
+        maxHeight,
       }}>
       {children}
     </View>
