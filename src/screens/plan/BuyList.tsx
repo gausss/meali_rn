@@ -1,51 +1,46 @@
 import {useTheme} from '@react-navigation/native';
 import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, Image, Share, Text, View} from 'react-native';
+import {FlatList, Image, Text, View} from 'react-native';
 import {Ingredient} from '../../domain/Meal';
 import {PlanContext} from '../../domain/PlanContext';
 import {ListItemSeparator} from '../../shared/List';
 import {GlobalStyles} from '../../shared/Styles';
-import {Button} from '../../shared/Button';
 
 export function BuyList(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const plan = useContext(PlanContext);
+  let groups: string[] = [];
 
-  const shareList = async (share: string) => {
-    await Share.share({
-      message: share,
-    });
-  };
+  if (plan.suggestions) {
+    groups = [
+      ...plan.suggestions
+        .filter(suggestion => suggestion.pinned)
+        .flatMap(suggestion => suggestion.meal.ingredients)
+        .reduce((acc, curr) => {
+          if (curr?.name) {
+            const key = curr.name.trim();
+            acc.set(key, [...(acc.get(key) || []), curr]);
+          }
 
-  const groups = [
-    ...plan.suggestions
-      .filter(suggestion => suggestion.pinned)
-      .flatMap(suggestion => suggestion.meal.ingredients)
-      .reduce((acc, curr) => {
-        if (curr?.name) {
-          const key = curr.name.trim();
-          acc.set(key, [...(acc.get(key) || []), curr]);
-        }
-
-        return acc;
-      }, new Map<String, Ingredient[]>())
-      .values(),
-  ].map(
-    ingredients =>
-      `${ingredients.reduce((acc, item) => acc + item.count, 0)} ${t(
-        'meals.ingredient.unitType.' + ingredients[0].unit,
-      )} ${ingredients[0].name}`,
-  );
-
+          return acc;
+        }, new Map<String, Ingredient[]>())
+        .values(),
+    ].map(
+      ingredients =>
+        `${ingredients.reduce((acc, item) => acc + item.count, 0)} ${t(
+          'meals.ingredient.unitType.' + ingredients[0].unit,
+        )} ${ingredients[0].name}`,
+    );
+  }
   return (
     <View
       style={{
         ...GlobalStyles.viewContainer,
         maxHeight: '80%',
       }}>
-      {plan.suggestions.some(item => item.pinned) ? (
+      {plan?.suggestions?.some(item => item?.pinned) ? (
         <View>
           <FlatList
             style={GlobalStyles.listStyle}
@@ -62,13 +57,6 @@ export function BuyList(): React.JSX.Element {
               </View>
             )}
           />
-          <View style={{...GlobalStyles.viewCentered, marginTop: 15}}>
-            <Button
-              icon="share-outline"
-              backgroundColor={colors.background}
-              onPress={() => shareList(groups.join('\n'))}
-            />
-          </View>
         </View>
       ) : (
         <NoPlan />

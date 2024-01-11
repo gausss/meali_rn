@@ -1,13 +1,13 @@
+import {useTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
+import {Text} from 'react-native';
+import {GlobalStyles} from '../../shared/Styles';
+import {IngredientDetail} from './IngredientDetail';
+import {MealDetail} from './MealDetail';
 import {MealList} from './MealList';
 import {MealScreenParams} from './MealScreenParams';
-import {Text} from 'react-native';
-import {useTheme} from '@react-navigation/native';
-import {GlobalStyles} from '../../shared/Styles';
-import {MealDetail} from './MealDetail';
-import {IngredientDetail} from './IngredientDetail';
 
 export default function MealScreen(): React.JSX.Element {
   const {t} = useTranslation();

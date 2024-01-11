@@ -10,7 +10,7 @@ const resources = {
       buy: {
         title: 'Einkaufsliste',
         introDescription:
-          'Pinne Gerichte, indem du auf einen Vorschlag in deinem Plan drückst, um dafür eine Einkaufsliste zu sehen.',
+          'Pinne Gerichte in deinem Plan, um alle benötigten Zutaten hier zu sehen.',
         copy: 'Kopieren',
       },
       plan: {

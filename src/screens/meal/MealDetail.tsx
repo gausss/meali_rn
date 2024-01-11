@@ -50,7 +50,6 @@ export function MealDetail(): React.JSX.Element {
         },
         ingredientRemove: {
           backgroundColor: dark ? '#444444' : '#cccccc',
-          padding: 1,
           borderRadius: 25,
         },
         ingredientAdd: {
@@ -79,7 +78,6 @@ export function MealDetail(): React.JSX.Element {
       <Input
         label={t('meals.name')}
         inputMode="text"
-        autoFocus={editIndex?.toString() ? false : true}
         onChangeText={value => {
           setLocalMeal(meal => ({...meal, name: value}));
         }}
@@ -116,6 +114,7 @@ export function MealDetail(): React.JSX.Element {
           <ListItemSeparator />
           <TouchableHighlight
             underlayColor={colors.notification}
+            hitSlop={3}
             style={styles.ingredientAdd}
             onPress={() => {
               navigation.navigate('Ingredient', {
@@ -138,13 +137,20 @@ export function MealDetail(): React.JSX.Element {
             ItemSeparatorComponent={ListItemSeparator}
             renderItem={({item, index}) => (
               <View style={styles.ingredientRow}>
-                <Text style={{...GlobalStyles.defaultText, color: colors.text}}>
+                <Text
+                  numberOfLines={1}
+                  style={{
+                    ...GlobalStyles.defaultText,
+                    color: colors.text,
+                    maxWidth: '90%',
+                  }}>
                   {item.count ? item.count + ' ' : null}
                   <Text>{t(`meals.ingredient.unitType.${item.unit}`)}</Text>
                   <Text> {item.name}</Text>
                 </Text>
                 <TouchableHighlight
                   key={item.name}
+                  hitSlop={3}
                   underlayColor={colors.notification}
                   style={styles.ingredientRemove}
                   onPress={() => {

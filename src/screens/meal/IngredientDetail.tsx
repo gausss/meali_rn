@@ -27,7 +27,6 @@ export function IngredientDetail(): React.JSX.Element {
     <View style={GlobalStyles.viewContainer}>
       <Input
         label={t('meals.ingredient.name')}
-        autoFocus={true}
         inputMode="text"
         onChangeText={value => {
           setLocalIngredient({...localIngredient, name: value});

@@ -6,6 +6,7 @@ import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
+  useTheme,
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useTranslation} from 'react-i18next';
@@ -71,11 +72,13 @@ export default function App(): React.JSX.Element {
 export type HomeTabParams = {
   Plan: undefined;
   Meals: undefined;
+  Buy: undefined;
 };
 
 export function Home(): React.JSX.Element {
   const {t} = useTranslation();
   const dark = useColorScheme() === 'dark';
+  const {colors} = useTheme();
   const Tab = createBottomTabNavigator<HomeTabParams>();
   const [meals, mealDispatch] = useReducer(mealReducer, []);
 

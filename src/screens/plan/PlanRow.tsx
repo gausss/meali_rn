@@ -59,31 +59,32 @@ export function PlanRow({
               )}
             </View>
           </TourGuideZone>
-          <View>
-            <View style={styles.content}>
-              {options.showWeekdays ? (
-                <Text style={{...styles.suggestionDay}}>
-                  {format(
-                    add(generated, {
-                      days: suggestion.index + options.startDay || 0,
-                    }),
-                    'EEEE',
-                    {
-                      locale: de,
-                    },
-                  )}
-                </Text>
+          <View style={styles.content}>
+            {options.showWeekdays ? (
+              <Text style={{...styles.suggestionDay}}>
+                {format(
+                  add(generated, {
+                    days: suggestion.index + options.startDay || 0,
+                  }),
+                  'EEEE',
+                  {
+                    locale: de,
+                  },
+                )}
+              </Text>
+            ) : null}
+            <View style={GlobalStyles.row}>
+              <Text
+                numberOfLines={1}
+                style={{
+                  ...styles.suggestionMeal,
+                  color: colors.text,
+                }}>
+                {suggestion.meal.name}
+              </Text>
+              {suggestion.meal.complexity === 'HARD' ? (
+                <View style={GlobalStyles.badgeWarn} />
               ) : null}
-              <View style={GlobalStyles.row}>
-                <Text
-                  numberOfLines={1}
-                  style={{...styles.suggestionMeal, color: colors.text}}>
-                  {suggestion.meal.name}
-                </Text>
-                {suggestion.meal.complexity === 'HARD' ? (
-                  <View style={GlobalStyles.badgeWarn} />
-                ) : null}
-              </View>
             </View>
           </View>
         </View>
@@ -155,6 +156,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 13.5,
+    maxWidth: '78%',
   },
   indexCircle: {
     borderWidth: 3,
