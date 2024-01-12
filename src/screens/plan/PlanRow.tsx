@@ -3,7 +3,7 @@ import {format} from 'date-fns';
 import {de} from 'date-fns/locale';
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Suggestion} from '../../domain/Plan';
+import {SuggestionModel} from '../../domain/Plan';
 import {GlobalStyles} from '../../shared/Styles';
 import {useContext} from 'react';
 import {OptionsContext} from '../../domain/OptionsContext';
@@ -12,13 +12,13 @@ import {useTourGuideController} from 'rn-tourguide';
 import {useTranslation} from 'react-i18next';
 
 interface PlanRowProps {
-  suggestion: Suggestion;
+  suggestion: SuggestionModel;
   generated: Date;
 }
 
 export function PlanRow({
   suggestion,
-  generated,
+  generated
 }: PlanRowProps): React.JSX.Element {
   const {colors} = useTheme();
   const options = useContext(OptionsContext);
@@ -38,14 +38,14 @@ export function PlanRow({
               style={{
                 ...styles.indexCircle,
                 borderColor: colors.notification,
-                backgroundColor: colors.notification,
+                backgroundColor: colors.notification
               }}>
               {!suggestion.pinned ? (
                 <Icon
                   name="lock-open-outline"
                   style={{
                     ...styles.iconStyle,
-                    color: colors.text,
+                    color: colors.text
                   }}
                 />
               ) : (
@@ -53,7 +53,7 @@ export function PlanRow({
                   name="lock-closed"
                   style={{
                     ...styles.iconStyle,
-                    color: colors.text,
+                    color: colors.text
                   }}
                 />
               )}
@@ -64,12 +64,12 @@ export function PlanRow({
               <Text style={{...styles.suggestionDay}}>
                 {format(
                   add(generated, {
-                    days: suggestion.index + options.startDay || 0,
+                    days: suggestion.index + options.startDay || 0
                   }),
                   'EEEE',
                   {
-                    locale: de,
-                  },
+                    locale: de
+                  }
                 )}
               </Text>
             ) : null}
@@ -78,7 +78,7 @@ export function PlanRow({
                 numberOfLines={1}
                 style={{
                   ...styles.suggestionMeal,
-                  color: colors.text,
+                  color: colors.text
                 }}>
                 {suggestion.meal.name}
               </Text>
@@ -98,14 +98,14 @@ export function PlanRow({
         style={{
           ...styles.indexCircle,
           borderColor: colors.notification,
-          backgroundColor: colors.notification,
+          backgroundColor: colors.notification
         }}>
         {!suggestion.pinned ? (
           <Icon
             name="lock-open-outline"
             style={{
               ...styles.iconStyle,
-              color: colors.text,
+              color: colors.text
             }}
           />
         ) : (
@@ -113,7 +113,7 @@ export function PlanRow({
             name="lock-closed"
             style={{
               ...styles.iconStyle,
-              color: colors.text,
+              color: colors.text
             }}
           />
         )}
@@ -124,12 +124,12 @@ export function PlanRow({
             <Text style={{...styles.suggestionDay}}>
               {format(
                 add(generated, {
-                  days: suggestion.index + options.startDay || 0,
+                  days: suggestion.index + options.startDay || 0
                 }),
                 'EEEE',
                 {
-                  locale: de,
-                },
+                  locale: de
+                }
               )}
             </Text>
           ) : null}
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 13.5,
-    maxWidth: '78%',
+    maxWidth: '78%'
   },
   indexCircle: {
     borderWidth: 3,
@@ -164,25 +164,25 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
     paddingLeft: 5,
-    paddingTop: 5,
+    paddingTop: 5
   },
   iconStyle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   suggestionMeal: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   suggestionDay: {
     fontSize: 13,
     fontWeight: 'bold',
     marginBottom: 5,
-    color: 'grey',
+    color: 'grey'
   },
   content: {
     paddingVertical: 10,
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-  },
+    alignItems: 'flex-start'
+  }
 });

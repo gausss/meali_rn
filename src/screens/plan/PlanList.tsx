@@ -1,7 +1,7 @@
 import {
   NavigationProp,
   useNavigation,
-  useTheme,
+  useTheme
 } from '@react-navigation/native';
 import {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
@@ -62,7 +62,7 @@ export function PlanList(): React.JSX.Element {
               planDispatch({
                 type: 'init',
                 meals: meals,
-                options: options,
+                options: options
               });
             }}
           />
@@ -72,42 +72,31 @@ export function PlanList(): React.JSX.Element {
               ...GlobalStyles.row,
               justifyContent: 'space-between',
               paddingHorizontal: 10,
-              width: '100%',
+              width: '105%'
             }}>
-            <View style={GlobalStyles.row}>
-              <TourGuideZone
-                zone={3}
-                text={t('guide.generate')}
-                tooltipBottomOffset={50}>
-                <Button
-                  icon="reload"
-                  textColor="white"
-                  disabled={
-                    !meals.length ||
-                    (plan.generated &&
-                      plan.suggestions.filter(suggestion => suggestion.pinned)
-                        .length === options.numSuggestions)
-                  }
-                  onPress={() => {
-                    planDispatch({
-                      type: 'generateMore',
-                      meals: meals,
-                      options: options,
-                    });
-                  }}
-                />
-              </TourGuideZone>
-              <TourGuideZone
-                zone={4}
-                text={t('guide.buy')}
-                tooltipBottomOffset={50}>
-                <Button
-                  backgroundColor={colors.background}
-                  icon="receipt-outline"
-                  onPress={() => navigation.navigate('Buy')}
-                />
-              </TourGuideZone>
-            </View>
+            <View style={{width: 40}}></View>
+            <TourGuideZone
+              zone={3}
+              text={t('guide.generate')}
+              tooltipBottomOffset={50}>
+              <Button
+                icon="reload"
+                textColor="white"
+                disabled={
+                  !meals.length ||
+                  (plan.generated &&
+                    plan.suggestions.filter(suggestion => suggestion.pinned)
+                      .length === options.numSuggestions)
+                }
+                onPress={() => {
+                  planDispatch({
+                    type: 'generateMore',
+                    meals: meals,
+                    options: options
+                  });
+                }}
+              />
+            </TourGuideZone>
 
             <TourGuideZone
               zone={5}
@@ -118,7 +107,7 @@ export function PlanList(): React.JSX.Element {
                 backgroundColor={colors.background}
                 onPress={() => {
                   planDispatch({
-                    type: 'clear',
+                    type: 'clear'
                   });
                 }}
               />

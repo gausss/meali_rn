@@ -26,19 +26,18 @@ export function BuyList(): React.JSX.Element {
 
           return acc;
         }, new Map<String, Ingredient[]>())
-        .values(),
+        .values()
     ].map(
       ingredients =>
         `${ingredients.reduce((acc, item) => acc + item.count, 0)} ${t(
-          'meals.ingredient.unitType.' + ingredients[0].unit,
-        )} ${ingredients[0].name}`,
+          'meals.ingredient.unitType.' + ingredients[0].unit
+        )} ${ingredients[0].name}`
     );
   }
   return (
     <View
       style={{
-        ...GlobalStyles.viewContainer,
-        maxHeight: '80%',
+        ...GlobalStyles.viewContainer
       }}>
       {plan?.suggestions?.some(item => item?.pinned) ? (
         <View>

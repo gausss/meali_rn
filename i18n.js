@@ -9,10 +9,10 @@ const resources = {
       delete: 'Löschen',
       cancel: 'Abbrechen',
       buy: {
+        tabTitle: 'Einkauf',
         title: 'Einkaufsliste',
         introDescription:
-          'Pinne Gerichte in deinem Plan, um alle benötigten Zutaten hier zu sehen.',
-        copy: 'Kopieren'
+          'Pinne Gerichte in deinem Plan, um alle benötigten Zutaten hier zu sehen.'
       },
       plan: {
         tabTitle: 'Plan',
@@ -79,14 +79,12 @@ const resources = {
   }
 };
 
-i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .init({
-    resources,
-    lng: 'de',
-    interpolation: {
-      escapeValue: false // react already safes from xss
-    }
-  });
+i18n.use(initReactI18next).init({
+  resources,
+  lng: 'de',
+  interpolation: {
+    escapeValue: false
+  }
+});
 
 export default i18n;

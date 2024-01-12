@@ -6,7 +6,7 @@ export interface Suggestion {
   pinned: boolean;
 }
 
-export interface Plan {
+export interface PlanModel {
   generated: Date;
   suggestions: Suggestion[];
 }

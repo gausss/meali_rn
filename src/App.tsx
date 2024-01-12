@@ -23,6 +23,14 @@ import {
 import MealScreen from './screens/meal/MealScreen';
 import Plan from './screens/plan/PlanScreen';
 import {Dark, Light} from './shared/Styles';
+import {
+  PLAN_STORAGE_KEY,
+  PlanContext,
+  PlanDispatchContext,
+  planReducer
+} from './domain/PlanContext';
+import {PlanModel} from './domain/Plan';
+import BuyScreen from './screens/buy/BuyScreen';
 
 export type AppStackParams = {
   Home: undefined;
@@ -81,6 +89,7 @@ export function Home(): React.JSX.Element {
   const {colors} = useTheme();
   const Tab = createBottomTabNavigator<HomeTabParams>();
   const [meals, mealDispatch] = useReducer(mealReducer, []);
+  const [plan, planDispatch] = useReducer(planReducer, {} as PlanModel);
 
   useEffect(() => {
     AsyncStorage.getItem(MEAL_STORAGE_KEY).then(value => {
@@ -88,6 +97,17 @@ export function Home(): React.JSX.Element {
         mealDispatch({
           type: 'restore',
           meals: JSON.parse(value)
+        });
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    AsyncStorage.getItem(PLAN_STORAGE_KEY).then(value => {
+      if (value) {
+        planDispatch({
+          type: 'restore',
+          plan: JSON.parse(value)
         });
       }
     });
@@ -107,32 +127,53 @@ export function Home(): React.JSX.Element {
       color={color}
     />
   );
+  const buyTabIcon = ({size, color, focused}) => (
+    <Icon
+      name={focused ? 'receipt' : 'receipt-outline'}
+      size={size}
+      color={color}
+    />
+  );
 
   return (
     <MealsContext.Provider value={meals}>
       <MealsDispatchContext.Provider value={mealDispatch}>
-        <Tab.Navigator initialRouteName="Plan">
-          <Tab.Screen
-            name="Plan"
-            component={Plan}
-            options={{
-              headerShown: false,
-              title: t('plan.tabTitle'),
-              tabBarActiveTintColor: dark ? 'white' : 'black',
-              tabBarIcon: planTabIcon
-            }}
-          />
-          <Tab.Screen
-            name="Meals"
-            component={MealScreen}
-            options={{
-              headerShown: false,
-              title: t('meals.tabTitle'),
-              tabBarActiveTintColor: dark ? 'white' : 'black',
-              tabBarIcon: mealTabIcon
-            }}
-          />
-        </Tab.Navigator>
+        <PlanContext.Provider value={plan}>
+          <PlanDispatchContext.Provider value={planDispatch}>
+            <Tab.Navigator initialRouteName="Plan">
+              <Tab.Screen
+                name="Plan"
+                component={Plan}
+                options={{
+                  headerShown: false,
+                  title: t('plan.tabTitle'),
+                  tabBarActiveTintColor: dark ? 'white' : 'black',
+                  tabBarIcon: planTabIcon
+                }}
+              />
+              <Tab.Screen
+                name="Meals"
+                component={MealScreen}
+                options={{
+                  headerShown: false,
+                  title: t('meals.tabTitle'),
+                  tabBarActiveTintColor: dark ? 'white' : 'black',
+                  tabBarIcon: mealTabIcon
+                }}
+              />
+              <Tab.Screen
+                name="Buy"
+                component={BuyScreen}
+                options={{
+                  headerShown: false,
+                  title: t('buy.tabTitle'),
+                  tabBarActiveTintColor: dark ? 'white' : 'black',
+                  tabBarIcon: buyTabIcon
+                }}
+              />
+            </Tab.Navigator>
+          </PlanDispatchContext.Provider>
+        </PlanContext.Provider>
       </MealsDispatchContext.Provider>
     </MealsContext.Provider>
   );

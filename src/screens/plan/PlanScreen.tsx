@@ -2,10 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   NavigationProp,
   useNavigation,
-  useTheme,
+  useTheme
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useEffect, useReducer} from 'react';
+import {useContext, useEffect, useReducer} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -14,17 +14,10 @@ import {
   OPTIONS_STORAGE_KEY,
   OptionsContext,
   OptionsDispatchContext,
-  optionsReducer,
+  optionsReducer
 } from '../../domain/OptionsContext';
-import {Plan} from '../../domain/Plan';
-import {
-  PLAN_STORAGE_KEY,
-  PlanContext,
-  PlanDispatchContext,
-  planReducer,
-} from '../../domain/PlanContext';
+import {PlanContext} from '../../domain/PlanContext';
 import {GlobalStyles} from '../../shared/Styles';
-import {BuyList} from './BuyList';
 import {PlanList} from './PlanList';
 import {PlanOptions} from './PlanOptions';
 import {PlanScreenParams} from './PlanScreenParams';
@@ -34,11 +27,12 @@ export default function PlanScreen(): React.JSX.Element {
   const {colors} = useTheme();
   const navigation = useNavigation<NavigationProp<PlanScreenParams>>();
   const Stack = createNativeStackNavigator<PlanScreenParams>();
-  const [plan, planDispatch] = useReducer(planReducer, {} as Plan);
+  const plan = useContext(PlanContext);
+
   const [options, optionsDispatch] = useReducer(optionsReducer, {
     numSuggestions: 5,
     showWeekdays: true,
-    startDay: 0,
+    startDay: 0
   });
 
   const {start} = useTourGuideController('plan');
@@ -48,18 +42,7 @@ export default function PlanScreen(): React.JSX.Element {
       if (value) {
         optionsDispatch({
           type: 'update',
-          options: JSON.parse(value),
-        });
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    AsyncStorage.getItem(PLAN_STORAGE_KEY).then(value => {
-      if (value) {
-        planDispatch({
-          type: 'restore',
-          plan: JSON.parse(value),
+          options: JSON.parse(value)
         });
       }
     });
@@ -99,7 +82,7 @@ export default function PlanScreen(): React.JSX.Element {
     <Text
       style={{
         ...GlobalStyles.statusBarTitle,
-        color: colors.text,
+        color: colors.text
       }}>
       {t('plan.headerTitle')}
     </Text>
@@ -108,44 +91,29 @@ export default function PlanScreen(): React.JSX.Element {
   return (
     <OptionsContext.Provider value={options}>
       <OptionsDispatchContext.Provider value={optionsDispatch}>
-        <PlanContext.Provider value={plan}>
-          <PlanDispatchContext.Provider value={planDispatch}>
-            <Stack.Navigator>
-              <Stack.Screen
-                name="List"
-                component={PlanList}
-                options={{
-                  title: '',
-                  headerTitleStyle: {fontSize: 22},
-                  headerStyle: {backgroundColor: colors.background},
-                  headerShadowVisible: false,
-                  headerRight: planActions,
-                  headerLeft: planTitle,
-                }}
-              />
-              <Stack.Screen
-                name="Options"
-                component={PlanOptions}
-                options={{
-                  headerStyle: {backgroundColor: colors.background},
-                  headerShadowVisible: false,
-                  title: t('plan.options.title'),
-                }}
-              />
-              <Stack.Screen
-                name="Buy"
-                component={BuyList}
-                options={{
-                  headerStyle: {backgroundColor: colors.card},
-                  contentStyle: {backgroundColor: colors.card},
-                  presentation: 'modal',
-                  headerShadowVisible: false,
-                  title: t('buy.title'),
-                }}
-              />
-            </Stack.Navigator>
-          </PlanDispatchContext.Provider>
-        </PlanContext.Provider>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="List"
+            component={PlanList}
+            options={{
+              title: '',
+              headerTitleStyle: {fontSize: 22},
+              headerStyle: {backgroundColor: colors.background},
+              headerShadowVisible: false,
+              headerRight: planActions,
+              headerLeft: planTitle
+            }}
+          />
+          <Stack.Screen
+            name="Options"
+            component={PlanOptions}
+            options={{
+              headerStyle: {backgroundColor: colors.background},
+              headerShadowVisible: false,
+              title: t('plan.options.title')
+            }}
+          />
+        </Stack.Navigator>
       </OptionsDispatchContext.Provider>
     </OptionsContext.Provider>
   );
