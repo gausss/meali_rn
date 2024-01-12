@@ -13,7 +13,7 @@ export class Meal {
   static copy(meal: Partial<Meal>): Partial<Meal> {
     return {
       ...meal,
-      ingredients: meal?.ingredients?.map(ingredient => ({...ingredient})),
+      ingredients: meal?.ingredients?.map(ingredient => ({...ingredient}))
     };
   }
 }
@@ -33,7 +33,7 @@ class IdGenerator {
   static generate(): string {
     return Array.from(Array(16).keys()).reduce(
       acc => acc + this.getCharacter(this.getRandomInt()),
-      '',
+      ''
     );
   }
 

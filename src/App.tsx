@@ -6,7 +6,7 @@ import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
-  useTheme,
+  useTheme
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useTranslation} from 'react-i18next';
@@ -18,7 +18,7 @@ import {
   MEAL_STORAGE_KEY,
   MealsContext,
   MealsDispatchContext,
-  mealReducer,
+  mealReducer
 } from './domain/MealContext';
 import MealScreen from './screens/meal/MealScreen';
 import Plan from './screens/plan/PlanScreen';
@@ -44,8 +44,8 @@ export default function App(): React.JSX.Element {
           previous: t('guide.back'),
           next: t('guide.next'),
           skip: t('guide.skip'),
-          finish: t('guide.finish'),
-        },
+          finish: t('guide.finish')
+        }
       }}>
       <NavigationContainer theme={dark ? Dark : Light}>
         <Stack.Navigator
@@ -54,13 +54,13 @@ export default function App(): React.JSX.Element {
             orientation: 'portrait',
             navigationBarColor: dark
               ? DarkTheme.colors.card
-              : DefaultTheme.colors.card,
+              : DefaultTheme.colors.card
           }}>
           <Stack.Screen
             name="Home"
             component={gestureHandlerRootHOC(Home)}
             options={{
-              headerShown: false,
+              headerShown: false
             }}
           />
         </Stack.Navigator>
@@ -87,7 +87,7 @@ export function Home(): React.JSX.Element {
       if (value) {
         mealDispatch({
           type: 'restore',
-          meals: JSON.parse(value),
+          meals: JSON.parse(value)
         });
       }
     });
@@ -119,7 +119,7 @@ export function Home(): React.JSX.Element {
               headerShown: false,
               title: t('plan.tabTitle'),
               tabBarActiveTintColor: dark ? 'white' : 'black',
-              tabBarIcon: planTabIcon,
+              tabBarIcon: planTabIcon
             }}
           />
           <Tab.Screen
@@ -129,7 +129,7 @@ export function Home(): React.JSX.Element {
               headerShown: false,
               title: t('meals.tabTitle'),
               tabBarActiveTintColor: dark ? 'white' : 'black',
-              tabBarIcon: mealTabIcon,
+              tabBarIcon: mealTabIcon
             }}
           />
         </Tab.Navigator>

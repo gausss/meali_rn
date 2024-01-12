@@ -2,7 +2,7 @@ import {useTheme} from '@react-navigation/native';
 import {StyleSheet, Text, View} from 'react-native';
 import {
   TouchableHighlight,
-  TouchableHighlightProps,
+  TouchableHighlightProps
 } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {GlobalStyles} from './Styles';
@@ -19,7 +19,7 @@ export function Button(props: ButtonProps): React.JSX.Element {
 
   const styles = StyleSheet.create({
     highlightStyle: {
-      borderRadius: 30,
+      borderRadius: 30
     },
     buttonStyle: {
       backgroundColor: props.disabled
@@ -31,7 +31,7 @@ export function Button(props: ButtonProps): React.JSX.Element {
       justifyContent: 'center',
       alignItems: 'center',
       gap: 10,
-      borderRadius: 30,
+      borderRadius: 30
     },
     buttonStyleIconOnly: {
       backgroundColor: props.disabled
@@ -45,17 +45,17 @@ export function Button(props: ButtonProps): React.JSX.Element {
       justifyContent: 'center',
       alignItems: 'center',
       gap: 10,
-      borderRadius: 30,
+      borderRadius: 30
     },
     textStyle: {
       fontSize: GlobalStyles.defaultText.fontSize,
       fontWeight: '600',
-      color: props.textColor || 'white',
+      color: props.textColor || 'white'
     },
     iconStyle: {
       fontSize: 25,
-      fontWeight: '600',
-    },
+      fontWeight: '600'
+    }
   });
 
   return (

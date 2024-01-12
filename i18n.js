@@ -1,4 +1,5 @@
 import i18n from 'i18next';
+import 'intl-pluralrules';
 import {initReactI18next} from 'react-i18next';
 
 const resources = {
@@ -11,7 +12,7 @@ const resources = {
         title: 'Einkaufsliste',
         introDescription:
           'Pinne Gerichte in deinem Plan, um alle benötigten Zutaten hier zu sehen.',
-        copy: 'Kopieren',
+        copy: 'Kopieren'
       },
       plan: {
         tabTitle: 'Plan',
@@ -26,12 +27,12 @@ const resources = {
           title: 'Einstellungen',
           numSuggestions: 'Anzahl Vorschläge',
           showWeekdays: 'Tage anzeigen',
-          startDay: 'Tage starten',
+          startDay: 'Tage starten'
         },
         days: {
           0: 'am Erstelldatum',
-          1: 'am Tag danach',
-        },
+          1: 'am Tag danach'
+        }
       },
       meals: {
         tabTitle: 'Gerichte',
@@ -52,14 +53,14 @@ const resources = {
             ML: 'Milliliter',
             UNIT: 'Stück',
             CAN: 'Dose',
-            PACK: 'Packung',
-          },
+            PACK: 'Packung'
+          }
         },
         complexity: {
           name: 'Schwierigkeit',
           EASY: 'Einfach',
-          HARD: 'Aufwändig',
-        },
+          HARD: 'Aufwändig'
+        }
       },
       guide: {
         next: 'Weiter',
@@ -72,10 +73,10 @@ const resources = {
           'Generiere neue Vorschläge für deinen Plan. Gepinnte Vorschläge bleiben erhalten.',
         buy: 'Zeige eine Einkaufsliste aller Gerichte die gepinnt sind.',
         reset:
-          'Setze deinen Plan zurück, z.B. wenn der geplante Zeitraum vorbei ist.',
-      },
-    },
-  },
+          'Setze deinen Plan zurück, z.B. wenn der geplante Zeitraum vorbei ist.'
+      }
+    }
+  }
 };
 
 i18n
@@ -84,8 +85,8 @@ i18n
     resources,
     lng: 'de',
     interpolation: {
-      escapeValue: false, // react already safes from xss
-    },
+      escapeValue: false // react already safes from xss
+    }
   });
 
 export default i18n;
