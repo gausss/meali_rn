@@ -3,7 +3,7 @@ import {format} from 'date-fns';
 import {de} from 'date-fns/locale';
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {SuggestionModel} from '../../domain/Plan';
+import {Suggestion} from '../../domain/Plan';
 import {GlobalStyles} from '../../shared/Styles';
 import {useContext} from 'react';
 import {OptionsContext} from '../../domain/OptionsContext';
@@ -12,7 +12,7 @@ import {useTourGuideController} from 'rn-tourguide';
 import {useTranslation} from 'react-i18next';
 
 interface PlanRowProps {
-  suggestion: SuggestionModel;
+  suggestion: Suggestion;
   generated: Date;
 }
 
@@ -33,6 +33,7 @@ export function PlanRow({
           <TourGuideZone
             zone={2}
             text={t('guide.pin')}
+            shape="circle"
             keepTooltipPosition={true}>
             <View
               style={{

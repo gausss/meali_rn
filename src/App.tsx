@@ -47,7 +47,8 @@ export default function App(): React.JSX.Element {
         androidStatusBarVisible: true,
         borderRadius: 4,
         persistTooltip: true,
-        backdropColor: 'rgba(0, 0, 0, 0.6)',
+        backdropColor: 'rgba(94, 157, 94, 0.96)',
+        maskOffset: 12,
         labels: {
           previous: t('guide.back'),
           next: t('guide.next'),
