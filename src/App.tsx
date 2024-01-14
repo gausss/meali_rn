@@ -11,26 +11,27 @@ import {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useTranslation} from 'react-i18next';
 import {useColorScheme} from 'react-native';
-import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {TourGuideProvider} from 'rn-tourguide';
+import {TooltipProps, TourGuideProvider} from 'rn-tourguide';
 import {
   MEAL_STORAGE_KEY,
   MealsContext,
   MealsDispatchContext,
   mealReducer
 } from './domain/MealContext';
-import MealScreen from './screens/meal/MealScreen';
-import Plan from './screens/plan/PlanScreen';
-import {Dark, Light} from './shared/Styles';
+import {PlanModel} from './domain/Plan';
 import {
   PLAN_STORAGE_KEY,
   PlanContext,
   PlanDispatchContext,
   planReducer
 } from './domain/PlanContext';
-import {PlanModel} from './domain/Plan';
 import BuyScreen from './screens/buy/BuyScreen';
+import MealScreen from './screens/meal/MealScreen';
+import Plan from './screens/plan/PlanScreen';
+import {Dark, Light} from './shared/Styles';
+import {TourModal} from './shared/TourModal';
 
 export type AppStackParams = {
   Home: undefined;
@@ -42,39 +43,46 @@ export default function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator<AppStackParams>();
 
   return (
-    <TourGuideProvider
-      {...{
-        androidStatusBarVisible: true,
-        borderRadius: 4,
-        persistTooltip: true,
-        backdropColor: 'rgba(94, 157, 94, 0.96)',
-        maskOffset: 12,
-        labels: {
-          previous: t('guide.back'),
-          next: t('guide.next'),
-          skip: t('guide.skip'),
-          finish: t('guide.finish')
-        }
-      }}>
-      <NavigationContainer theme={dark ? Dark : Light}>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            orientation: 'portrait',
-            navigationBarColor: dark
-              ? DarkTheme.colors.card
-              : DefaultTheme.colors.card
-          }}>
-          <Stack.Screen
-            name="Home"
-            component={gestureHandlerRootHOC(Home)}
-            options={{
-              headerShown: false
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </TourGuideProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <TourGuideProvider
+        {...{
+          androidStatusBarVisible: true,
+          borderRadius: 4,
+          persistTooltip: true,
+          backdropColor: dark
+            ? 'rgba(255, 255, 255, 0.4)'
+            : 'rgba(0, 0, 0, 0.5)',
+          tooltipComponent: (props: TooltipProps) => (
+            <TourModal {...props}></TourModal>
+          ),
+          maskOffset: 10,
+          labels: {
+            previous: t('guide.back'),
+            next: t('guide.next'),
+            skip: t('guide.skip'),
+            finish: t('guide.finish')
+          }
+        }}>
+        <NavigationContainer theme={dark ? Dark : Light}>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              orientation: 'portrait',
+              navigationBarColor: dark
+                ? DarkTheme.colors.card
+                : DefaultTheme.colors.card
+            }}>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{
+                headerShown: false
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </TourGuideProvider>
+    </GestureHandlerRootView>
   );
 }
 

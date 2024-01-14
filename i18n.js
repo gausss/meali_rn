@@ -65,9 +65,9 @@ const resources = {
       guide: {
         next: 'Weiter',
         back: 'Zurück',
-        skip: 'Abbrechen',
+        skip: 'Fertig',
         finish: 'Fertig',
-        meal: 'Ein Essensvorschlag für den gezeigten Tag. In den Optionen kann die Anzahl der Vorschläge/Tage angepasst werden.',
+        meal: 'Ein Essensvorschlag für den gezeigten Tag. In den Optionen kann die Anzahl der Vorschläge angepasst werden.',
         pin: 'Pinne einen Vorschlag durch einmal antippen. Das Schloss Icon zeigt ob ein Vorschlag gepinnt ist oder nicht.',
         generate:
           'Generiere neue Vorschläge für deinen Plan. Gepinnte Vorschläge bleiben erhalten.',
