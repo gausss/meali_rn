@@ -31,7 +31,7 @@ export default function BuyScreen(): React.JSX.Element {
               underlayColor={'transparent'}
               iconStyle={GlobalStyles.headeIcon}
               color={colors.text}
-              size={25}
+              size={22}
               name="share-outline"
               onPress={async () => onShare()}
             />
