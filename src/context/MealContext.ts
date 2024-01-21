@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {createContext} from 'react';
-import {Meal} from './Meal';
+import { createContext } from 'react';
+import { Meal } from '../domain/Meal';
 
 export const MEAL_STORAGE_KEY = 'meali.meals';
 
 export const MealsContext = createContext<Meal[]>([]);
 export const MealsDispatchContext = createContext<React.Dispatch<MealAction>>(
-  () => {},
+  () => { },
 );
 
 type MealRestoreAction = {

@@ -1,15 +1,15 @@
-import {useTheme} from '@react-navigation/native';
-import {format} from 'date-fns';
-import {de} from 'date-fns/locale';
-import {StyleSheet, Text, View} from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { format } from 'date-fns';
+import { de } from 'date-fns/locale';
+import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Suggestion} from '../../domain/Plan';
-import {GlobalStyles} from '../../shared/Styles';
-import {useContext} from 'react';
-import {OptionsContext} from '../../domain/OptionsContext';
-import {add} from 'date-fns';
-import {useTourGuideController} from 'rn-tourguide';
-import {useTranslation} from 'react-i18next';
+import { Suggestion } from '../../domain/Plan';
+import { GlobalStyles } from '../../shared/Styles';
+import { useContext } from 'react';
+import { OptionsContext } from '../../context/OptionsContext';
+import { add } from 'date-fns';
+import { useTourGuideController } from 'rn-tourguide';
+import { useTranslation } from 'react-i18next';
 
 interface PlanRowProps {
   suggestion: Suggestion;
@@ -20,10 +20,10 @@ export function PlanRow({
   suggestion,
   generated
 }: PlanRowProps): React.JSX.Element {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
   const options = useContext(OptionsContext);
-  const {t} = useTranslation();
-  const {TourGuideZone} = useTourGuideController('plan');
+  const { t } = useTranslation();
+  const { TourGuideZone } = useTourGuideController('plan');
   const isFirst = suggestion.index === 0;
 
   if (isFirst) {
@@ -62,7 +62,7 @@ export function PlanRow({
           </TourGuideZone>
           <View style={styles.content}>
             {options.showWeekdays ? (
-              <Text style={{...styles.suggestionDay}}>
+              <Text style={{ ...styles.suggestionDay }}>
                 {format(
                   add(generated, {
                     days: suggestion.index + options.startDay || 0
@@ -122,7 +122,7 @@ export function PlanRow({
       <View>
         <View style={styles.content}>
           {options.showWeekdays ? (
-            <Text style={{...styles.suggestionDay}}>
+            <Text style={{ ...styles.suggestionDay }}>
               {format(
                 add(generated, {
                   days: suggestion.index + options.startDay || 0
@@ -137,7 +137,7 @@ export function PlanRow({
           <View style={GlobalStyles.row}>
             <Text
               numberOfLines={1}
-              style={{...styles.suggestionMeal, color: colors.text}}>
+              style={{ ...styles.suggestionMeal, color: colors.text }}>
               {suggestion.meal.name}
             </Text>
             {suggestion.meal.complexity === 'HARD' ? (

@@ -1,4 +1,4 @@
-import {Meal} from './Meal';
+import { Meal } from './Meal';
 
 export interface Suggestion {
   index: number;
@@ -6,7 +6,7 @@ export interface Suggestion {
   pinned: boolean;
 }
 
-export interface PlanModel {
+export interface Plan {
   generated: Date;
   suggestions: Suggestion[];
 }

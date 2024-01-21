@@ -3,26 +3,26 @@ import {
   useNavigation,
   useTheme,
 } from '@react-navigation/native';
-import React, {useContext} from 'react';
-import {useTranslation} from 'react-i18next';
-import {Image, Text, View} from 'react-native';
-import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
-import {MealsContext} from '../../domain/MealContext';
-import {Button} from '../../shared/Button';
-import {Card} from '../../shared/Card';
-import {ListItemSeparator} from '../../shared/List';
-import {GlobalStyles} from '../../shared/Styles';
-import {MealRow} from './MealRow';
-import {MealScreenParams} from './MealScreenParams';
+import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Image, Text, View } from 'react-native';
+import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
+import { MealsContext } from '../../context/MealContext';
+import { Button } from '../../shared/Button';
+import { Card } from '../../shared/Card';
+import { ListItemSeparator } from '../../shared/List';
+import { GlobalStyles } from '../../shared/Styles';
+import { MealRow } from './MealRow';
+import { MealScreenParams } from './MealScreenParams';
 
 export function MealList(): React.JSX.Element {
-  const {colors} = useTheme();
-  const {t} = useTranslation();
+  const { colors } = useTheme();
+  const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
   const meals = useContext(MealsContext);
 
   return (
-    <View style={{...GlobalStyles.viewContainer, maxHeight: '80%'}}>
+    <View style={{ ...GlobalStyles.viewContainer, maxHeight: '80%' }}>
       {meals.length ? (
         <Card>
           <FlatList
@@ -30,7 +30,7 @@ export function MealList(): React.JSX.Element {
             data={meals}
             scrollEnabled={true}
             ItemSeparatorComponent={ListItemSeparator}
-            renderItem={({item, index}) => (
+            renderItem={({ item, index }) => (
               <TouchableHighlight
                 key={item.id}
                 underlayColor={colors.notification}
@@ -63,12 +63,12 @@ export function MealList(): React.JSX.Element {
 }
 
 function NoMeals(): React.JSX.Element {
-  const {colors} = useTheme();
-  const {t} = useTranslation();
+  const { colors } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <View>
-      <Text style={{...GlobalStyles.sectionBody, color: colors.text}}>
+      <Text style={{ ...GlobalStyles.sectionBody, color: colors.text }}>
         {t('meals.introDescription')}
       </Text>
       <View style={GlobalStyles.viewCentered}>

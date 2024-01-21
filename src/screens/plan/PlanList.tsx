@@ -3,30 +3,29 @@ import {
   useNavigation,
   useTheme
 } from '@react-navigation/native';
-import {useContext} from 'react';
-import {useTranslation} from 'react-i18next';
-import {Image, Text, View} from 'react-native';
-import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
-import {useTourGuideController} from 'rn-tourguide';
-import {HomeTabParams} from '../../App';
-import {MealsContext} from '../../domain/MealContext';
-import {OptionsContext} from '../../domain/OptionsContext';
-import {PlanContext, PlanDispatchContext} from '../../domain/PlanContext';
-import {Button} from '../../shared/Button';
-import {Card} from '../../shared/Card';
-import {GlobalStyles} from '../../shared/Styles';
-import {PlanRow} from './PlanRow';
-import {PlanScreenParams} from './PlanScreenParams';
+import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Image, Text, View } from 'react-native';
+import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
+import { useTourGuideController } from 'rn-tourguide';
+import { HomeTabParams } from '../../App';
+import { MealsContext } from '../../context/MealContext';
+import { OptionsContext } from '../../context/OptionsContext';
+import { PlanContext, PlanDispatchContext } from '../../context/PlanContext';
+import { Button } from '../../shared/Button';
+import { Card } from '../../shared/Card';
+import { GlobalStyles } from '../../shared/Styles';
+import { PlanRow } from './PlanRow';
+import { BuyDispatchContext } from '../../context/BuyContext';
 
 export function PlanList(): React.JSX.Element {
-  const {colors} = useTheme();
-  const {t} = useTranslation();
-  const navigation = useNavigation<NavigationProp<PlanScreenParams>>();
+  const { colors } = useTheme();
+  const { t } = useTranslation();
   const meals = useContext(MealsContext);
   const plan = useContext(PlanContext);
   const options = useContext(OptionsContext);
   const planDispatch = useContext(PlanDispatchContext);
-  const {TourGuideZone} = useTourGuideController('plan');
+  const { TourGuideZone } = useTourGuideController('plan');
 
   return (
     <View style={GlobalStyles.viewContainer}>
@@ -35,14 +34,14 @@ export function PlanList(): React.JSX.Element {
           style={GlobalStyles.listStyle}
           data={plan.suggestions}
           scrollEnabled={true}
-          renderItem={({item, index}) => (
+          renderItem={({ item, index }) => (
             <Card>
               <TouchableHighlight
                 key={item.index}
                 style={GlobalStyles.listStyle}
                 underlayColor={colors.notification}
                 onPress={() => {
-                  planDispatch({type: 'togglePin', index});
+                  planDispatch({ type: 'togglePin', index });
                 }}>
                 <PlanRow generated={plan.generated} suggestion={item} />
               </TouchableHighlight>
@@ -74,7 +73,7 @@ export function PlanList(): React.JSX.Element {
               paddingHorizontal: 10,
               width: '105%'
             }}>
-            <View style={{width: 40}}></View>
+            <View style={{ width: 40 }}></View>
             <TourGuideZone
               zone={3}
               text={t('guide.generate')}
@@ -122,27 +121,27 @@ export function PlanList(): React.JSX.Element {
 }
 
 function NoPlan(): React.JSX.Element {
-  const {colors} = useTheme();
-  const {t} = useTranslation();
+  const { colors } = useTheme();
+  const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<HomeTabParams>>();
   const meals = useContext(MealsContext);
 
   return (
     <View>
-      <Text style={{...GlobalStyles.sectionBody, color: colors.text}}>
+      <Text style={{ ...GlobalStyles.sectionBody, color: colors.text }}>
         {t('plan.introDescription')}
       </Text>
       <View style={GlobalStyles.viewCentered}>
         <Image
           source={require('../../img/plan-fly.png')}
-          style={{...GlobalStyles.placeholderImagePlan}}
+          style={{ ...GlobalStyles.placeholderImagePlan }}
         />
       </View>
       {!meals.length ? (
         <View style={GlobalStyles.viewCentered}>
           <Text
-            style={{...GlobalStyles.sectionBody, color: colors.primary}}
-            onPress={() => navigation.navigate('Meals')}>
+            style={{ ...GlobalStyles.sectionBody, color: colors.primary }}
+            onPress={() => navigation.navigate('MealTab')}>
             {t('plan.noMeals')}
           </Text>
         </View>

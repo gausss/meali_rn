@@ -1,19 +1,45 @@
-import {useTheme} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React from 'react';
-import {useTranslation} from 'react-i18next';
-import {Text} from 'react-native';
-import {GlobalStyles} from '../../shared/Styles';
-import {BuyScreenParams, MealScreenParams} from './BuyScreenParams';
-import {IngredientDetail} from './IngredientDetail';
-import {MealDetail} from './MealDetail';
-import {MealList} from './MealList';
-import {BuyList} from './BuyList';
+import { useTheme } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Share, Text, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { BuyContext } from '../../context/BuyContext';
+import { GlobalStyles } from '../../shared/Styles';
+import { BuyList } from './BuyList';
+import { BuyScreenParams } from './BuyScreenParams';
 
 export default function BuyScreen(): React.JSX.Element {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const Stack = createNativeStackNavigator<BuyScreenParams>();
-  const {colors} = useTheme();
+  const { colors } = useTheme();
+  const buyItems = useContext(BuyContext);
+
+  const onShare = async () => {
+    await Share.share({
+      message: 'Einkaufsliste \n - ' + buyItems.filter((item) => !item.checked).map((item) => item.value).join("\n - ")
+    });
+  };
+
+  const buyActions = () => {
+    return (
+      <View style={GlobalStyles.row}>
+        {buyItems.length ? (
+          <View style={GlobalStyles.row}>
+            <Icon.Button
+              backgroundColor={'transparent'}
+              underlayColor={'transparent'}
+              iconStyle={GlobalStyles.headeIcon}
+              color={colors.text}
+              size={25}
+              name="share-outline"
+              onPress={async () => onShare()}
+            />
+          </View>
+        ) : null}
+      </View>
+    );
+  };
 
   const buyTitle = () => (
     <Text
@@ -32,9 +58,10 @@ export default function BuyScreen(): React.JSX.Element {
         component={BuyList}
         options={{
           title: '',
-          headerTitleStyle: {fontSize: 22},
-          headerStyle: {backgroundColor: colors.background},
+          headerTitleStyle: { fontSize: 22 },
+          headerStyle: { backgroundColor: colors.background },
           headerShadowVisible: false,
+          headerRight: buyActions,
           headerLeft: buyTitle
         }}
       />

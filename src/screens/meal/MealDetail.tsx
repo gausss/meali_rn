@@ -5,25 +5,25 @@ import {
   useRoute,
   useTheme,
 } from '@react-navigation/native';
-import {useContext, useMemo, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {StyleSheet, Text, View} from 'react-native';
-import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
+import { useContext, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Ingredient, Meal} from '../../domain/Meal';
-import {MealsContext, MealsDispatchContext} from '../../domain/MealContext';
-import {Button} from '../../shared/Button';
-import {Card} from '../../shared/Card';
-import {Input} from '../../shared/Input';
-import {Label} from '../../shared/Label';
-import {ListItemSeparator} from '../../shared/List';
-import {Select} from '../../shared/Select';
-import {GlobalStyles} from '../../shared/Styles';
-import {MealScreenParams} from './MealScreenParams';
+import { Ingredient, Meal } from '../../domain/Meal';
+import { MealsContext, MealsDispatchContext } from '../../context/MealContext';
+import { Button } from '../../shared/Button';
+import { Card } from '../../shared/Card';
+import { Input } from '../../shared/Input';
+import { Label } from '../../shared/Label';
+import { ListItemSeparator } from '../../shared/List';
+import { Select } from '../../shared/Select';
+import { GlobalStyles } from '../../shared/Styles';
+import { MealScreenParams } from './MealScreenParams';
 
 export function MealDetail(): React.JSX.Element {
-  const {t} = useTranslation();
-  const {dark, colors} = useTheme();
+  const { t } = useTranslation();
+  const { dark, colors } = useTheme();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
   const route = useRoute<RouteProp<MealScreenParams, 'Detail'>>();
   const dispatch = useContext(MealsDispatchContext);
@@ -63,13 +63,13 @@ export function MealDetail(): React.JSX.Element {
   const [localMeal, setLocalMeal] = useState<Partial<Meal>>(
     editIndex?.toString()
       ? Meal.copy(meals[editIndex.valueOf()])
-      : {complexity: 'EASY'},
+      : { complexity: 'EASY' },
   );
 
   const addIngredient = (ingredient: Ingredient) => {
     setLocalMeal(meal => {
       meal.ingredients = [...(meal.ingredients || []), ingredient];
-      return {...meal};
+      return { ...meal };
     });
   };
 
@@ -79,7 +79,7 @@ export function MealDetail(): React.JSX.Element {
         label={t('meals.name')}
         inputMode="text"
         onChangeText={value => {
-          setLocalMeal(meal => ({...meal, name: value}));
+          setLocalMeal(meal => ({ ...meal, name: value }));
         }}
         defaultValue={localMeal.name}
       />
@@ -93,7 +93,7 @@ export function MealDetail(): React.JSX.Element {
           return t(`meals.complexity.${item}`);
         }}
         onSelect={selectedItem => {
-          setLocalMeal(meal => ({...meal, complexity: selectedItem}));
+          setLocalMeal(meal => ({ ...meal, complexity: selectedItem }));
         }}
         defaultValue={localMeal.complexity}
       />
@@ -107,7 +107,7 @@ export function MealDetail(): React.JSX.Element {
               alignItems: 'flex-start',
             }}>
             <Label text={t('meals.ingredient.title')} />
-            <Text style={{paddingStart: 10, paddingBottom: 5, color: 'grey'}}>
+            <Text style={{ paddingStart: 10, paddingBottom: 5, color: 'grey' }}>
               {t('meals.ingredient.explanation')}
             </Text>
           </View>
@@ -127,7 +127,7 @@ export function MealDetail(): React.JSX.Element {
               size={GlobalStyles.defaultText.fontSize}
             />
           </TouchableHighlight>
-          <View style={{paddingBottom: localMeal.ingredients?.length ? 0 : 20}}>
+          <View style={{ paddingBottom: localMeal.ingredients?.length ? 0 : 20 }}>
             <ListItemSeparator />
           </View>
           <FlatList
@@ -135,7 +135,7 @@ export function MealDetail(): React.JSX.Element {
             data={localMeal.ingredients}
             scrollEnabled={true}
             ItemSeparatorComponent={ListItemSeparator}
-            renderItem={({item, index}) => (
+            renderItem={({ item, index }) => (
               <View style={styles.ingredientRow}>
                 <Text
                   numberOfLines={1}
@@ -156,7 +156,7 @@ export function MealDetail(): React.JSX.Element {
                   onPress={() => {
                     setLocalMeal(meal => {
                       meal.ingredients?.splice(index, 1);
-                      return {...meal};
+                      return { ...meal };
                     });
                   }}>
                   <Icon

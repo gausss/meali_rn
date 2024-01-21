@@ -1,15 +1,14 @@
-import {createContext} from 'react';
-import {Meal} from './Meal';
-import {Options} from './OptionsContext';
-import {PlanModel} from './Plan';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {addDays} from 'date-fns';
+import { createContext } from 'react';
+import { Meal } from '../domain/Meal';
+import { Plan } from '../domain/Plan';
+import { Options } from './OptionsContext';
 
 export const PLAN_STORAGE_KEY = 'meali.plan';
 
-export const PlanContext = createContext<PlanModel>({} as PlanModel);
+export const PlanContext = createContext<Plan>({} as Plan);
 export const PlanDispatchContext = createContext<React.Dispatch<PlanAction>>(
-  () => {}
+  () => { }
 );
 
 type PlanResetPinsAction = {
@@ -38,7 +37,7 @@ type PlanLengthAction = {
 };
 type PlanRestoreAction = {
   type: 'restore';
-  plan: PlanModel;
+  plan: Plan;
 };
 type PlanAction =
   | PlanResetPinsAction
@@ -49,7 +48,7 @@ type PlanAction =
   | PlanClearAction
   | PlanInitAction;
 
-export function planReducer(state: PlanModel, action: PlanAction): PlanModel {
+export function planReducer(state: Plan, action: PlanAction): Plan {
   let stateUpdated = state;
   switch (action.type) {
     case 'restore': {
@@ -66,12 +65,12 @@ export function planReducer(state: PlanModel, action: PlanAction): PlanModel {
       break;
     }
     case 'clear': {
-      stateUpdated = {} as PlanModel;
+      stateUpdated = {} as Plan;
       break;
     }
     case 'init': {
       stateUpdated = generateSuggestions(
-        {generated: new Date(), suggestions: []},
+        { generated: new Date(), suggestions: [] },
         action.meals,
         action.options
       );
@@ -87,7 +86,7 @@ export function planReducer(state: PlanModel, action: PlanAction): PlanModel {
         suggestion.pinned = !suggestion.pinned;
       }
 
-      stateUpdated = {...state, suggestions: [...state.suggestions]};
+      stateUpdated = { ...state, suggestions: [...state.suggestions] };
       break;
     }
     case 'length': {
@@ -106,10 +105,10 @@ export function planReducer(state: PlanModel, action: PlanAction): PlanModel {
 }
 
 function generateSuggestions(
-  currentPlan: Readonly<PlanModel>,
+  currentPlan: Readonly<Plan>,
   meals: Meal[],
   options: Options
-): PlanModel {
+): Plan {
   const suggestions = [];
   for (let index = 0; index < options.numSuggestions; index++) {
     if (
@@ -128,5 +127,5 @@ function generateSuggestions(
     });
   }
 
-  return {...currentPlan, suggestions};
+  return { ...currentPlan, suggestions };
 }

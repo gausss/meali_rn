@@ -1,17 +1,17 @@
-import {useContext} from 'react';
-import {useTranslation} from 'react-i18next';
-import {View} from 'react-native';
+import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import {
   OptionsContext,
   OptionsDispatchContext,
-} from '../../domain/OptionsContext';
-import {PlanDispatchContext} from '../../domain/PlanContext';
-import {Select} from '../../shared/Select';
-import {GlobalStyles} from '../../shared/Styles';
-import {Toggle} from '../../shared/Toggle';
+} from '../../context/OptionsContext';
+import { PlanDispatchContext } from '../../context/PlanContext';
+import { Select } from '../../shared/Select';
+import { GlobalStyles } from '../../shared/Styles';
+import { Toggle } from '../../shared/Toggle';
 
 export function PlanOptions(): React.JSX.Element {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const options = useContext(OptionsContext);
   const optionsDispatch = useContext(OptionsDispatchContext);
   const planDispatch = useContext(PlanDispatchContext);
@@ -25,9 +25,9 @@ export function PlanOptions(): React.JSX.Element {
         onSelect={selectedItem => {
           optionsDispatch({
             type: 'update',
-            options: {...options, numSuggestions: selectedItem},
+            options: { ...options, numSuggestions: selectedItem },
           });
-          planDispatch({type: 'length', length: selectedItem});
+          planDispatch({ type: 'length', length: selectedItem });
         }}
         defaultValue={options.numSuggestions}
       />
@@ -37,7 +37,7 @@ export function PlanOptions(): React.JSX.Element {
         onValueChange={value =>
           optionsDispatch({
             type: 'update',
-            options: {...options, showWeekdays: value},
+            options: { ...options, showWeekdays: value },
           })
         }
       />
@@ -54,7 +54,7 @@ export function PlanOptions(): React.JSX.Element {
         onSelect={selectedItem => {
           optionsDispatch({
             type: 'update',
-            options: {...options, startDay: selectedItem},
+            options: { ...options, startDay: selectedItem },
           });
         }}
         defaultValue={options.startDay}
