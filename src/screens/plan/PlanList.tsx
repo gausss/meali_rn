@@ -16,7 +16,6 @@ import { Button } from '../../shared/Button';
 import { Card } from '../../shared/Card';
 import { GlobalStyles } from '../../shared/Styles';
 import { PlanRow } from './PlanRow';
-import { BuyDispatchContext } from '../../context/BuyContext';
 
 export function PlanList(): React.JSX.Element {
   const { colors } = useTheme();

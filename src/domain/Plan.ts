@@ -1,12 +1,12 @@
 import { Meal } from './Meal';
 
 export interface Suggestion {
-  index: number;
-  meal: Meal;
-  pinned: boolean;
+  readonly index: number;
+  readonly meal: Meal;
+  readonly pinned: boolean;
 }
 
 export interface Plan {
-  generated: Date;
-  suggestions: Suggestion[];
+  readonly generated: Date;
+  readonly suggestions: readonly Suggestion[];
 }

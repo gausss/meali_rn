@@ -1,8 +1,8 @@
 export class Meal {
-  id: string;
-  name: string;
-  complexity?: Complexity;
-  ingredients?: Ingredient[];
+  readonly id: string;
+  readonly name: string;
+  readonly complexity?: Complexity;
+  readonly ingredients?: readonly Ingredient[];
 
   constructor(name: string, complexity: Complexity) {
     this.id = IdGenerator.generate();
@@ -13,15 +13,15 @@ export class Meal {
   static copy(meal: Partial<Meal>): Partial<Meal> {
     return {
       ...meal,
-      ingredients: meal?.ingredients?.map(ingredient => ({...ingredient}))
+      ingredients: meal?.ingredients?.map(ingredient => ({ ...ingredient }))
     };
   }
 }
 
 export interface Ingredient {
-  count: number;
-  unit: 'GRM' | 'ML' | 'UNIT';
-  name: string;
+  readonly count: number;
+  readonly unit: 'GRM' | 'ML' | 'UNIT';
+  readonly name: string;
 }
 
 export type Complexity = 'EASY' | 'HARD';

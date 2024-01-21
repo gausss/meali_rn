@@ -68,8 +68,7 @@ export function MealDetail(): React.JSX.Element {
 
   const addIngredient = (ingredient: Ingredient) => {
     setLocalMeal(meal => {
-      meal.ingredients = [...(meal.ingredients || []), ingredient];
-      return { ...meal };
+      return { ...meal, ingredients: [...(meal.ingredients || []), ingredient] };
     });
   };
 
@@ -155,8 +154,9 @@ export function MealDetail(): React.JSX.Element {
                   style={styles.ingredientRemove}
                   onPress={() => {
                     setLocalMeal(meal => {
-                      meal.ingredients?.splice(index, 1);
-                      return { ...meal };
+                      const tmpIngredients = [...meal.ingredients || []];
+                      tmpIngredients.splice(index, 1);
+                      return { ...meal, ingredients: tmpIngredients };
                     });
                   }}>
                   <Icon

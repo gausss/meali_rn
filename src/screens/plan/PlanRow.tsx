@@ -1,15 +1,14 @@
 import { useTheme } from '@react-navigation/native';
-import { format } from 'date-fns';
+import { add, format } from 'date-fns';
 import { de } from 'date-fns/locale';
+import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useTourGuideController } from 'rn-tourguide';
+import { OptionsContext } from '../../context/OptionsContext';
 import { Suggestion } from '../../domain/Plan';
 import { GlobalStyles } from '../../shared/Styles';
-import { useContext } from 'react';
-import { OptionsContext } from '../../context/OptionsContext';
-import { add } from 'date-fns';
-import { useTourGuideController } from 'rn-tourguide';
-import { useTranslation } from 'react-i18next';
 
 interface PlanRowProps {
   suggestion: Suggestion;

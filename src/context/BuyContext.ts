@@ -2,11 +2,7 @@ import i18next from 'i18next';
 import { createContext } from 'react';
 import { Ingredient } from '../domain/Meal';
 import { Plan } from '../domain/Plan';
-
-export interface BuyItem {
-  checked: boolean,
-  value: string
-}
+import { BuyItem } from '../domain/BuyItem';
 
 export const BuyContext = createContext<BuyItem[]>([]);
 export const BuyDispatchContext = createContext<React.Dispatch<BuyAction>>(
@@ -25,7 +21,7 @@ type BuyAction =
   | BuyRegenerateAction
   | BuyUpdateAction;
 
-export function buyReducer(state: BuyItem[], action: BuyAction): BuyItem[] {
+export function buyReducer(state: readonly BuyItem[], action: BuyAction): BuyItem[] {
   switch (action.type) {
     case 'regenerate': {
       const buyList = generateBuyList(action.plan);
@@ -33,9 +29,10 @@ export function buyReducer(state: BuyItem[], action: BuyAction): BuyItem[] {
 
     }
     case 'update': {
+      const tmpState = [...state];
       const item = state[action.index];
-      item.checked = !item.checked;
-      return [...state];
+      tmpState[action.index] = { ...item, checked: !item.checked };
+      return tmpState;
     }
   }
 }

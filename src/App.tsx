@@ -26,12 +26,12 @@ import {
   PlanDispatchContext,
   planReducer
 } from './context/PlanContext';
+import { Plan } from './domain/Plan';
 import BuyScreen from './screens/buy/BuyScreen';
 import MealScreen from './screens/meal/MealScreen';
 import PlanScreen from './screens/plan/PlanScreen';
 import { Dark, Light } from './shared/Styles';
 import { TourModal } from './shared/TourModal';
-import { Plan } from './domain/Plan';
 
 export type AppStackParams = {
   Home: undefined;

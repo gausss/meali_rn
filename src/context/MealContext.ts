@@ -32,7 +32,7 @@ type MealAction =
   | MealRestoreAction
   | MealDeleteAction;
 
-export function mealReducer(state: Meal[], action: MealAction): Meal[] {
+export function mealReducer(state: readonly Meal[], action: MealAction): Meal[] {
   let stateUpdated;
   switch (action.type) {
     case 'restore': {
@@ -43,13 +43,15 @@ export function mealReducer(state: Meal[], action: MealAction): Meal[] {
       break;
     }
     case 'edit': {
-      state[action.index] = action.meal;
-      stateUpdated = [...state];
+      const tmpState = [...state];
+      tmpState[action.index] = action.meal;
+      stateUpdated = tmpState;
       break;
     }
     case 'delete': {
-      state.splice(action.index, 1);
-      stateUpdated = [...state];
+      const tmpState = [...state];
+      tmpState.splice(action.index, 1);
+      stateUpdated = tmpState;
       break;
     }
   }

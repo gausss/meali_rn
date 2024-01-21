@@ -58,8 +58,7 @@ export function planReducer(state: Plan, action: PlanAction): Plan {
       stateUpdated = {
         ...state,
         suggestions: state.suggestions.map(suggestion => {
-          suggestion.pinned = false;
-          return suggestion;
+          return { ...suggestion, pinned: false };;
         })
       };
       break;
@@ -81,12 +80,13 @@ export function planReducer(state: Plan, action: PlanAction): Plan {
       break;
     }
     case 'togglePin': {
-      let suggestion = state.suggestions[action.index];
+      const tmpSuggestions = [...state.suggestions];
+      let suggestion = tmpSuggestions[action.index];
       if (suggestion) {
-        suggestion.pinned = !suggestion.pinned;
+        tmpSuggestions[action.index] = { ...suggestion, pinned: !suggestion.pinned };
       }
 
-      stateUpdated = { ...state, suggestions: [...state.suggestions] };
+      stateUpdated = { ...state, suggestions: tmpSuggestions };
       break;
     }
     case 'length': {
