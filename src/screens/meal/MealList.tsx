@@ -38,7 +38,7 @@ export function MealList(): React.JSX.Element {
 
       <ScrollView>
         {meals.length ? (
-          <View style={{...GlobalStyles.card, backgroundColor: colors.card}}>
+          <View style={{...GlobalStyles.card}}>
             <FlatList
               data={meals}
               scrollEnabled={false}

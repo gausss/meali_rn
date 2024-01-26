@@ -43,7 +43,9 @@ export function PlanRow({
             )}
           </Text>
         ) : (
-          <View />
+          <Text style={{...styles.suggestionDay, paddingLeft: 12}}>
+            {suggestion.index + 1}
+          </Text>
         )}
         <View>
           <Button
@@ -70,9 +72,7 @@ export function PlanRow({
           style={{
             ...styles.indexCircle,
             borderColor: colors.notification,
-            backgroundColor: suggestion.pinned
-              ? colors.primary
-              : colors.notification
+            backgroundColor: colors.notification
           }}>
           {!suggestion.pinned ? (
             <Icon

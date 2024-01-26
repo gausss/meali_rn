@@ -68,6 +68,7 @@ export function PlanList(): React.JSX.Element {
                     }}>
                     <TouchableHighlight
                       key={item.index}
+                      style={{borderRadius: 12}}
                       underlayColor={colors.notification}
                       onPress={() => {
                         planDispatch({type: 'togglePin', index});
@@ -81,6 +82,7 @@ export function PlanList(): React.JSX.Element {
                   style={{...GlobalStyles.card, backgroundColor: colors.card}}>
                   <TouchableHighlight
                     key={item.index}
+                    style={{borderRadius: 12}}
                     underlayColor={colors.notification}
                     onPress={() => {
                       planDispatch({type: 'togglePin', index});
