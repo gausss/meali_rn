@@ -4,30 +4,32 @@ import {
   useNavigation,
   useTheme
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useContext, useEffect, useReducer } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useContext, useEffect, useReducer} from 'react';
+import {useTranslation} from 'react-i18next';
+import {Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useTourGuideController } from 'rn-tourguide';
+import {useTourGuideController} from 'rn-tourguide';
 import {
   OPTIONS_STORAGE_KEY,
   OptionsContext,
   OptionsDispatchContext,
   optionsReducer
 } from '../../context/OptionsContext';
-import { PlanContext } from '../../context/PlanContext';
-import { GlobalStyles } from '../../shared/Styles';
-import { PlanList } from './PlanList';
-import { PlanOptions } from './PlanOptions';
-import { PlanScreenParams } from './PlanScreenParams';
+import {PlanContext, PlanDispatchContext} from '../../context/PlanContext';
+import {GlobalStyles} from '../../shared/Styles';
+import {PlanList} from './PlanList';
+import {PlanOptions} from './PlanOptions';
+import {PlanScreenParams} from './PlanScreenParams';
 
 export default function PlanScreen(): React.JSX.Element {
-  const { t } = useTranslation();
-  const { colors } = useTheme();
+  const {t} = useTranslation();
+  const {colors} = useTheme();
   const navigation = useNavigation<NavigationProp<PlanScreenParams>>();
   const Stack = createNativeStackNavigator<PlanScreenParams>();
   const plan = useContext(PlanContext);
+  const planDispatch = useContext(PlanDispatchContext);
+  const {TourGuideZone} = useTourGuideController('plan');
 
   const [options, optionsDispatch] = useReducer(optionsReducer, {
     numSuggestions: 5,
@@ -35,7 +37,7 @@ export default function PlanScreen(): React.JSX.Element {
     startDay: 0
   });
 
-  const { start } = useTourGuideController('plan');
+  const {start} = useTourGuideController('plan');
 
   useEffect(() => {
     AsyncStorage.getItem(OPTIONS_STORAGE_KEY).then(value => {
@@ -53,6 +55,22 @@ export default function PlanScreen(): React.JSX.Element {
       <View style={GlobalStyles.row}>
         {plan.generated ? (
           <View style={GlobalStyles.row}>
+            <TourGuideZone zone={5} text={t('guide.reset')} shape="circle">
+              <Icon.Button
+                backgroundColor={'transparent'}
+                underlayColor={'transparent'}
+                iconStyle={GlobalStyles.headeIcon}
+                color={colors.text}
+                size={22}
+                name="trash-outline"
+                onPress={() => {
+                  planDispatch({
+                    type: 'clear'
+                  });
+                }}
+              />
+            </TourGuideZone>
+
             <Icon.Button
               backgroundColor={'transparent'}
               underlayColor={'transparent'}
@@ -97,8 +115,8 @@ export default function PlanScreen(): React.JSX.Element {
             component={PlanList}
             options={{
               title: '',
-              headerTitleStyle: { fontSize: 22 },
-              headerStyle: { backgroundColor: colors.background },
+              headerTitleStyle: {fontSize: 22},
+              headerStyle: {backgroundColor: colors.background},
               headerShadowVisible: false,
               headerRight: planActions,
               headerLeft: planTitle
@@ -108,7 +126,7 @@ export default function PlanScreen(): React.JSX.Element {
             name="Options"
             component={PlanOptions}
             options={{
-              headerStyle: { backgroundColor: colors.background },
+              headerStyle: {backgroundColor: colors.background},
               headerShadowVisible: false,
               title: t('plan.options.title')
             }}

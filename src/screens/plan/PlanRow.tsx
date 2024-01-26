@@ -27,13 +27,9 @@ export function PlanRow({
 
   if (isFirst) {
     return (
-      <TourGuideZone zone={1} keepTooltipPosition={true} text={t('guide.meal')}>
+      <TourGuideZone zone={1} text={t('guide.meal')}>
         <View style={styles.rowContainer}>
-          <TourGuideZone
-            zone={2}
-            text={t('guide.pin')}
-            shape="circle"
-            keepTooltipPosition={true}>
+          <TourGuideZone zone={2} text={t('guide.pin')} shape="circle">
             <View
               style={{
                 ...styles.indexCircle,
@@ -75,7 +71,7 @@ export function PlanRow({
             ) : null}
             <View style={GlobalStyles.row}>
               <Text
-                numberOfLines={1}
+                numberOfLines={2}
                 style={{
                   ...styles.suggestionMeal,
                   color: colors.text

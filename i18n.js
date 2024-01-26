@@ -12,7 +12,7 @@ const resources = {
         tabTitle: 'Einkauf',
         title: 'Einkaufsliste',
         introDescription:
-          'Pinne Gerichte in deinem Plan, um alle benötigten Zutaten hier zu sehen.'
+          'Pinne Gerichte in deinem Plan, um die Zutaten hier zu sehen. Ist die Zutat vorhanden kann sie aus der Liste gestrichen werden.'
       },
       plan: {
         tabTitle: 'Plan',

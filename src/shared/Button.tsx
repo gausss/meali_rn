@@ -41,8 +41,8 @@ export function Button(props: ButtonProps): React.JSX.Element {
       flexDirection: 'row',
       paddingLeft: 2,
       paddingTop: 1,
-      width: 40,
-      height: 40,
+      width: 50,
+      height: 50,
       justifyContent: 'center',
       alignItems: 'center',
       gap: 10,
@@ -55,7 +55,8 @@ export function Button(props: ButtonProps): React.JSX.Element {
     },
     iconStyle: {
       fontSize: 25,
-      fontWeight: '600'
+      fontWeight: '600',
+      color: 'white'
     }
   });
 

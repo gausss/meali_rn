@@ -25,43 +25,55 @@ export function MealList(): React.JSX.Element {
   const meals = useContext(MealsContext);
 
   return (
-    <ScrollView style={GlobalStyles.viewContainer}>
+    <View style={GlobalStyles.viewContainer}>
       {meals.length ? (
-        <View style={{...GlobalStyles.card, backgroundColor: colors.card}}>
-          <FlatList
-            style={GlobalStyles.listStyle}
-            data={meals}
-            scrollEnabled={false}
-            ItemSeparatorComponent={ListItemSeparator}
-            renderItem={({item, index}) => (
-              <TouchableHighlight
-                key={item.id}
-                underlayColor={colors.notification}
-                onPress={() => {
-                  navigation.navigate({
-                    name: 'Detail',
-                    params: {
-                      index
-                    },
-                    merge: true
-                  });
-                }}>
-                <MealRow meal={item} />
-              </TouchableHighlight>
-            )}
+        <View style={GlobalStyles.fab}>
+          <Button
+            icon="add-outline"
+            onPress={() => navigation.navigate('Detail', {})}
           />
         </View>
-      ) : (
-        <NoMeals />
-      )}
+      ) : null}
 
-      <View style={GlobalStyles.actionBar}>
-        <Button
-          label={t('meals.add')}
-          onPress={() => navigation.navigate('Detail', {})}
-        />
-      </View>
-    </ScrollView>
+      <ScrollView>
+        {meals.length ? (
+          <View style={{...GlobalStyles.card, backgroundColor: colors.card}}>
+            <FlatList
+              data={meals}
+              scrollEnabled={false}
+              ItemSeparatorComponent={ListItemSeparator}
+              renderItem={({item, index}) => (
+                <TouchableHighlight
+                  key={item.id}
+                  underlayColor={colors.notification}
+                  onPress={() => {
+                    navigation.navigate({
+                      name: 'Detail',
+                      params: {
+                        index
+                      },
+                      merge: true
+                    });
+                  }}>
+                  <MealRow meal={item} />
+                </TouchableHighlight>
+              )}
+            />
+          </View>
+        ) : (
+          <NoMeals />
+        )}
+
+        {!meals.length ? (
+          <View style={GlobalStyles.actionBar}>
+            <Button
+              label={t('meals.add')}
+              onPress={() => navigation.navigate('Detail', {})}
+            />
+          </View>
+        ) : null}
+      </ScrollView>
+    </View>
   );
 }
 

@@ -15,10 +15,19 @@ export const GlobalStyles = StyleSheet.create({
     gap: 10,
     marginVertical: 15
   },
+  fab: {
+    zIndex: 1,
+    position: 'absolute',
+    shadowColor: '#777',
+    shadowOpacity: 0.1,
+    shadowOffset: {width: 2, height: 0},
+    shadowRadius: 2,
+    bottom: 20,
+    right: 20
+  },
   viewContainer: {
     paddingHorizontal: 15,
     marginTop: 15,
-    gap: 15,
     flex: 1
   },
   card: {
@@ -72,7 +81,6 @@ export const GlobalStyles = StyleSheet.create({
     fontSize: 26,
     fontWeight: '700'
   },
-  listStyle: {},
   row: {
     flexDirection: 'row',
     alignItems: 'center',

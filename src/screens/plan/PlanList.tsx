@@ -30,92 +30,69 @@ export function PlanList(): React.JSX.Element {
   const {TourGuideZone} = useTourGuideController('plan');
 
   return (
-    <ScrollView style={GlobalStyles.viewContainer}>
-      {meals.length && plan.generated && options.numSuggestions ? (
-        <View>
-          {plan.suggestions.map((item, index) => (
-            <View style={{...GlobalStyles.card, backgroundColor: colors.card}}>
-              <TouchableHighlight
-                key={item.index}
-                style={GlobalStyles.listStyle}
-                underlayColor={colors.notification}
-                onPress={() => {
-                  planDispatch({type: 'togglePin', index});
-                }}>
-                <PlanRow generated={plan.generated} suggestion={item} />
-              </TouchableHighlight>
-            </View>
-          ))}
+    <View style={GlobalStyles.viewContainer}>
+      {plan.generated ? (
+        <View style={GlobalStyles.fab}>
+          <TourGuideZone zone={3} text={t('guide.generate')} shape="circle">
+            <Button
+              icon="reload"
+              textColor="white"
+              disabled={
+                !meals.length ||
+                (plan.generated &&
+                  plan.suggestions.filter(suggestion => suggestion.pinned)
+                    .length === options.numSuggestions)
+              }
+              onPress={() => {
+                planDispatch({
+                  type: 'generateMore',
+                  meals: meals,
+                  options: options
+                });
+              }}
+            />
+          </TourGuideZone>
         </View>
-      ) : (
-        <NoPlan />
-      )}
+      ) : null}
 
-      <View style={GlobalStyles.actionBar}>
-        {!meals.length || !plan.generated ? (
-          <Button
-            label={t('plan.generate')}
-            disabled={!meals.length}
-            onPress={() => {
-              planDispatch({
-                type: 'init',
-                meals: meals,
-                options: options
-              });
-            }}
-          />
-        ) : (
-          <View
-            style={{
-              ...GlobalStyles.row,
-              justifyContent: 'space-between',
-              paddingHorizontal: 10,
-              width: '100%'
-            }}>
-            <View style={{width: 40}}></View>
-            <TourGuideZone
-              zone={3}
-              text={t('guide.generate')}
-              shape="circle"
-              tooltipBottomOffset={50}>
-              <Button
-                icon="reload"
-                textColor="white"
-                disabled={
-                  !meals.length ||
-                  (plan.generated &&
-                    plan.suggestions.filter(suggestion => suggestion.pinned)
-                      .length === options.numSuggestions)
-                }
-                onPress={() => {
-                  planDispatch({
-                    type: 'generateMore',
-                    meals: meals,
-                    options: options
-                  });
-                }}
-              />
-            </TourGuideZone>
-
-            <TourGuideZone
-              zone={5}
-              text={t('guide.reset')}
-              shape="circle"
-              tooltipBottomOffset={50}>
-              <Button
-                icon="trash-outline"
-                backgroundColor={colors.background}
-                onPress={() => {
-                  planDispatch({
-                    type: 'clear'
-                  });
-                }}
-              />
-            </TourGuideZone>
+      <ScrollView>
+        {meals.length && plan.generated && options.numSuggestions ? (
+          <View>
+            {plan.suggestions.map((item, index) => (
+              <View
+                style={{...GlobalStyles.card, backgroundColor: colors.card}}>
+                <TouchableHighlight
+                  key={item.index}
+                  underlayColor={colors.notification}
+                  onPress={() => {
+                    planDispatch({type: 'togglePin', index});
+                  }}>
+                  <PlanRow generated={plan.generated} suggestion={item} />
+                </TouchableHighlight>
+              </View>
+            ))}
           </View>
+        ) : (
+          <NoPlan />
         )}
-      </View>
-    </ScrollView>
+
+        <View style={GlobalStyles.actionBar}>
+          {!meals.length || !plan.generated ? (
+            <Button
+              label={t('plan.generate')}
+              disabled={!meals.length}
+              onPress={() => {
+                planDispatch({
+                  type: 'init',
+                  meals: meals,
+                  options: options
+                });
+              }}
+            />
+          ) : null}
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 

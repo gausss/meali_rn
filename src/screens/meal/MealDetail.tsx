@@ -8,14 +8,10 @@ import {
 import {useContext, useMemo, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {StyleSheet, Text, View} from 'react-native';
-import {
-  FlatList,
-  ScrollView,
-  TouchableHighlight
-} from 'react-native-gesture-handler';
+import {ScrollView, TouchableHighlight} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Ingredient, Meal} from '../../domain/Meal';
 import {MealsContext, MealsDispatchContext} from '../../context/MealContext';
+import {Ingredient, Meal} from '../../domain/Meal';
 import {Button} from '../../shared/Button';
 import {Input} from '../../shared/Input';
 import {Label} from '../../shared/Label';
