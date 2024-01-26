@@ -8,7 +8,7 @@ export function ListItemSeparator(): React.JSX.Element {
     <View
       style={{
         backgroundColor: colors.notification,
-        height: 1,
+        height: 1
       }}
     />
   );

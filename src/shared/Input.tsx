@@ -4,11 +4,10 @@ import {
   StyleSheet,
   TextInput,
   TextInputProps,
-  View,
+  View
 } from 'react-native';
 import {GlobalStyles} from './Styles';
 import {Label} from './Label';
-import {Card} from './Card';
 
 type InputProps = TextInputProps & {
   width?: DimensionValue;
@@ -19,23 +18,21 @@ export function Input(props: InputProps): React.JSX.Element {
   const {colors} = useTheme();
 
   return (
-    <Card>
-      <View style={GlobalStyles.inputStyle}>
-        <Label text={props.label} />
-        <TextInput
-          {...props}
-          clearButtonMode="always"
-          selectionColor={colors.primary}
-          style={{...styles.inputStyle, color: colors.text}}
-        />
-      </View>
-    </Card>
+    <View style={{...GlobalStyles.inputStyle, backgroundColor: colors.card}}>
+      <Label text={props.label} />
+      <TextInput
+        {...props}
+        clearButtonMode="always"
+        selectionColor={colors.primary}
+        style={{...styles.inputStyle, color: colors.text}}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   inputStyle: {
     fontSize: GlobalStyles.defaultText.fontSize,
-    width: '50%',
-  },
+    width: '50%'
+  }
 });

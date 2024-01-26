@@ -6,41 +6,51 @@ export const GlobalStyles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
+    gap: 10
+  },
+  actionBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 10,
+    marginVertical: 15
   },
   viewContainer: {
     paddingHorizontal: 15,
-    marginTop: 25,
-    justifyContent: 'space-between',
+    marginTop: 15,
     gap: 15,
-    maxHeight: '92%',
+    flex: 1
+  },
+  card: {
+    borderRadius: 12,
+    marginBottom: 10
   },
   placeholderBuyListImage: {
     height: Dimensions.get('window').height * 0.25,
     marginVertical: 35,
-    resizeMode: 'contain',
+    resizeMode: 'contain'
   },
   placeholderImagePlan: {
     height: Dimensions.get('window').height * 0.4,
     marginVertical: 35,
-    resizeMode: 'contain',
+    resizeMode: 'contain'
   },
   placeholderImageMeal: {
     height: Dimensions.get('window').height * 0.25,
     marginVertical: 35,
-    resizeMode: 'contain',
+    resizeMode: 'contain'
   },
   defaultText: {
-    fontSize: 16,
+    fontSize: 16
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: '600'
   },
   sectionBody: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: '400'
   },
   badgeWarn: {
     backgroundColor: '#ff9149',
@@ -48,7 +58,7 @@ export const GlobalStyles = StyleSheet.create({
     paddingVertical: 5,
     width: 5,
     height: 5,
-    borderRadius: 15,
+    borderRadius: 15
   },
   badgeInfo: {
     backgroundColor: '#5e9d5e',
@@ -56,33 +66,33 @@ export const GlobalStyles = StyleSheet.create({
     paddingVertical: 5,
     width: 5,
     height: 5,
-    borderRadius: 15,
+    borderRadius: 15
   },
   statusBarTitle: {
     fontSize: 26,
-    fontWeight: '700',
+    fontWeight: '700'
   },
-  listStyle: {
-    borderRadius: 12,
-  },
+  listStyle: {},
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: 10
   },
   headeIcon: {
-    marginRight: 0,
+    marginRight: 0
   },
   inputStyle: {
     paddingEnd: 20,
     height: 50,
+    borderRadius: 12,
+    marginBottom: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   defaultBorder: {
-    borderRadius: 12,
-  },
+    borderRadius: 12
+  }
 });
 
 export const Light = {
@@ -90,8 +100,8 @@ export const Light = {
   colors: {
     ...DefaultTheme.colors,
     notification: '#E0DEE7',
-    primary: '#5e9d5e',
-  },
+    primary: '#5e9d5e'
+  }
 };
 
 export const Dark = {
@@ -100,6 +110,6 @@ export const Dark = {
     ...DarkTheme.colors,
     notification: '#232323',
     card: '#181818',
-    primary: '#5e9d5e',
-  },
+    primary: '#5e9d5e'
+  }
 };
