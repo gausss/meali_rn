@@ -12,6 +12,7 @@ type ButtonProps = TouchableHighlightProps & {
   icon?: string;
   backgroundColor?: string;
   textColor?: string;
+  small?: boolean;
 };
 
 export function Button(props: ButtonProps): React.JSX.Element {
@@ -26,9 +27,9 @@ export function Button(props: ButtonProps): React.JSX.Element {
         ? 'grey'
         : props.backgroundColor || colors.primary,
       flexDirection: 'row',
-      paddingVertical: 15,
-      paddingLeft: 25,
-      paddingRight: 20,
+      paddingVertical: props.small ? 10 : 15,
+      paddingLeft: props.small ? 12 : 25,
+      paddingRight: props.small ? 12 : 20,
       justifyContent: 'center',
       alignItems: 'center',
       gap: 10,
@@ -49,7 +50,7 @@ export function Button(props: ButtonProps): React.JSX.Element {
       borderRadius: 30
     },
     textStyle: {
-      fontSize: GlobalStyles.defaultText.fontSize,
+      fontSize: props.small ? 10 : GlobalStyles.defaultText.fontSize,
       fontWeight: '600',
       color: props.textColor || 'white'
     },

@@ -41,16 +41,6 @@ export function PlanOptions(): React.JSX.Element {
           })
         }
       />
-      <Toggle
-        label={t('plan.options.showReference')}
-        value={options.showReference}
-        onValueChange={value =>
-          optionsDispatch({
-            type: 'update',
-            options: {...options, showReference: value}
-          })
-        }
-      />
       <Select
         label={t('plan.options.startDay')}
         defaultButtonText=" "

@@ -18,10 +18,6 @@ export const GlobalStyles = StyleSheet.create({
   fab: {
     zIndex: 1,
     position: 'absolute',
-    shadowColor: '#777',
-    shadowOpacity: 0.1,
-    shadowOffset: {width: 2, height: 0},
-    shadowRadius: 2,
     bottom: 20,
     right: 20
   },
@@ -62,19 +58,15 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: '400'
   },
   badgeWarn: {
-    backgroundColor: '#ff9149',
-    paddingHorizontal: 5,
+    backgroundColor: '#FEC514',
+    paddingHorizontal: 10,
     paddingVertical: 5,
-    width: 5,
-    height: 5,
     borderRadius: 15
   },
   badgeInfo: {
     backgroundColor: '#5e9d5e',
-    paddingHorizontal: 5,
+    paddingHorizontal: 10,
     paddingVertical: 5,
-    width: 5,
-    height: 5,
     borderRadius: 15
   },
   statusBarTitle: {

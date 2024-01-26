@@ -21,6 +21,7 @@ import {GlobalStyles} from '../../shared/Styles';
 import {PlanList} from './PlanList';
 import {PlanOptions} from './PlanOptions';
 import {PlanScreenParams} from './PlanScreenParams';
+import {ShowMeal} from './ShowMeal';
 
 export default function PlanScreen(): React.JSX.Element {
   const {t} = useTranslation();
@@ -129,6 +130,16 @@ export default function PlanScreen(): React.JSX.Element {
               headerStyle: {backgroundColor: colors.background},
               headerShadowVisible: false,
               title: t('plan.options.title')
+            }}
+          />
+          <Stack.Screen
+            name="Meal"
+            component={ShowMeal}
+            options={{
+              presentation: 'modal',
+              headerStyle: {backgroundColor: colors.background},
+              headerShadowVisible: false,
+              title: t('meals.detail')
             }}
           />
         </Stack.Navigator>

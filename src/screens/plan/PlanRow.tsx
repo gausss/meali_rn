@@ -1,4 +1,8 @@
-import {useTheme} from '@react-navigation/native';
+import {
+  NavigationProp,
+  useNavigation,
+  useTheme
+} from '@react-navigation/native';
 import {add, format} from 'date-fns';
 import {de} from 'date-fns/locale';
 import {useContext} from 'react';
@@ -6,7 +10,9 @@ import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {OptionsContext} from '../../context/OptionsContext';
 import {Suggestion} from '../../domain/Plan';
+import {Button} from '../../shared/Button';
 import {GlobalStyles} from '../../shared/Styles';
+import {PlanScreenParams} from './PlanScreenParams';
 
 interface PlanRowProps {
   suggestion: Suggestion;
@@ -19,6 +25,7 @@ export function PlanRow({
 }: PlanRowProps): React.JSX.Element {
   const {colors} = useTheme();
   const options = useContext(OptionsContext);
+  const navigation = useNavigation<NavigationProp<PlanScreenParams>>();
 
   return (
     <View style={styles.content}>
@@ -35,12 +42,24 @@ export function PlanRow({
               }
             )}
           </Text>
-        ) : null}
-        {options.showReference ? (
-          <Text style={{...styles.suggestionDay}}>
-            {suggestion.meal.reference}
-          </Text>
-        ) : null}
+        ) : (
+          <View />
+        )}
+        <View>
+          <Button
+            label="Gericht anzeigen"
+            small={true}
+            backgroundColor={colors.notification}
+            textColor={colors.text}
+            onPress={() =>
+              navigation.navigate({
+                name: 'Meal',
+                params: {
+                  meal: suggestion.meal
+                }
+              })
+            }></Button>
+        </View>
       </View>
       <View
         style={{
@@ -51,7 +70,9 @@ export function PlanRow({
           style={{
             ...styles.indexCircle,
             borderColor: colors.notification,
-            backgroundColor: colors.notification
+            backgroundColor: suggestion.pinned
+              ? colors.primary
+              : colors.notification
           }}>
           {!suggestion.pinned ? (
             <Icon
@@ -80,10 +101,8 @@ export function PlanRow({
           }}>
           {suggestion.meal.name}
         </Text>
-        {suggestion.meal.complexity === 'HARD' ? (
-          <View style={GlobalStyles.badgeWarn} />
-        ) : null}
       </View>
+      <View style={{...GlobalStyles.rowApart, justifyContent: 'center'}}></View>
     </View>
   );
 }
@@ -102,7 +121,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   suggestionMeal: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   suggestionDay: {
