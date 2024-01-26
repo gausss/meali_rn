@@ -89,7 +89,7 @@ export const GlobalStyles = StyleSheet.create({
   rowApart: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: 15,
     justifyContent: 'space-between',
     width: '100%'
   },

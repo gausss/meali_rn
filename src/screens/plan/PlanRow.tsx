@@ -21,79 +21,74 @@ export function PlanRow({
   const options = useContext(OptionsContext);
 
   return (
-    <View style={styles.rowContainer}>
+    <View style={styles.content}>
+      <View style={{...GlobalStyles.rowApart, justifyContent: 'space-between'}}>
+        {options.showWeekdays ? (
+          <Text style={{...styles.suggestionDay}}>
+            {format(
+              add(generated, {
+                days: suggestion.index + options.startDay || 0
+              }),
+              'EEEE',
+              {
+                locale: de
+              }
+            )}
+          </Text>
+        ) : null}
+        {options.showReference ? (
+          <Text style={{...styles.suggestionDay}}>
+            {suggestion.meal.reference}
+          </Text>
+        ) : null}
+      </View>
       <View
         style={{
-          ...styles.indexCircle,
-          borderColor: colors.notification,
-          backgroundColor: colors.notification
+          ...GlobalStyles.rowApart,
+          justifyContent: 'flex-start'
         }}>
-        {!suggestion.pinned ? (
-          <Icon
-            name="lock-open-outline"
-            style={{
-              ...styles.iconStyle,
-              color: colors.text
-            }}
-          />
-        ) : (
-          <Icon
-            name="lock-closed"
-            style={{
-              ...styles.iconStyle,
-              color: colors.text
-            }}
-          />
-        )}
-      </View>
-      <View style={styles.content}>
-        <View style={GlobalStyles.rowApart}>
-          {options.showWeekdays ? (
-            <Text style={{...styles.suggestionDay}}>
-              {format(
-                add(generated, {
-                  days: suggestion.index + options.startDay || 0
-                }),
-                'EEEE',
-                {
-                  locale: de
-                }
-              )}
-            </Text>
-          ) : null}
-          {options.showReference ? (
-            <Text style={{...styles.suggestionDay}}>
-              {suggestion.meal.reference}
-            </Text>
-          ) : null}
+        <View
+          style={{
+            ...styles.indexCircle,
+            borderColor: colors.notification,
+            backgroundColor: colors.notification
+          }}>
+          {!suggestion.pinned ? (
+            <Icon
+              name="lock-open-outline"
+              style={{
+                ...styles.iconStyle,
+                color: colors.text
+              }}
+            />
+          ) : (
+            <Icon
+              name="lock-closed"
+              style={{
+                ...styles.iconStyle,
+                color: colors.text
+              }}
+            />
+          )}
         </View>
-        <View style={GlobalStyles.row}>
-          <Text
-            numberOfLines={2}
-            style={{
-              ...styles.suggestionMeal,
-              color: colors.text
-            }}>
-            {suggestion.meal.name}
-          </Text>
-          {suggestion.meal.complexity === 'HARD' ? (
-            <View style={GlobalStyles.badgeWarn} />
-          ) : null}
-        </View>
+        <Text
+          numberOfLines={2}
+          style={{
+            ...styles.suggestionMeal,
+            color: colors.text,
+            maxWidth: '85%'
+          }}>
+          {suggestion.meal.name}
+        </Text>
+        {suggestion.meal.complexity === 'HARD' ? (
+          <View style={GlobalStyles.badgeWarn} />
+        ) : null}
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  rowContainer: {
-    flexDirection: 'row',
-    gap: 15,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    padding: 13.5,
-    maxWidth: '78%'
-  },
   indexCircle: {
     borderWidth: 3,
     borderRadius: 35,
@@ -117,8 +112,8 @@ const styles = StyleSheet.create({
     color: 'grey'
   },
   content: {
-    paddingVertical: 10,
-    justifyContent: 'space-between',
-    alignItems: 'flex-start'
+    flex: 1,
+    padding: 14,
+    gap: 8
   }
 });

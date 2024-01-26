@@ -96,6 +96,7 @@ export function MealDetail(): React.JSX.Element {
       <Input
         label={t('meals.reference')}
         inputMode="text"
+        maxLength={20}
         onChangeText={value => {
           setLocalMeal(meal => ({...meal, reference: value}));
         }}
