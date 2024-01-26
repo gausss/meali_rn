@@ -29,6 +29,7 @@ export function MealList(): React.JSX.Element {
       {meals.length ? (
         <View style={GlobalStyles.fab}>
           <Button
+            textColor="white"
             icon="add-outline"
             onPress={() => navigation.navigate('Detail', {})}
           />

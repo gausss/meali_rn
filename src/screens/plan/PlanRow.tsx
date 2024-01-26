@@ -2,10 +2,8 @@ import {useTheme} from '@react-navigation/native';
 import {add, format} from 'date-fns';
 import {de} from 'date-fns/locale';
 import {useContext} from 'react';
-import {useTranslation} from 'react-i18next';
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useTourGuideController} from 'rn-tourguide';
 import {OptionsContext} from '../../context/OptionsContext';
 import {Suggestion} from '../../domain/Plan';
 import {GlobalStyles} from '../../shared/Styles';
@@ -21,72 +19,6 @@ export function PlanRow({
 }: PlanRowProps): React.JSX.Element {
   const {colors} = useTheme();
   const options = useContext(OptionsContext);
-  const {t} = useTranslation();
-  const {TourGuideZone} = useTourGuideController('plan');
-  const isFirst = suggestion.index === 0;
-
-  if (isFirst) {
-    return (
-      <TourGuideZone zone={1} text={t('guide.meal')}>
-        <View style={styles.rowContainer}>
-          <TourGuideZone zone={2} text={t('guide.pin')} shape="circle">
-            <View
-              style={{
-                ...styles.indexCircle,
-                borderColor: colors.notification,
-                backgroundColor: colors.notification
-              }}>
-              {!suggestion.pinned ? (
-                <Icon
-                  name="lock-open-outline"
-                  style={{
-                    ...styles.iconStyle,
-                    color: colors.text
-                  }}
-                />
-              ) : (
-                <Icon
-                  name="lock-closed"
-                  style={{
-                    ...styles.iconStyle,
-                    color: colors.text
-                  }}
-                />
-              )}
-            </View>
-          </TourGuideZone>
-          <View style={styles.content}>
-            {options.showWeekdays ? (
-              <Text style={{...styles.suggestionDay}}>
-                {format(
-                  add(generated, {
-                    days: suggestion.index + options.startDay || 0
-                  }),
-                  'EEEE',
-                  {
-                    locale: de
-                  }
-                )}
-              </Text>
-            ) : null}
-            <View style={GlobalStyles.row}>
-              <Text
-                numberOfLines={2}
-                style={{
-                  ...styles.suggestionMeal,
-                  color: colors.text
-                }}>
-                {suggestion.meal.name}
-              </Text>
-              {suggestion.meal.complexity === 'HARD' ? (
-                <View style={GlobalStyles.badgeWarn} />
-              ) : null}
-            </View>
-          </View>
-        </View>
-      </TourGuideZone>
-    );
-  }
 
   return (
     <View style={styles.rowContainer}>
@@ -114,8 +46,8 @@ export function PlanRow({
           />
         )}
       </View>
-      <View>
-        <View style={styles.content}>
+      <View style={styles.content}>
+        <View style={GlobalStyles.rowApart}>
           {options.showWeekdays ? (
             <Text style={{...styles.suggestionDay}}>
               {format(
@@ -129,16 +61,24 @@ export function PlanRow({
               )}
             </Text>
           ) : null}
-          <View style={GlobalStyles.row}>
-            <Text
-              numberOfLines={2}
-              style={{...styles.suggestionMeal, color: colors.text}}>
-              {suggestion.meal.name}
+          {options.showReference ? (
+            <Text style={{...styles.suggestionDay}}>
+              {suggestion.meal.reference}
             </Text>
-            {suggestion.meal.complexity === 'HARD' ? (
-              <View style={GlobalStyles.badgeWarn} />
-            ) : null}
-          </View>
+          ) : null}
+        </View>
+        <View style={GlobalStyles.row}>
+          <Text
+            numberOfLines={2}
+            style={{
+              ...styles.suggestionMeal,
+              color: colors.text
+            }}>
+            {suggestion.meal.name}
+          </Text>
+          {suggestion.meal.complexity === 'HARD' ? (
+            <View style={GlobalStyles.badgeWarn} />
+          ) : null}
         </View>
       </View>
     </View>

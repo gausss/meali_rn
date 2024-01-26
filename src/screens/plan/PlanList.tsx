@@ -58,19 +58,38 @@ export function PlanList(): React.JSX.Element {
       <ScrollView>
         {meals.length && plan.generated && options.numSuggestions ? (
           <View>
-            {plan.suggestions.map((item, index) => (
-              <View
-                style={{...GlobalStyles.card, backgroundColor: colors.card}}>
-                <TouchableHighlight
-                  key={item.index}
-                  underlayColor={colors.notification}
-                  onPress={() => {
-                    planDispatch({type: 'togglePin', index});
-                  }}>
-                  <PlanRow generated={plan.generated} suggestion={item} />
-                </TouchableHighlight>
-              </View>
-            ))}
+            {plan.suggestions.map((item, index) =>
+              index === 0 ? (
+                <TourGuideZone zone={1} text={t('guide.meal')}>
+                  <View
+                    style={{
+                      ...GlobalStyles.card,
+                      backgroundColor: colors.card
+                    }}>
+                    <TouchableHighlight
+                      key={item.index}
+                      underlayColor={colors.notification}
+                      onPress={() => {
+                        planDispatch({type: 'togglePin', index});
+                      }}>
+                      <PlanRow generated={plan.generated} suggestion={item} />
+                    </TouchableHighlight>
+                  </View>
+                </TourGuideZone>
+              ) : (
+                <View
+                  style={{...GlobalStyles.card, backgroundColor: colors.card}}>
+                  <TouchableHighlight
+                    key={item.index}
+                    underlayColor={colors.notification}
+                    onPress={() => {
+                      planDispatch({type: 'togglePin', index});
+                    }}>
+                    <PlanRow generated={plan.generated} suggestion={item} />
+                  </TouchableHighlight>
+                </View>
+              )
+            )}
           </View>
         ) : (
           <NoPlan />

@@ -2,6 +2,7 @@ export class Meal {
   readonly id: string;
   readonly name: string;
   readonly complexity?: Complexity;
+  readonly reference?: string;
   readonly ingredients?: readonly Ingredient[];
 
   constructor(name: string, complexity: Complexity) {
@@ -13,7 +14,7 @@ export class Meal {
   static copy(meal: Partial<Meal>): Partial<Meal> {
     return {
       ...meal,
-      ingredients: meal?.ingredients?.map(ingredient => ({ ...ingredient }))
+      ingredients: meal?.ingredients?.map(ingredient => ({...ingredient}))
     };
   }
 }

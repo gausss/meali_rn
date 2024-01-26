@@ -27,6 +27,7 @@ const resources = {
           title: 'Einstellungen',
           numSuggestions: 'Anzahl Vorschläge',
           showWeekdays: 'Tage anzeigen',
+          showReference: 'Rezept-Referenz anzeigen',
           startDay: 'Tage starten'
         },
         days: {
@@ -60,15 +61,15 @@ const resources = {
           name: 'Schwierigkeit',
           EASY: 'Einfach',
           HARD: 'Aufwändig'
-        }
+        },
+        reference: 'Rezept-Referenz'
       },
       guide: {
         next: 'Weiter',
         back: 'Zurück',
         skip: 'Fertig',
         finish: 'Fertig',
-        meal: 'Ein Essensvorschlag für den gezeigten Tag. In den Optionen kann die Anzahl der Vorschläge angepasst werden.',
-        pin: 'Pinne einen Vorschlag durch einmal antippen. Das Schloss Icon zeigt ob ein Vorschlag gepinnt ist oder nicht.',
+        meal: 'Ein Essensvorschlag für den gezeigten Tag. In den Optionen kann die Anzahl der Vorschläge angepasst werden.\n \nPinne einen Vorschlag durch einmal antippen. Das Schloss Icon zeigt ob ein Vorschlag gepinnt ist oder nicht.',
         generate:
           'Generiere neue Vorschläge für deinen Plan. Gepinnte Vorschläge bleiben erhalten.',
         buy: 'Zeige eine Einkaufsliste aller Gerichte die gepinnt sind.',

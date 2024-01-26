@@ -86,6 +86,13 @@ export const GlobalStyles = StyleSheet.create({
     alignItems: 'center',
     gap: 10
   },
+  rowApart: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    justifyContent: 'space-between',
+    width: '100%'
+  },
   headeIcon: {
     marginRight: 0
   },

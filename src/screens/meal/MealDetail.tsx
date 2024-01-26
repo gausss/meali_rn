@@ -93,6 +93,15 @@ export function MealDetail(): React.JSX.Element {
         defaultValue={localMeal.complexity}
       />
 
+      <Input
+        label={t('meals.reference')}
+        inputMode="text"
+        onChangeText={value => {
+          setLocalMeal(meal => ({...meal, reference: value}));
+        }}
+        defaultValue={localMeal.reference}
+      />
+
       <View style={{...GlobalStyles.card, backgroundColor: colors.card}}>
         <View>
           <View

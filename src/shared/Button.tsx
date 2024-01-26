@@ -55,8 +55,7 @@ export function Button(props: ButtonProps): React.JSX.Element {
     },
     iconStyle: {
       fontSize: 25,
-      fontWeight: '600',
-      color: 'white'
+      fontWeight: '600'
     }
   });
 
