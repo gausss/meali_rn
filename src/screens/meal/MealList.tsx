@@ -29,7 +29,7 @@ export function MealList(): React.JSX.Element {
   return (
     <View style={GlobalStyles.viewContainer}>
       {meals.length ? (
-        <View style={GlobalStyles.fab}>
+        <View style={{...GlobalStyles.fab, bottom: tabBarHeight + 20}}>
           <Button
             textColor="white"
             icon="add-outline"

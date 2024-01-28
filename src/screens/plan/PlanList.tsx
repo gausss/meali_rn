@@ -34,7 +34,7 @@ export function PlanList(): React.JSX.Element {
   return (
     <View style={GlobalStyles.viewContainer}>
       {plan.generated ? (
-        <View style={GlobalStyles.fab}>
+        <View style={{...GlobalStyles.fab, bottom: tabBerHeight + 20}}>
           <TourGuideZone zone={3} text={t('guide.generate')} shape="circle">
             <Button
               icon="reload"

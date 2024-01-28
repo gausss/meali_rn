@@ -17,7 +17,7 @@ export function PlanOptions(): React.JSX.Element {
   const planDispatch = useContext(PlanDispatchContext);
 
   return (
-    <View style={GlobalStyles.viewContainer}>
+    <View style={{...GlobalStyles.viewContainer, marginHorizontal: 15}}>
       <Select
         label={t('plan.options.numSuggestions')}
         defaultButtonText=" "

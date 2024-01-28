@@ -49,7 +49,7 @@ export function PlanRow({
         )}
         <View>
           <Button
-            label="Gericht anzeigen"
+            icon="ellipsis-horizontal-outline"
             small={true}
             backgroundColor={colors.notification}
             textColor={colors.text}

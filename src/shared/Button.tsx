@@ -40,10 +40,10 @@ export function Button(props: ButtonProps): React.JSX.Element {
         ? 'grey'
         : props.backgroundColor || colors.primary,
       flexDirection: 'row',
-      paddingLeft: 2,
+      paddingLeft: 1,
       paddingTop: 1,
-      width: 50,
-      height: 50,
+      width: props.small ? 30 : 50,
+      height: props.small ? 30 : 50,
       justifyContent: 'center',
       alignItems: 'center',
       gap: 10,
@@ -55,7 +55,7 @@ export function Button(props: ButtonProps): React.JSX.Element {
       color: props.textColor || 'white'
     },
     iconStyle: {
-      fontSize: 25,
+      fontSize: props.small ? 20 : 25,
       fontWeight: '600'
     }
   });

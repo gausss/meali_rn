@@ -24,7 +24,7 @@ export function IngredientDetail(): React.JSX.Element {
   });
 
   return (
-    <View style={GlobalStyles.viewContainer}>
+    <View style={{...GlobalStyles.viewContainer, marginHorizontal: 15}}>
       <Input
         label={t('meals.ingredient.name')}
         inputMode="text"
