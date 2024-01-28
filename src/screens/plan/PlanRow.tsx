@@ -122,11 +122,11 @@ const styles = StyleSheet.create({
   },
   suggestionMeal: {
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: '500'
   },
   suggestionDay: {
     fontSize: 13,
-    fontWeight: 'bold',
+    fontWeight: '500',
     marginBottom: 5,
     color: 'grey'
   },
