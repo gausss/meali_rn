@@ -2,25 +2,25 @@ import {
   NavigationProp,
   RouteProp,
   useNavigation,
-  useRoute,
+  useRoute
 } from '@react-navigation/native';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
-import { Ingredient } from '../../domain/Meal';
-import { Button } from '../../shared/Button';
-import { Input } from '../../shared/Input';
-import { Select } from '../../shared/Select';
-import { GlobalStyles } from '../../shared/Styles';
-import { MealScreenParams } from './MealScreenParams';
+import {useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {View} from 'react-native';
+import {Ingredient} from '../../domain/Meal';
+import {Button} from '../../shared/Button';
+import {Input} from '../../shared/Input';
+import {Select} from '../../shared/Select';
+import {GlobalStyles} from '../../shared/Styles';
+import {MealScreenParams} from './MealScreenParams';
 
 export function IngredientDetail(): React.JSX.Element {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
   const route = useRoute<RouteProp<MealScreenParams, 'Ingredient'>>();
   const [localIngredient, setLocalIngredient] = useState<Partial<Ingredient>>({
     count: 1,
-    unit: 'UNIT',
+    unit: 'UNIT'
   });
 
   return (
@@ -29,7 +29,7 @@ export function IngredientDetail(): React.JSX.Element {
         label={t('meals.ingredient.name')}
         inputMode="text"
         onChangeText={value => {
-          setLocalIngredient({ ...localIngredient, name: value });
+          setLocalIngredient({...localIngredient, name: value});
         }}
       />
 
@@ -38,7 +38,7 @@ export function IngredientDetail(): React.JSX.Element {
         inputMode="numeric"
         defaultValue={localIngredient.count?.toString()}
         onChangeText={value => {
-          setLocalIngredient({ ...localIngredient, count: Number(value) });
+          setLocalIngredient({...localIngredient, count: Number(value)});
         }}
       />
       <Select
@@ -52,7 +52,7 @@ export function IngredientDetail(): React.JSX.Element {
           return t(`meals.ingredient.unitType.${item}`);
         }}
         onSelect={selectedItem => {
-          setLocalIngredient({ ...localIngredient, unit: selectedItem });
+          setLocalIngredient({...localIngredient, unit: selectedItem});
         }}
       />
 

@@ -17,7 +17,8 @@ export function BuyList(): React.JSX.Element {
     <ScrollView
       style={{
         ...GlobalStyles.viewContainer
-      }}>
+      }}
+      contentContainerStyle={{marginHorizontal: 15}}>
       {buyItems.length ? (
         <View>
           {buyItems.map((item, index) => (

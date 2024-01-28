@@ -22,7 +22,6 @@ export const GlobalStyles = StyleSheet.create({
     right: 30
   },
   viewContainer: {
-    paddingHorizontal: 15,
     marginTop: 15,
     flex: 1
   },

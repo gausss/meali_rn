@@ -41,7 +41,9 @@ export function ShowMeal(): React.JSX.Element {
   );
 
   return (
-    <ScrollView style={GlobalStyles.viewContainer}>
+    <ScrollView
+      style={GlobalStyles.viewContainer}
+      contentContainerStyle={{marginHorizontal: 15}}>
       <Value label={t('meals.name')} value={localMeal.name} />
       <Value
         label={t('meals.complexity.name')}

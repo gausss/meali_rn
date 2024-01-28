@@ -55,7 +55,7 @@ export function PlanList(): React.JSX.Element {
         </View>
       ) : null}
 
-      <ScrollView>
+      <ScrollView contentContainerStyle={{marginHorizontal: 15}}>
         {meals.length && plan.generated && options.numSuggestions ? (
           <View>
             {plan.suggestions.map((item, index) =>

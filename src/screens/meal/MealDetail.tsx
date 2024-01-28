@@ -69,7 +69,9 @@ export function MealDetail(): React.JSX.Element {
   };
 
   return (
-    <ScrollView style={GlobalStyles.viewContainer}>
+    <ScrollView
+      style={GlobalStyles.viewContainer}
+      contentContainerStyle={{marginHorizontal: 15}}>
       <Input
         label={t('meals.name')}
         inputMode="text"

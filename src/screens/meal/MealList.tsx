@@ -36,7 +36,7 @@ export function MealList(): React.JSX.Element {
         </View>
       ) : null}
 
-      <ScrollView>
+      <ScrollView contentContainerStyle={{marginHorizontal: 15}}>
         {meals.length ? (
           <View style={{...GlobalStyles.card}}>
             <FlatList

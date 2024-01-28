@@ -27,6 +27,7 @@ export function MealRow({meal}: MealRowProps): React.JSX.Element {
 const styles = StyleSheet.create({
   container: {
     padding: 15,
+    paddingLeft: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
