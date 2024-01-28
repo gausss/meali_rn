@@ -1,19 +1,19 @@
-import React, { useEffect, useReducer } from 'react';
+import React, {useEffect, useReducer} from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useTranslation } from 'react-i18next';
-import { useColorScheme } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useTranslation} from 'react-i18next';
+import {StyleSheet, useColorScheme} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { TooltipProps, TourGuideProvider } from 'rn-tourguide';
-import { BuyContext, BuyDispatchContext, buyReducer } from './context/BuyContext';
+import {TooltipProps, TourGuideProvider} from 'rn-tourguide';
+import {BuyContext, BuyDispatchContext, buyReducer} from './context/BuyContext';
 import {
   MEAL_STORAGE_KEY,
   MealsContext,
@@ -26,24 +26,25 @@ import {
   PlanDispatchContext,
   planReducer
 } from './context/PlanContext';
-import { Plan } from './domain/Plan';
+import {Plan} from './domain/Plan';
 import BuyScreen from './screens/buy/BuyScreen';
 import MealScreen from './screens/meal/MealScreen';
 import PlanScreen from './screens/plan/PlanScreen';
-import { Dark, Light } from './shared/Styles';
-import { TourModal } from './shared/TourModal';
+import {Dark, Light} from './shared/Styles';
+import {TourModal} from './shared/TourModal';
+import {BlurView, VibrancyView} from '@react-native-community/blur';
 
 export type AppStackParams = {
   Home: undefined;
 };
 
 export default function App(): React.JSX.Element {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const dark = useColorScheme() === 'dark';
   const Stack = createNativeStackNavigator<AppStackParams>();
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{flex: 1}}>
       <TourGuideProvider
         {...{
           androidStatusBarVisible: true,
@@ -93,7 +94,7 @@ export type HomeTabParams = {
 };
 
 export function Home(): React.JSX.Element {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const dark = useColorScheme() === 'dark';
   const Tab = createBottomTabNavigator<HomeTabParams>();
   const [meals, mealDispatch] = useReducer(mealReducer, []);
@@ -101,7 +102,7 @@ export function Home(): React.JSX.Element {
   const [buyList, buyListDispatch] = useReducer(buyReducer, []);
 
   useEffect(() => {
-    buyListDispatch({ type: 'regenerate', plan: plan })
+    buyListDispatch({type: 'regenerate', plan: plan});
   }, [plan]);
 
   useEffect(() => {
@@ -126,21 +127,21 @@ export function Home(): React.JSX.Element {
     });
   }, []);
 
-  const planTabIcon = ({ size, color, focused }) => (
+  const planTabIcon = ({size, color, focused}) => (
     <Icon
       name={focused ? 'calendar' : 'calendar-outline'}
       size={size}
       color={color}
     />
   );
-  const mealTabIcon = ({ size, color, focused }) => (
+  const mealTabIcon = ({size, color, focused}) => (
     <Icon
       name={focused ? 'restaurant' : 'restaurant-outline'}
       size={size}
       color={color}
     />
   );
-  const buyTabIcon = ({ size, color, focused }) => (
+  const buyTabIcon = ({size, color, focused}) => (
     <Icon
       name={focused ? 'receipt' : 'receipt-outline'}
       size={size}
@@ -155,7 +156,17 @@ export function Home(): React.JSX.Element {
           <PlanDispatchContext.Provider value={planDispatch}>
             <BuyContext.Provider value={buyList}>
               <BuyDispatchContext.Provider value={buyListDispatch}>
-                <Tab.Navigator initialRouteName="PlanTab">
+                <Tab.Navigator
+                  initialRouteName="PlanTab"
+                  screenOptions={{
+                    tabBarStyle: {position: 'absolute'},
+                    tabBarBackground: () => (
+                      <VibrancyView
+                        blurType="regular"
+                        blurAmount={30}
+                        style={StyleSheet.absoluteFill}></VibrancyView>
+                    )
+                  }}>
                   <Tab.Screen
                     name="PlanTab"
                     component={PlanScreen}

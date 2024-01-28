@@ -19,6 +19,7 @@ import {PlanContext, PlanDispatchContext} from '../../context/PlanContext';
 import {Button} from '../../shared/Button';
 import {GlobalStyles} from '../../shared/Styles';
 import {PlanRow} from './PlanRow';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export function PlanList(): React.JSX.Element {
   const {colors} = useTheme();
@@ -28,6 +29,7 @@ export function PlanList(): React.JSX.Element {
   const options = useContext(OptionsContext);
   const planDispatch = useContext(PlanDispatchContext);
   const {TourGuideZone} = useTourGuideController('plan');
+  const tabBerHeight = useBottomTabBarHeight();
 
   return (
     <View style={GlobalStyles.viewContainer}>
@@ -55,7 +57,11 @@ export function PlanList(): React.JSX.Element {
         </View>
       ) : null}
 
-      <ScrollView contentContainerStyle={{marginHorizontal: 15}}>
+      <ScrollView
+        contentContainerStyle={{
+          marginHorizontal: 15,
+          paddingBottom: tabBerHeight
+        }}>
         {meals.length && plan.generated && options.numSuggestions ? (
           <View>
             {plan.suggestions.map((item, index) =>

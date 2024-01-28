@@ -7,18 +7,23 @@ import {GlobalStyles} from '../../shared/Styles';
 import {useContext} from 'react';
 import {BuyContext, BuyDispatchContext} from '../../context/BuyContext';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export function BuyList(): React.JSX.Element {
   const {colors} = useTheme();
   const buyItems = useContext(BuyContext);
   const buyItemsDispatch = useContext(BuyDispatchContext);
+  const tabBarHeight = useBottomTabBarHeight();
 
   return (
     <ScrollView
       style={{
         ...GlobalStyles.viewContainer
       }}
-      contentContainerStyle={{marginHorizontal: 15}}>
+      contentContainerStyle={{
+        marginHorizontal: 15,
+        paddingBottom: tabBarHeight
+      }}>
       {buyItems.length ? (
         <View>
           {buyItems.map((item, index) => (

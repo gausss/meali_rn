@@ -18,8 +18,8 @@ export const GlobalStyles = StyleSheet.create({
   fab: {
     zIndex: 1,
     position: 'absolute',
-    bottom: 30,
-    right: 30
+    bottom: 100,
+    right: 10
   },
   viewContainer: {
     marginTop: 15,

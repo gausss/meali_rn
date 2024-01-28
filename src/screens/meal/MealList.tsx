@@ -17,12 +17,14 @@ import {ListItemSeparator} from '../../shared/List';
 import {GlobalStyles} from '../../shared/Styles';
 import {MealRow} from './MealRow';
 import {MealScreenParams} from './MealScreenParams';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export function MealList(): React.JSX.Element {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const navigation = useNavigation<NavigationProp<MealScreenParams>>();
   const meals = useContext(MealsContext);
+  const tabBarHeight = useBottomTabBarHeight();
 
   return (
     <View style={GlobalStyles.viewContainer}>
@@ -36,9 +38,13 @@ export function MealList(): React.JSX.Element {
         </View>
       ) : null}
 
-      <ScrollView contentContainerStyle={{marginHorizontal: 15}}>
+      <ScrollView
+        contentContainerStyle={{
+          marginHorizontal: 15,
+          paddingBottom: tabBarHeight
+        }}>
         {meals.length ? (
-          <View style={{...GlobalStyles.card}}>
+          <View style={GlobalStyles.card}>
             <FlatList
               data={meals}
               scrollEnabled={false}

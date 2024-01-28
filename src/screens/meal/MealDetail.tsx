@@ -19,6 +19,7 @@ import {ListItemSeparator} from '../../shared/List';
 import {Select} from '../../shared/Select';
 import {GlobalStyles} from '../../shared/Styles';
 import {MealScreenParams} from './MealScreenParams';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export function MealDetail(): React.JSX.Element {
   const {t} = useTranslation();
@@ -28,6 +29,7 @@ export function MealDetail(): React.JSX.Element {
   const dispatch = useContext(MealsDispatchContext);
   const meals = useContext(MealsContext);
   const editIndex = route.params.index;
+  const tabBarHeight = useBottomTabBarHeight();
 
   const styles = useMemo(
     () =>
@@ -71,7 +73,10 @@ export function MealDetail(): React.JSX.Element {
   return (
     <ScrollView
       style={GlobalStyles.viewContainer}
-      contentContainerStyle={{marginHorizontal: 15}}>
+      contentContainerStyle={{
+        marginHorizontal: 15,
+        paddingBottom: tabBarHeight
+      }}>
       <Input
         label={t('meals.name')}
         inputMode="text"
